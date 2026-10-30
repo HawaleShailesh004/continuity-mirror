@@ -55,7 +55,7 @@ test.describe("helper page", () => {
 });
 
 test.describe("regrowth roadmap", () => {
-  test("nothing is shown until asked, then three stages beside the person's own photo", async ({ page }) => {
+  test("a sample person's three stages are there at once, with a slider across time", async ({ page }) => {
     test.slow();
     const problems = watchConsole(page);
     await reachPlanWithLook(page);
@@ -63,32 +63,25 @@ test.describe("regrowth roadmap", () => {
     await expect(page.getByRole("heading", { name: "Regrowth roadmap", level: 1 })).toBeVisible();
     await expect(page).toHaveTitle(/Regrowth roadmap/); // the title streams in after a client-side navigation
 
-    // Before asking: words only, a clear way out, and no pictures of stages.
+    // A sample person's stages are genuine results we already hold, so they are simply there:
+    // one stage on a stage, the baseline docked beside it, a slider across time.
     await expect(page.getByText("A possibility to explore, not a prediction").first()).toBeVisible();
-    await expect(page.getByText("You don’t need this to make your plan.")).toBeVisible();
-    await expect(page.getByText("Style direction, not exact wig fit").filter({ visible: true })).toHaveCount(0);
+    await expect(page.getByRole("slider", { name: "Time since treatment ends" })).toBeVisible();
+    await expect(page.getByText("Style direction, not exact wig fit").filter({ visible: true })).toHaveCount(1);
+    await expect(page.getByAltText("Your photo, before").filter({ visible: true })).toHaveCount(1);
+    await expect(page.getByRole("heading", { name: "How your hair might come back" })).toBeVisible();
     await settle(page);
     expect((await axe(page)).violations).toEqual([]);
 
-    await page.getByRole("button", { name: "Show me" }).click();
-    const stages = page.getByRole("list", { name: /Stages from the first months/ });
-    await expect(stages.getByRole("heading", { level: 3 })).toHaveText([
-      "About 3 months after treatment ends",
-      "About 6 months",
-      "About a year",
-    ]);
-    // Each stage is a result: labelled as a style direction, and the baseline is beside it.
-    await expect(page.getByText("Style direction, not exact wig fit").filter({ visible: true })).toHaveCount(3);
-    await expect(stages.getByAltText("Your photo, before")).toHaveCount(3);
-    await expect(page.getByText("A possibility to explore, not a prediction").filter({ visible: true })).toHaveCount(4);
-    await settle(page);
-    expect((await axe(page)).violations).toEqual([]);
-
-    // A stage joins the plan like any look, and says which stage it is.
-    const sixMonths = stages.getByRole("listitem").filter({ has: page.getByRole("heading", { name: "About 6 months" }) });
-    await sixMonths.getByRole("button", { name: "Add to my plan", exact: true }).click();
-    await expect(sixMonths.getByRole("button", { name: "In my plan", exact: true })).toBeVisible();
-    await expect(sixMonths.getByRole("button", { name: "In my plan" })).toHaveAccessibleDescription("About 6 months");
+    // Moving through time changes the stage; a stage joins the plan like any look, and says which one.
+    await page.getByRole("button", { name: "6 months", exact: true }).click();
+    await expect(page.getByText("About 6 months", { exact: true }).first()).toBeVisible();
+    await page.getByRole("button", { name: /^Add to my plan/ }).click();
+    await expect(page.getByRole("button", { name: /^In my plan/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^In my plan/ })).toContainText("6 months");
+    await page.getByRole("slider", { name: "Time since treatment ends" }).focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(page.getByText("About a year", { exact: true }).first()).toBeVisible();
     await page.getByRole("link", { name: "Back to my plan" }).click();
     await expect(page.getByText("Regrowth · 6 months")).toBeVisible();
 

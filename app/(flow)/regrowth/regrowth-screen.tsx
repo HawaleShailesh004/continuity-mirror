@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useScroll } from "motion/react";
 import * as m from "motion/react-m";
 import { useLiveQuery } from "dexie-react-hooks";
@@ -10,8 +10,10 @@ import { BottomBar } from "@/components/cm/bottom-bar";
 import { BudgetNote } from "@/components/cm/budget-note";
 import { HowMadeDrawer } from "@/components/cm/how-made-drawer";
 import { RegrowthStage } from "@/components/cm/regrowth-stage";
+import { TimeScrubber } from "@/components/cm/time-scrubber";
 import { Screen } from "@/components/cm/screen";
 import { EmptyState, ErrorState, OfflineBanner, SampleModeBanner } from "@/components/cm/states";
+import { CheckIcon, PlusIcon } from "lucide-react";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { copy } from "@/content/copy";
 import { styles } from "@/lib/catalog";
@@ -73,6 +75,8 @@ export function RegrowthScreen() {
   const resultUrls = useObjectUrls(resultEntries);
 
   const [starting, setStarting] = useState(false);
+  const [active, setActive] = useState(0);
+  const autoStarted = useRef(false);
 
   const stageRows = KEYS.map((key) => rows?.find((r) => r.routeKey === key && !r.superseded));
   const started = stageRows.some(Boolean);
@@ -84,6 +88,13 @@ export function RegrowthScreen() {
   const tooFew = !isSample && unitsLeft !== undefined && unitsLeft < cost;
   const firstStored = stageRows.find((r) => r?.result === "stored" && r.job);
   const firstProvenance = firstStored ? results?.find((r) => r.clientRequestId === firstStored.clientRequestId)?.provenance : undefined;
+
+  // A sample person's stages are genuine results we already hold: nothing is generated, so they are simply there.
+  useEffect(() => {
+    if (!isSample || !ready || !baselineId || !snapshot || started || autoStarted.current) return;
+    autoStarted.current = true;
+    void startRegrowth({ baselineId, snapshot: snapshot.snapshot, audience, personaId });
+  }, [isSample, ready, baselineId, snapshot, started, audience, personaId]);
 
   if (!ready || !baselineUrl || !snapshot || !baselineId) {
     return (
@@ -105,13 +116,22 @@ export function RegrowthScreen() {
 
   // Show what exists even if the module has since been switched off; only block starting a new one.
   const blocked = !started && capability === false;
-  const waiting = !started && capability === undefined && !status.isError;
+  const waiting = (!started && capability === undefined && !status.isError) || (isSample && !started);
+  const stageUrls = stageRows.map((r) => (r?.result === "stored" ? resultUrls.get(r.clientRequestId) : undefined));
+  const allReady = started && stageUrls.every(Boolean);
+  const scrubStages = KEYS.map((key, i) => {
+    const style = styles.find((s) => s.id === (stageRows[i]?.spec.kind === "route" ? stageRows[i]!.spec.styleId : ""));
+    return { key, when: t.stages[key].when, short: t.stages[key].short, src: stageUrls[i] ?? "", alt: t.alt(t.stages[key].when, style?.label ?? ""), styleName: style?.label ?? "" };
+  });
+  const activeRow = stageRows[active];
+  const activeSaved = Boolean(activeRow && plan?.looks.includes(activeRow.clientRequestId));
 
   return (
     <Screen
       title={t.title}
       backHref="/plan"
       baselineSrc={baselineUrl}
+      stage={allReady ? <TimeScrubber stages={scrubStages} beforeSrc={baselineUrl} active={active} onActive={setActive} /> : undefined}
       bottom={
         !blocked &&
         !waiting && (
@@ -164,6 +184,28 @@ export function RegrowthScreen() {
         </section>
       ) : (
         <div className="flex flex-col gap-6">
+          {allReady && activeRow && (
+            <section aria-labelledby="scrub-title" className="flex flex-col gap-2">
+              <h2 id="scrub-title" className="font-display text-xl font-medium md:text-2xl">
+                {t.scrubTitle}
+              </h2>
+              <p className="text-lg font-semibold" aria-live="polite">
+                {scrubStages[active]!.when}
+              </p>
+              <p className="text-sm text-text-soft">{t.stageStyle(scrubStages[active]!.styleName)}</p>
+              {activeRow.note && <p className="text-xs text-text-muted">{activeRow.note}</p>}
+              <Button
+                variant={activeSaved ? "primary" : "secondary"}
+                className="mt-2 self-start"
+                onClick={() => void toggleLook(activeRow.clientRequestId).then((added) => added && toast(t.addedToast))}
+              >
+                {activeSaved ? <CheckIcon aria-hidden="true" className="size-5" /> : <PlusIcon aria-hidden="true" className="size-5" />}
+                {activeSaved ? t.inPlan : t.addToPlan}
+                <span className="sr-only"> · {scrubStages[active]!.short}</span>
+              </Button>
+            </section>
+          )}
+          {!allReady && (
           <Timeline label={t.timelineLabel}>
               {KEYS.map((key, i) => {
                 const row = stageRows[i];
@@ -192,6 +234,7 @@ export function RegrowthScreen() {
                 );
               })}
           </Timeline>
+          )}
 
           <section aria-labelledby="wig-title" className="flex flex-col gap-2 rounded-card bg-surface p-5">
             <h2 id="wig-title" className="text-lg">

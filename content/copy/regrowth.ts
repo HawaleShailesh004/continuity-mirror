@@ -13,6 +13,9 @@ export const regrowth = {
     "regrowth-12m": { when: "About a year", short: "A year" },
   },
   timelineLabel: "Stages from the first months to about a year",
+  scrubLabel: "Time since treatment ends",
+  scrubStops: "Jump to a stage",
+  scrubTitle: "How your hair might come back",
 
   startTitle: "See three stages",
   startBody: "We start from your photo and show short styles that might suit each stage, in your own colour. Nothing is made until you ask.",
