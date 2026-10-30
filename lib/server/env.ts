@@ -65,6 +65,9 @@ export type Env = z.infer<typeof EnvSchema>;
 export function parseEnv(source: Record<string, string | undefined>): Env {
   // `KEY=` (as copied from .env.example) means unset, not "empty string".
   const cleaned: Record<string, string | undefined> = Object.fromEntries(Object.entries(source).filter(([, v]) => v !== undefined && v.trim() !== ""));
+  // The Vercel Upstash integration names its variables KV_REST_API_*; accept them as the same thing.
+  cleaned.UPSTASH_REDIS_REST_URL ??= cleaned.KV_REST_API_URL;
+  cleaned.UPSTASH_REDIS_REST_TOKEN ??= cleaned.KV_REST_API_TOKEN;
   // Share links work out of the box locally (in-memory stores); a deployment turns them on on purpose.
   if (cleaned.CAP_SHARES === undefined && !cleaned.VERCEL) cleaned.CAP_SHARES = "true";
   const result = EnvSchema.safeParse(cleaned);
