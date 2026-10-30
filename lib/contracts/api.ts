@@ -136,10 +136,19 @@ export const RepairSpec = z
   })
   .meta({ id: "RepairSpec" });
 
-export const JobSpec = z.discriminatedUnion("kind", [RouteSpec, ColourSpec, BrowsSpec, RepairSpec]).meta({ id: "JobSpec" });
+/** A fringe (YouCam Bangs template) on the baseline: a "try a fringe" variant, 1 unit. */
+export const FringeSpec = z
+  .strictObject({
+    kind: z.literal("fringe"),
+    templateId: z.string().regex(/^[a-z0-9_]{1,64}$/),
+    attempt: Attempt,
+  })
+  .meta({ id: "FringeSpec" });
+
+export const JobSpec = z.discriminatedUnion("kind", [RouteSpec, ColourSpec, BrowsSpec, FringeSpec, RepairSpec]).meta({ id: "JobSpec" });
 export type JobSpec = z.infer<typeof JobSpec>;
 export type JobSpecInput = z.input<typeof JobSpec>;
-export const JobKind = z.enum(["route", "colour", "brows", "repair"]).meta({ id: "JobKind" });
+export const JobKind = z.enum(["route", "colour", "brows", "fringe", "repair"]).meta({ id: "JobKind" });
 export type JobKind = z.infer<typeof JobKind>;
 
 export const CreateJobRequest = z
@@ -153,7 +162,7 @@ export const CreateJobRequest = z
 export type CreateJobRequest = z.infer<typeof CreateJobRequest>;
 export type CreateJobRequestInput = z.input<typeof CreateJobRequest>;
 
-export const StepKind = z.enum(["hair-transfer", "hair-color", "makeup-vto"]).meta({ id: "StepKind" });
+export const StepKind = z.enum(["hair-transfer", "hair-color", "hair-bang", "makeup-vto"]).meta({ id: "StepKind" });
 export type StepKind = z.infer<typeof StepKind>;
 
 export const JobStatus = z.enum(["queued", "running", "succeeded", "failed"]).meta({ id: "JobStatus" });

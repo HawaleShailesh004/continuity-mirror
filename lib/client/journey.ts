@@ -93,6 +93,11 @@ export function enqueueVariant(
   return enqueue({ baselineId, routeKey: `${base}~${key}`, variantOf: base, spec });
 }
 
+/** "Try a fringe": one YouCam Bangs template on the baseline (1 unit). Its own row key, so no path lists it. */
+export function enqueueFringe(baselineId: string, templateId: string) {
+  return enqueue({ baselineId, routeKey: `fringe~${templateId}`, spec: { kind: "fringe", templateId, attempt: 0 } });
+}
+
 /** Units a spec will cost, for BudgetNote. */
 export function unitsFor(spec: JobSpec): number {
   return planSteps(spec, catalog).reduce((sum, s) => sum + s.units, 0);

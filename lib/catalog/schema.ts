@@ -73,5 +73,18 @@ export const BrowCatalog = z.strictObject({
 });
 export type BrowCatalog = z.infer<typeof BrowCatalog>;
 
+/** One of YouCam's Bangs templates (GET /s2s/v2.0/task/template/hair-bang), verified 30 Oct 2026. */
+export const FringeCatalogItem = z
+  .strictObject({
+    id: z.string().regex(/^[a-z0-9_]{1,64}$/),
+    label: z.string().min(1),
+    audience: z.enum(["female", "male"]),
+    /** Offered first. */
+    suggested: z.boolean().optional(),
+  })
+  .meta({ id: "FringeCatalogItem" });
+export type FringeCatalogItem = z.infer<typeof FringeCatalogItem>;
+export const FringeCatalog = z.array(FringeCatalogItem).min(1);
+
 export const StyleCatalog = z.array(StyleCatalogItem);
 export const ColourCatalog = z.array(ColourPreset);

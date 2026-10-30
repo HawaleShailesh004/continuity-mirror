@@ -6,8 +6,8 @@ import type { KV } from "../store/kv";
 // Operator numbers for the submission ("p95 route latency", "units by kind"). Best effort: a lost
 // increment under a race is acceptable; nothing here gates behaviour.
 const LATENCY_SAMPLES = 200;
-const STEP_KINDS: StepKind[] = ["hair-transfer", "hair-color", "makeup-vto"];
-const JOB_KINDS: JobKind[] = ["route", "colour", "brows"];
+const STEP_KINDS: StepKind[] = ["hair-transfer", "hair-color", "hair-bang", "makeup-vto"];
+const JOB_KINDS: JobKind[] = ["route", "colour", "brows", "fringe", "repair"];
 const JOB_STATUSES: JobStatus[] = ["queued", "running", "succeeded", "failed"];
 
 export const metrics = {

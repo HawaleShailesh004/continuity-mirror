@@ -375,6 +375,9 @@
             "$ref": "#/components/schemas/BrowsSpec"
           },
           {
+            "$ref": "#/components/schemas/FringeSpec"
+          },
+          {
             "$ref": "#/components/schemas/RepairSpec"
           }
         ],
@@ -384,6 +387,7 @@
             "route": "#/components/schemas/RouteSpec",
             "colour": "#/components/schemas/ColourSpec",
             "brows": "#/components/schemas/BrowsSpec",
+            "fringe": "#/components/schemas/FringeSpec",
             "repair": "#/components/schemas/RepairSpec"
           }
         }
@@ -606,6 +610,33 @@
         ],
         "additionalProperties": false
       },
+      "FringeSpec": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "fringe"
+            ]
+          },
+          "templateId": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]{1,64}$"
+          },
+          "attempt": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5,
+            "default": 0,
+            "description": ">0 only for an intentional re-roll; part of the idempotency key"
+          }
+        },
+        "required": [
+          "kind",
+          "templateId"
+        ],
+        "additionalProperties": false
+      },
       "RepairSpec": {
         "type": "object",
         "properties": {
@@ -686,6 +717,7 @@
         "enum": [
           "hair-transfer",
           "hair-color",
+          "hair-bang",
           "makeup-vto"
         ]
       },
@@ -892,6 +924,7 @@
           "route",
           "colour",
           "brows",
+          "fringe",
           "repair"
         ]
       },

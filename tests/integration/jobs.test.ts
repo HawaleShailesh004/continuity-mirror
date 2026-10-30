@@ -172,6 +172,24 @@ describe("route job: happy path", () => {
   });
 });
 
+describe("fringe job", () => {
+  it("runs one hair-bang step on the baseline for 1 unit and streams the result", async () => {
+    const c = client();
+    const baselineId = await c.upload();
+    const job = await jobOf(await c.create(baselineId, { kind: "fringe", templateId: "female_wispy_bangs" }), 202);
+    expect(job.provenance.steps[0]).toMatchObject({ endpoint: "/s2s/v2.0/task/hair-bang", params: { src_file_id: "<baseline>", template_id: "female_wispy_bangs" } });
+    expect((await settle(c, job.id)).status).toBe("succeeded");
+    expect((await c.status()).session.unitsUsed).toBe(1);
+    expect((await c.result(job.id)).status).toBe(200);
+  });
+
+  it("rejects a template that is not in the catalog", async () => {
+    const c = client();
+    const baselineId = await c.upload();
+    await expectError(await c.create(baselineId, { kind: "fringe", templateId: "not_a_template" }), 400, "VALIDATION_FAILED");
+  });
+});
+
 describe("repair job (result check)", () => {
   const repair = (fromJobId: string, colourHex = "#211B13"): JobSpecInput => ({ kind: "repair", fromJobId, colourHex });
 

@@ -13,6 +13,7 @@ export const SRC_SOURCE_RESULT = "<source job result>";
 export const STEP_META: Record<StepKind, { endpoint: string; apiVersion: string; units: number }> = {
   "hair-transfer": { endpoint: "/s2s/v2.1/task/hair-transfer", apiVersion: "v2.1", units: 2 },
   "hair-color": { endpoint: "/s2s/v2.0/task/hair-color", apiVersion: "v2.0", units: 1 },
+  "hair-bang": { endpoint: "/s2s/v2.0/task/hair-bang", apiVersion: "v2.0", units: 1 },
   "makeup-vto": { endpoint: "/s2s/v2.0/task/makeup-vto", apiVersion: "v2.0", units: 1 },
 };
 
@@ -29,6 +30,7 @@ export type CatalogLookup = {
   style(id: string): StyleCatalogItem | undefined;
   colour(id: string): ColourPreset | undefined;
   brow(id: string): { id: string } | undefined;
+  fringe(id: string): { id: string } | undefined;
   /** Slider bands the request is clamped into (inside the contract's own ranges). */
   browBands: Record<"curvature" | "thickness" | "definition" | "intensity", { min: number; max: number }>;
 };
@@ -88,6 +90,10 @@ export function planSteps(spec: JobSpec, catalog: CatalogLookup): PlannedStep[] 
     case "colour": {
       const preset = presetOrThrow(catalog, spec.colour.presetId);
       return [step("hair-color", colourBody({ src_file_id: SRC_BASELINE }, preset.hexes, spec.colour.mode))];
+    }
+    case "fringe": {
+      if (!catalog.fringe(spec.templateId)) throw new UnknownCatalogIdError("templateId", spec.templateId);
+      return [step("hair-bang", { src_file_id: SRC_BASELINE, template_id: spec.templateId })];
     }
     case "repair":
       return [step("hair-color", colourBody({ src_file_url: SRC_SOURCE_RESULT }, [spec.colourHex], "full"))];

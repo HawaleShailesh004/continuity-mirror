@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { brows, catalog, closestBrowShape, colours, defaultBrowHex, estimateUnits, planSteps, styles, UnknownCatalogIdError, SRC_BASELINE, SRC_PREVIOUS } from "@/lib/catalog";
+import { brows, catalog, closestBrowShape, colours, defaultBrowHex, estimateUnits, fringes, planSteps, styles, suggestedFringes, UnknownCatalogIdError, SRC_BASELINE, SRC_PREVIOUS } from "@/lib/catalog";
 import { JobSpec, type RouteColour } from "@/lib/contracts/api";
 
 const route = (styleId: string, colour: RouteColour) => JobSpec.parse({ kind: "route", routeId: "closest", styleId, colour });
@@ -129,5 +129,27 @@ describe("planSteps", () => {
         expect(steps.length).toBeLessThanOrEqual(2); // baseline → style → (colour), never deeper
       }
     }
+  });
+});
+
+describe("fringes", () => {
+  it("lists YouCam's 20 Bangs templates, 10 per audience, with unique ids", () => {
+    expect(fringes).toHaveLength(20);
+    expect(new Set(fringes.map((f) => f.id)).size).toBe(20);
+    expect(fringes.filter((f) => f.audience === "male")).toHaveLength(10);
+  });
+
+  it("suggests three per audience, and only that audience's", () => {
+    expect(suggestedFringes("female")).toHaveLength(3);
+    expect(suggestedFringes("male").every((f) => f.audience === "male")).toBe(true);
+    expect(suggestedFringes()).toHaveLength(6);
+  });
+
+  it("plans one 1-unit hair-bang step on the baseline, and refuses an unknown template", () => {
+    const spec = JobSpec.parse({ kind: "fringe", templateId: "female_wispy_bangs" });
+    expect(planSteps(spec, catalog)).toEqual([
+      expect.objectContaining({ kind: "hair-bang", units: 1, endpoint: "/s2s/v2.0/task/hair-bang", body: { src_file_id: "<baseline>", template_id: "female_wispy_bangs" } }),
+    ]);
+    expect(() => planSteps(JobSpec.parse({ kind: "fringe", templateId: "nope_bangs" }), catalog)).toThrow(UnknownCatalogIdError);
   });
 });

@@ -1,0 +1,108 @@
+[
+  {
+    "id": "male_right_side_swept",
+    "label": "Right Side Swept",
+    "audience": "male",
+    "suggested": true
+  },
+  {
+    "id": "male_wispy_bangs",
+    "label": "Wispy Bangs",
+    "audience": "male",
+    "suggested": true
+  },
+  {
+    "id": "male_wispy_bangs_2",
+    "label": "Wispy Bangs 2",
+    "audience": "male"
+  },
+  {
+    "id": "male_sleek_bangs",
+    "label": "Sleek Bangs",
+    "audience": "male"
+  },
+  {
+    "id": "male_mini_fringe",
+    "label": "Mini Fringe",
+    "audience": "male",
+    "suggested": true
+  },
+  {
+    "id": "male_split_mini_fringe",
+    "label": "Split Mini Fringe",
+    "audience": "male"
+  },
+  {
+    "id": "male_split_bangs",
+    "label": "Split Bangs",
+    "audience": "male"
+  },
+  {
+    "id": "male_blunt_bangs",
+    "label": "Blunt Bangs",
+    "audience": "male"
+  },
+  {
+    "id": "male_thin_bangs",
+    "label": "Thin Bangs",
+    "audience": "male"
+  },
+  {
+    "id": "male_left_side_swept",
+    "label": "Left Side Swept",
+    "audience": "male"
+  },
+  {
+    "id": "female_thin_bangs",
+    "label": "Thin Bangs",
+    "audience": "female"
+  },
+  {
+    "id": "female_wispy_bangs",
+    "label": "Wispy Bangs",
+    "audience": "female",
+    "suggested": true
+  },
+  {
+    "id": "female_sleek_bangs",
+    "label": "Sleek Bangs",
+    "audience": "female"
+  },
+  {
+    "id": "female_wispy_bangs_2",
+    "label": "Wispy Bangs 2",
+    "audience": "female"
+  },
+  {
+    "id": "female_right_side_swept",
+    "label": "Right Side Swept",
+    "audience": "female"
+  },
+  {
+    "id": "female_left_side_swept",
+    "label": "Left Side Swept",
+    "audience": "female",
+    "suggested": true
+  },
+  {
+    "id": "female_split_mini_fringe",
+    "label": "Split Mini Fringe",
+    "audience": "female"
+  },
+  {
+    "id": "female_mini_fringe",
+    "label": "Mini Fringe",
+    "audience": "female"
+  },
+  {
+    "id": "female_split_bangs",
+    "label": "Split Bangs",
+    "audience": "female"
+  },
+  {
+    "id": "female_blunt_bangs",
+    "label": "Blunt Bangs",
+    "audience": "female",
+    "suggested": true
+  }
+]

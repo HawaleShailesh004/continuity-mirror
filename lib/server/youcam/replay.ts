@@ -41,7 +41,7 @@ export class ReplayYouCamAdapter implements YouCamAdapter {
   private uploads = 0;
 
   constructor(private opts: { fixturesDir: string; publicDir: string; strict?: boolean; pollsUntilDone?: number }) {
-    for (const group of ["hair-transfer", "hair-color", "makeup-vto"]) {
+    for (const group of ["hair-transfer", "hair-color", "hair-bang", "makeup-vto"]) {
       const dir = join(/*turbopackIgnore: true*/ opts.fixturesDir, group);
       if (!existsSync(/*turbopackIgnore: true*/ dir)) continue;
       for (const file of readdirSync(/*turbopackIgnore: true*/ dir)) {

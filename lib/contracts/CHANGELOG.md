@@ -39,3 +39,7 @@ First version, from the backend plan §3 adjusted to the B0 facts:
 - New job kind `repair` (`RepairSpec`: `{ kind: 'repair', fromJobId, colourHex }`) in `JobSpec` and `JobKind`. One `hair-color` step, 1 unit, over an earlier job's result (`src_file_url` filled server-side from that job; the URL never leaves the server). The source must be a finished `route` or `colour` job of the same baseline inside its result window; otherwise `NOT_FOUND`, `NOT_READY`, `EXPIRED` or `VALIDATION_FAILED`. A repair of a repair is refused.
 - Existing clients are unaffected: no field of any existing type changed, and `repair` jobs are only ever created by `lib/client/check/run.ts`.
 - `docs/API.md` and `docs/openapi.json` regenerated; the mock backend serves a repair job with its source's image.
+
+## 0.2.1 · Fri 30 Oct 2026 (fringe job, post-freeze, additive)
+
+- New job kind `fringe` (`FringeSpec`: `{ kind: 'fringe', templateId, attempt }`) and step kind `hair-bang` (`POST /s2s/v2.0/task/hair-bang`, 1 unit, source is the baseline). `templateId` must be one of the 20 YouCam Bangs templates in `lib/catalog/fringes.json`, otherwise `VALIDATION_FAILED`. No existing type changed. Client helper: `enqueueFringe` (`lib/client/journey.ts`); offer first: `suggestedFringes(audience)`.

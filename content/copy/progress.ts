@@ -4,6 +4,7 @@ export const progress = {
   uploading: "Sending your photo",
   "hair-transfer": "Styling your hair · usually 15 to 40 seconds",
   "hair-color": "Matching your colour",
+  "hair-bang": "Trying a fringe",
   "makeup-vto": "Shaping your brows",
   done: "Ready",
   slow: "Taking a little longer than usual.",

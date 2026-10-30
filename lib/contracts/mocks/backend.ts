@@ -81,7 +81,7 @@ export const MOCK_CAPABILITIES: Capabilities = {
 };
 export const MOCK_LIMITS = { uploadMaxBytes: 4_000_000, uploadMaxLongSide: 1600, uploadMinShortSide: 512 };
 
-const STEP_MS: Record<PlannedStep["kind"], number> = { "hair-transfer": 7000, "hair-color": 6000, "makeup-vto": 6000 };
+const STEP_MS: Record<PlannedStep["kind"], number> = { "hair-transfer": 7000, "hair-color": 6000, "hair-bang": 6000, "makeup-vto": 6000 };
 const QUEUED_MS = 400;
 const JOB_TIMEOUT_MS = 180_000;
 const RESULT_TTL_MS = 110 * 60_000;

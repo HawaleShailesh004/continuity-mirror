@@ -98,6 +98,7 @@ export function pickResultImage(spec: JobSpec): string {
   if (spec.kind === "brows") return RESULT_IMAGES.brows;
   if (spec.kind === "colour") return RESULT_IMAGES.curlyBobOwnColour;
   // A repair shows its source's image; the mock backend resolves that before calling this.
+  if (spec.kind === "fringe") return RESULT_IMAGES.curlyBobOwnColour;
   if (spec.kind === "repair") return RESULT_IMAGES.curlyBobOwnColour;
   const own = spec.colour.source === "own";
   switch (spec.styleId) {
