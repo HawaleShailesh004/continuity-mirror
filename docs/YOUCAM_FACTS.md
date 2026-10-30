@@ -146,3 +146,9 @@ The in-process stack (route handlers + job engine + **live adapter**) ran 42 rea
 - **Live, end to end** (upload, three paths, check, repair), Meera on the dev server in live mode: "Closest to me" measured ΔE 4.6, one repair asked for `#1B150C` and the result measured ΔE 1.28; "Familiar, easier" 3.1 (kept); "New chapter" skipped as a deliberate change. Face drift 0.004–0.007. About 60 s from the click to a checked result.
 - A repair job's source is the earlier job's signed result URL (valid about 110 min), passed as `src_file_url` exactly like the second step of a route. Output is PNG for colour steps, as before.
 - Routes now restore with the **measured** hex instead of the tapped one (`routeSpec`, `lib/client/journey.ts`): live, "Familiar, easier" came out at ΔE 3.1 (3.5 with the tapped hex on the stored sample).
+
+## B5 spike: Bangs (30 Oct 2026, 6 units)
+
+- `POST /s2s/v2.0/task/hair-bang` takes `{ src_file_id | src_file_url, template_id }`. Templates: `GET /s2s/v2.0/task/template/hair-bang?page_size=20` returns 20 (10 Male, 10 Female, one page): wispy, wispy 2, sleek, thin, blunt, mini fringe, split mini fringe, split, left/right side swept. Source limits: long side ≤ 1024, face ≥ 128 px, one face, pitch ±10°, yaw ±45°, roll ±15°. 1 unit; about 15 s.
+- Six live runs (Meera × 3 templates, Amara, Daniel, Grace) were all clean: own colour kept, Amara's curls and Daniel's beard kept, face unchanged, no artefacts. Grace already has a fringe and the result was still natural. Contact sheet: `spike-output/bangs/sheet.jpg` (gitignored).
+- Not wired into the app yet: it needs a `hair-bang` step kind and a job spec (a "Try a fringe" variant on a path).
