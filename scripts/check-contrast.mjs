@@ -38,6 +38,12 @@ const PAIRS = [
   ["action", "surface", TEXT, "links on cards"],
   ["action", "surface-raised", TEXT, "links in sheets"],
   ["action", "selected", UI, "selected verdict border"],
+  ...[1, 2, 3, 4, 5].flatMap((n) => [
+    ["text", `dawn-${n}`, TEXT, "headline on the dawn wash"],
+    ["text-soft", `dawn-${n}`, TEXT, "supporting text on the dawn wash"],
+    ["text-muted", `dawn-${n}`, TEXT, "caption on the dawn wash"],
+    ["action", `dawn-${n}`, TEXT, "link on the dawn wash"],
+  ]),
   ["focus", "bg", UI, "focus ring"],
   ["focus", "surface", UI, "focus ring on cards"],
   ["focus", "surface-raised", UI, "focus ring in sheets"],

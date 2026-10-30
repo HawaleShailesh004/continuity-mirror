@@ -16,6 +16,13 @@
     text-wrap: balance;
   }
 
+  /* The page headline is the warm serif (h2 opts in with font-display). h3 and all UI stay in Figtree. */
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+
   :focus-visible {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
@@ -41,6 +48,42 @@
     var(--glow) 0%,
     transparent 70%
   );
+}
+
+/*
+ * "The light rises": five washes, one per step of the journey, from pre-dawn
+ * lavender (consent) to clear morning blue (plan). The tint is strongest at the
+ * top and is gone by 620 px, so body text always sits on a pass-checked colour.
+ */
+@utility bg-dawn-1 {
+  background-image: linear-gradient(180deg, var(--dawn-1) 0, var(--bg) 620px);
+}
+@utility bg-dawn-2 {
+  background-image: linear-gradient(180deg, var(--dawn-2) 0, var(--bg) 620px);
+}
+@utility bg-dawn-3 {
+  background-image: linear-gradient(180deg, var(--dawn-3) 0, var(--bg) 620px);
+}
+@utility bg-dawn-4 {
+  background-image: linear-gradient(180deg, var(--dawn-4) 0, var(--bg) 620px);
+}
+@utility bg-dawn-5 {
+  background-image: linear-gradient(180deg, var(--dawn-5) 0, var(--bg) 620px);
+}
+
+/* A 3 % film grain over a surface; never over text (pointer-events off, sits behind content). */
+@utility grain {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url("/grain.svg");
+    opacity: 0.03;
+  }
 }
 
 /* Calm skeleton: pair with animate-skeleton. */

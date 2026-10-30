@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree } from "next/font/google";
+import { Figtree, Fraunces } from "next/font/google";
 import { MotionProvider } from "@/components/motion/motion-provider";
 import { LazyToaster } from "@/components/ui/lazy-toaster";
 import { app } from "@/content/copy/app";
@@ -10,6 +10,14 @@ import "./globals.css";
 const figtree = Figtree({
   subsets: ["latin"],
   variable: "--font-figtree",
+  display: "swap",
+});
+
+// Headlines only. SOFT rounds the serifs, opsz lets the big sizes tighten up.
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  axes: ["SOFT", "opsz"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -31,7 +39,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${figtree.variable} h-full`}>
+    <html lang="en" className={`${figtree.variable} ${fraunces.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-bg font-sans text-base text-text antialiased">
         <a
           href="#main"

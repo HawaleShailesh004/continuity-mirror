@@ -9,7 +9,7 @@ export function BottomBar({ children, className }: { children: ReactNode; classN
   return (
     <div
       className={cn(
-        "sticky bottom-0 z-20 flex flex-col gap-2.5 bg-bg/90 px-5 pt-3 backdrop-blur-md md:px-8",
+        "sticky bottom-0 z-20 flex flex-col gap-2.5 bg-linear-to-t from-bg from-70% to-transparent px-5 pt-6 md:px-8",
         "pb-[max(1rem,env(safe-area-inset-bottom))]",
         className,
       )}

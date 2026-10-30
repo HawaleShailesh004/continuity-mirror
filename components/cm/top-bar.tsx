@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { ChevronLeftIcon, ShieldCheckIcon } from "lucide-react";
+import { BrandMark } from "./brand-mark";
 import { StepProgress } from "./step-progress";
 import { copy } from "@/content/copy";
 
@@ -36,15 +37,20 @@ export function TopBar({
   return (
     <header
       style={{ viewTransitionName: "app-topbar" }}
-      className="sticky top-0 z-30 flex items-center gap-3 bg-bg/90 px-5 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 backdrop-blur-md md:px-8"
+      className="sticky top-0 z-30 flex items-center gap-3 bg-(--shell-top)/85 px-5 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 backdrop-blur-md md:px-8"
     >
+      <Link href="/" aria-label={copy.nav.home} className="hidden min-h-11 items-center gap-2 pr-3 font-display text-lg font-medium md:flex">
+        <BrandMark className="size-7" />
+        {copy.nav.brand}
+      </Link>
+      <span aria-hidden="true" className="hidden h-6 w-px bg-line md:block" />
       {backHref && (
         <Link href={backHref} transitionTypes={["nav-back"]} aria-label={copy.nav.back} className={iconButton}>
           <ChevronLeftIcon aria-hidden="true" className="size-5" />
         </Link>
       )}
       <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-        <h1 ref={heading} tabIndex={-1} className="text-lg leading-tight outline-none">
+        <h1 ref={heading} tabIndex={-1} className="text-lg leading-tight outline-none md:text-xl">
           {title}
         </h1>
         {step && <StepProgress step={step.n} total={step.total} />}

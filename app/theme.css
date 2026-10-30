@@ -28,6 +28,11 @@
   --glow: #ffd9b8;
   --focus: #1f4373;
   --on-photo: #ffffff;
+  --dawn-1: #ece9f4;
+  --dawn-2: #f9e7ea;
+  --dawn-3: #fbe6d5;
+  --dawn-4: #fbeecb;
+  --dawn-5: #deebfa;
   --shadow-color: rgb(22 32 46 / 0.1);
 }
 
@@ -49,6 +54,11 @@
     --glow: #4a3526;
     --focus: #bfd3ee;
     --on-photo: #ffffff;
+    --dawn-1: #1d1c37;
+    --dawn-2: #2c2034;
+    --dawn-3: #36251f;
+    --dawn-4: #33291a;
+    --dawn-5: #172d49;
     --shadow-color: rgb(0 0 0 / 0.45);
   }
 }
@@ -70,6 +80,11 @@
   --glow: #4a3526;
   --focus: #bfd3ee;
   --on-photo: #ffffff;
+  --dawn-1: #1d1c37;
+  --dawn-2: #2c2034;
+  --dawn-3: #36251f;
+  --dawn-4: #33291a;
+  --dawn-5: #172d49;
   --shadow-color: rgb(0 0 0 / 0.45);
 }
 
@@ -117,6 +132,8 @@
   --color-on-photo: var(--on-photo); /* handles and lines over photos, both modes */
 
   --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  /* Headlines only (h1, h2, the landing hero): a warm serif. Body and UI stay Figtree. */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
 
   /* Type: 13 / 15 / 17 (base) / 20 / 24 / 30 / 36. Nothing below 13 px. */
   --text-*: initial;
@@ -145,6 +162,8 @@
 
   /* One soft shadow for raised elements; a hairline one for the sliding pill. */
   --shadow-raised: 0 12px 40px var(--shadow-color);
+  /* Inside a photo stage: a soft fall-off at the foot so chips and the thumbnail stay readable. */
+  --shadow-stage: inset 0 -90px 70px -60px var(--shadow-color);
   --shadow-pill: 0 1px 3px var(--shadow-color);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);

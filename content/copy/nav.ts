@@ -1,6 +1,8 @@
 // Section of content/copy.ts (split so a screen imports only its own words).
 export const nav = {
   skip: "Skip to content",
+  brand: "Continuity Mirror",
+  home: "Continuity Mirror, home",
   back: "Back",
   privacy: "Privacy",
   mainLabel: "Main",
