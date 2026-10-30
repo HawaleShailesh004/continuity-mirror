@@ -28,6 +28,10 @@
   --glow: #ffd9b8;
   --focus: #1f4373;
   --on-photo: #ffffff;
+  /* The printed sheet in the consultation-pack preview: paper stays paper in both modes. */
+  --paper: #ffffff;
+  --paper-ink: #16202e;
+  --paper-muted: #556070;
   /* A dark fall-off under white text on a photo (same in both modes). */
   --scrim: rgb(10 16 26 / 0.88);
   --dawn-1: #ece9f4;
@@ -132,6 +136,9 @@
   --color-glow: var(--glow);
   --color-focus: var(--focus);
   --color-scrim: var(--scrim);
+  --color-paper: var(--paper);
+  --color-paper-ink: var(--paper-ink);
+  --color-paper-muted: var(--paper-muted);
   --color-on-photo: var(--on-photo); /* handles and lines over photos, both modes */
 
   --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;

@@ -1,18 +1,22 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { CheckCircle2Icon, DownloadIcon, PrinterIcon, Share2Icon } from "lucide-react";
-import { PhotoFrame } from "@/components/cm/photo-frame";
+import * as m from "motion/react-m";
+import { PackPaper } from "@/components/cm/pack-paper";
+import { useCalmMotion } from "@/components/motion/motion-provider";
 import { Screen } from "@/components/cm/screen";
 import { EmptyState, ErrorState, SampleModeBanner } from "@/components/cm/states";
 import { Button, ButtonLink, buttonClass } from "@/components/ui/button";
-import { copy } from "@/content/copy";
 import { exportPack } from "@/content/copy/exportPack";
 import { insuranceGuides, programmes } from "@/lib/catalog";
 import { formatDate } from "@/lib/client/format";
+import { fadeRise } from "@/lib/client/motion";
 import { useObjectUrl } from "@/lib/client/hooks";
 import { buildPackModel, pdfImage } from "@/lib/client/pack";
 import { usePlan } from "@/lib/client/use-plan";
+
+const subscribeNever = () => () => {};
 
 type Built = { blob: Blob; file: File };
 
@@ -97,9 +101,23 @@ export function ExportScreen() {
   };
 
   const empty = ready && looks.length === 0;
+  const calm = useCalmMotion();
+  // Read the clock after mount (never during render), so the page can be prerendered.
+  const today = useSyncExternalStore(subscribeNever, () => formatDate(new Date().toISOString()), () => "");
 
   return (
-    <Screen title={exportPack.title} backHref="/plan">
+    <Screen
+      title={exportPack.title}
+      backHref="/plan"
+      stage={
+        !empty && ready ? (
+          <div className="flex flex-col gap-3">
+            <PackPaper beforeSrc={baselineUrl} looks={looks} snapshot={snapshot} date={today} sample={isSample} />
+            <p className="text-center text-sm font-semibold text-text-soft">{exportPack.looksCount(looks.length)}</p>
+          </div>
+        ) : undefined
+      }
+    >
       {isSample && <SampleModeBanner />}
       <p className="text-text-soft">{exportPack.intro}</p>
 
@@ -113,31 +131,10 @@ export function ExportScreen() {
           }
         />
       ) : (
-        <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:items-start md:gap-12">
-          <section aria-labelledby="pack-preview" className="flex flex-col gap-4">
-            <h2 id="pack-preview" className="sr-only">
-              {exportPack.previewAlt}
-            </h2>
-            <div className="grid grid-cols-3 gap-2.5 rounded-card bg-surface p-4">
-              {baselineUrl && <PhotoFrame src={baselineUrl} alt={copy.compare.altBefore} aspect="aspect-3/4" />}
-              {looks.slice(0, 2).map((l) => (
-                <PhotoFrame
-                  key={l.row.clientRequestId}
-                  src={l.imageUrl ?? ""}
-                  alt={copy.compare.alt(l.style.label, l.ownColour)}
-                  generated
-                  hideLabel
-                  aspect="aspect-3/4"
-                />
-              ))}
-              <p className="col-span-3 mt-1 text-xs text-text-muted">{copy.label.styleDirection}</p>
-            </div>
-            <p className="text-sm font-semibold text-text-soft">{exportPack.looksCount(looks.length)}</p>
-          </section>
-
+        <div className="flex flex-col gap-8">
           <section aria-labelledby="pack-contents" className="flex flex-col gap-5">
             <div className="flex flex-col gap-3">
-              <h2 id="pack-contents" className="text-lg">
+              <h2 id="pack-contents" className="font-display text-xl font-medium md:text-2xl">
                 {exportPack.contentsTitle}
               </h2>
               <ul className="flex list-disc flex-col gap-1.5 pl-5 text-text-soft">
@@ -159,7 +156,14 @@ export function ExportScreen() {
                 {exportPack.making}
               </p>
             ) : (
-              <div className="flex flex-col gap-2.5">
+              // The download arrives once the sheet has finished printing.
+              <m.div
+                variants={calm ? fadeRise.calm : fadeRise.full}
+                initial="hidden"
+                animate="visible"
+                transition={calm ? undefined : { delay: 2.4 }}
+                className="flex flex-col gap-2.5"
+              >
                 <p role="status" className="flex items-center gap-2 text-sm font-semibold">
                   <CheckCircle2Icon aria-hidden="true" className="size-5 text-action" />
                   {exportPack.ready}
@@ -184,7 +188,7 @@ export function ExportScreen() {
                   {exportPack.print}
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
-              </div>
+              </m.div>
             )}
           </section>
         </div>
