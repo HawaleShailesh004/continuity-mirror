@@ -1,0 +1,33 @@
+{
+  "source": "YouCam eyebrow catalog (https://plugins-media.makeupar.com/wcm-saas/patterns/eyebrows.json, 350 shapes). Only shapes with known thickness metadata are listed; ids are YouCam's `label`.",
+  "shapes": [
+    { "id": "Straight1", "name": "Straight, balanced", "shape": "straight", "thickness": "balanced", "description": "A straight brow with an even line from front to tail." },
+    { "id": "Straight2", "name": "Straight, soft", "shape": "straight", "thickness": "balanced", "description": "A straight brow with a softer, slightly lifted tail." },
+    { "id": "Straight25", "name": "Straight, natural", "shape": "straight", "thickness": "balanced", "description": "A natural-looking straight brow." },
+    { "id": "Straight3", "name": "Straight, full", "shape": "straight", "thickness": "thick", "description": "A full, straight brow." },
+    { "id": "Straight29", "name": "Straight, bold", "shape": "straight", "thickness": "thick", "description": "A bold, dense straight brow." },
+    { "id": "Straight46", "name": "Straight, fine", "shape": "straight", "thickness": "thin", "description": "A fine, light straight brow." },
+
+    { "id": "SoftArch1", "name": "Soft arch, balanced", "shape": "soft-arch", "thickness": "balanced", "description": "A sculpted brow that rises steadily to a soft angled peak, then tapers cleanly." },
+    { "id": "SoftArch2", "name": "Soft arch, gentle", "shape": "soft-arch", "thickness": "balanced", "description": "A gentle, softly arched brow." },
+    { "id": "SoftArch3", "name": "Soft arch, classic", "shape": "soft-arch", "thickness": "balanced", "description": "A classic arch with a defined but soft peak." },
+    { "id": "SoftArch5", "name": "Soft arch, natural", "shape": "soft-arch", "thickness": "balanced", "description": "A natural-looking soft arch." },
+    { "id": "SoftArch24", "name": "Soft arch, full", "shape": "soft-arch", "thickness": "thick", "description": "A full, softly arched brow." },
+    { "id": "SoftArch84", "name": "Soft arch, bold", "shape": "soft-arch", "thickness": "thick", "description": "A bold, dense soft arch." },
+
+    { "id": "HighArch14", "name": "High arch, balanced", "shape": "high-arch", "thickness": "balanced", "description": "A brow with a higher, more defined peak." },
+    { "id": "HighArch22", "name": "High arch, full", "shape": "high-arch", "thickness": "thick", "description": "A full brow with a high, defined peak." },
+
+    { "id": "Curved7", "name": "Rounded, balanced", "shape": "rounded", "thickness": "balanced", "description": "A rounded brow that follows one continuous curve." },
+    { "id": "Curved3", "name": "Rounded, full", "shape": "rounded", "thickness": "thick", "description": "A full, rounded brow with a dense, softly blended texture." },
+    { "id": "Curved4", "name": "Rounded, soft", "shape": "rounded", "thickness": "thick", "description": "A wide, softly blurred rounded brow with a powdery finish." }
+  ],
+  "bands": {
+    "curvature": { "min": -40, "max": 40 },
+    "thickness": { "min": -40, "max": 40 },
+    "definition": { "min": 0, "max": 100 },
+    "intensity": { "min": 30, "max": 90 }
+  },
+  "defaults": { "curvature": 0, "thickness": 0, "definition": 50, "intensity": 70 },
+  "colours": { "light": "#9A7B5F", "medium": "#5C4331", "dark": "#2B1E16" }
+}

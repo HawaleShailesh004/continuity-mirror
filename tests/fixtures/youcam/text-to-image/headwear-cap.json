@@ -1,0 +1,47 @@
+{
+  "source": "spike-output/gen-headwear-cap.json",
+  "recordedAt": "2026-10-26",
+  "data": {
+    "job": {
+      "id": "headwear-cap",
+      "size": "1328*1328",
+      "negative": "person, face, mannequin, multiple items, text, logo, watermark, busy background, blur, low resolution",
+      "prompt": "Product photo of a plain navy blue cotton baseball cap, three-quarter view. Single product only, centered, isolated on a plain white background, studio product photography, soft shadow, the product fills most of the frame, high detail, no person, no mannequin."
+    },
+    "create": {
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "task_id": "fixture-task-1"
+        }
+      }
+    },
+    "polls": [
+      {
+        "status": 200,
+        "body": {
+          "status": 200,
+          "data": {
+            "error": null,
+            "results": null,
+            "task_status": "running"
+          }
+        }
+      },
+      {
+        "status": 200,
+        "body": {
+          "status": 200,
+          "data": {
+            "error": null,
+            "results": {
+              "url": "https://fixtures.invalid/signed/1.jpg"
+            },
+            "task_status": "success"
+          }
+        }
+      }
+    ]
+  }
+}

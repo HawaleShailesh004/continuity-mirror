@@ -1,0 +1,141 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+/* ── Base ───────────────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--selected);
+    color: var(--text);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+}
+
+/* ── Utilities ──────────────────────────────────────────────── */
+
+/* The "morning light" glow behind the hero portrait (moment 1). */
+@utility bg-morning-glow {
+  background-image: radial-gradient(
+    60% 55% at 50% 45%,
+    var(--glow) 0%,
+    transparent 70%
+  );
+}
+
+/* Calm skeleton: pair with animate-skeleton. */
+@utility bg-skeleton {
+  background-image: linear-gradient(
+    90deg,
+    var(--surface) 0%,
+    var(--selected) 50%,
+    var(--surface) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────
+ * Ambient loops stop at their resting frame; CSS transitions shrink to
+ * 150 ms. `motion` animations are handled by MotionProvider/useCalmMotion.
+ * <html data-motion="reduce|full"> overrides the OS setting.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) *,
+  :root:not([data-motion="full"]) *::before,
+  :root:not([data-motion="full"]) *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: var(--dur-reduced) !important;
+  }
+}
+
+:root[data-motion="reduce"] *,
+:root[data-motion="reduce"] *::before,
+:root[data-motion="reduce"] *::after {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: var(--dur-reduced) !important;
+}
+
+/* ── Route transitions (React <ViewTransition>, plan §3.4) ──────
+ * Forward: 320 ms crossfade with a 12 px rise; back: reversed.
+ * Tag links with transitionTypes={['nav-forward']} / ['nav-back'] and wrap
+ * each page.tsx in <ViewTransition enter/exit={{'nav-forward': 'nav-forward',
+ * 'nav-back': 'nav-back', default: 'none'}} default="none">.
+ */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(.nav-forward) {
+  --vt-shift: -12px;
+  animation: var(--dur-base) var(--ease-out) both vt-leave;
+}
+::view-transition-new(.nav-forward) {
+  --vt-shift: 12px;
+  animation: var(--dur-base) var(--ease-out) both vt-arrive;
+}
+::view-transition-old(.nav-back) {
+  --vt-shift: 12px;
+  animation: var(--dur-base) var(--ease-out) both vt-leave;
+}
+::view-transition-new(.nav-back) {
+  --vt-shift: -12px;
+  animation: var(--dur-base) var(--ease-out) both vt-arrive;
+}
+
+/* The top bar (with the "You, before" thumbnail) stays put while pages move. */
+::view-transition-group(app-topbar) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(app-topbar) {
+  display: none;
+}
+::view-transition-new(app-topbar) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"])::view-transition-old(*),
+  :root:not([data-motion="full"])::view-transition-new(*) {
+    --vt-shift: 0px;
+  }
+}
+:root[data-motion="reduce"]::view-transition-old(*),
+:root[data-motion="reduce"]::view-transition-new(*) {
+  --vt-shift: 0px;
+}
+
+@keyframes vt-arrive {
+  from {
+    opacity: 0;
+    translate: 0 var(--vt-shift);
+  }
+}
+@keyframes vt-leave {
+  to {
+    opacity: 0;
+    translate: 0 var(--vt-shift);
+  }
+}

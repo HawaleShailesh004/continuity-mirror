@@ -1,0 +1,49 @@
+{
+  "source": "spike-output/gen-persona-b-amara.json",
+  "recordedAt": "2026-10-26",
+  "data": {
+    "job": {
+      "id": "persona-b-amara",
+      "size": "1104*1472",
+      "negative": "hat, cap, glasses, sunglasses, hands, multiple people, cropped head, cropped shoulders, side profile, tilted head, heavy makeup, hair covering face, text, watermark, logo, blur, low resolution, distorted face, extra limbs, cartoon, illustration, painting, 3d render",
+      "prompt": "A 32-year-old Black woman with shoulder-length natural coily type 4 hair, defined curls, full natural eyebrows. Photorealistic portrait photograph. Front-facing, looking straight at the camera, head level. Framed from above the top of the head down to mid-chest, both shoulders fully visible in frame. Plain light grey studio background, soft even frontal lighting, neutral relaxed expression, natural skin texture, sharp focus, plain crew-neck top. Hair fully visible and not covered."
+    },
+    "create": {
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "task_id": "fixture-task-1"
+        }
+      }
+    },
+    "polls": [
+      {
+        "status": 200,
+        "body": {
+          "status": 200,
+          "data": {
+            "error": null,
+            "results": {
+              "url": "https://fixtures.invalid/signed/1.jpg"
+            },
+            "task_status": "running"
+          }
+        }
+      },
+      {
+        "status": 200,
+        "body": {
+          "status": 200,
+          "data": {
+            "error": null,
+            "results": {
+              "url": "https://fixtures.invalid/signed/2.jpg"
+            },
+            "task_status": "success"
+          }
+        }
+      }
+    ]
+  }
+}

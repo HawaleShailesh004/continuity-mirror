@@ -1,0 +1,44 @@
+{
+  "source": "spike-output/stage2/colour-chain-url-amara.json",
+  "recordedAt": "2026-10-26",
+  "data": [
+    {
+      "step": "task-create",
+      "path": "/s2s/v2.0/task/hair-color",
+      "request": {
+        "src_file_url": "https://fixtures.invalid/signed/1.jpg",
+        "pattern": {
+          "name": "full"
+        },
+        "palettes": [
+          {
+            "color": "#1C1714",
+            "color_intensity": 80,
+            "shine_intensity": 20
+          }
+        ]
+      },
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "task_id": "fixture-task-1"
+        }
+      }
+    },
+    {
+      "step": "task-final",
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "error": null,
+          "results": {
+            "url": "https://fixtures.invalid/signed/2.jpg"
+          },
+          "task_status": "success"
+        }
+      }
+    }
+  ]
+}

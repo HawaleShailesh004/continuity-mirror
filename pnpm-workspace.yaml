@@ -1,0 +1,10 @@
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
+
+patchedDependencies:
+  '@mediapipe/tasks-vision': patches/@mediapipe__tasks-vision.patch
+
+# An old zod copy (< 4.6.6, GHSA-mrhx-c7xc-m3w5) comes in through @vercel/blob > @vercel/oidc. Our own is 4.6.7.
+overrides:
+  'zod@<4.6.6': '4.6.7'

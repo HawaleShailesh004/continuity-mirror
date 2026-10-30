@@ -1,0 +1,288 @@
+[
+  {
+    "id": "twa-short",
+    "label": "Short coils (TWA)",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/twa-short.jpg"
+    },
+    "thumbnail": "/catalog/refs/twa-short.jpg",
+    "audience": "female",
+    "length": "short",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 1,
+    "askFor": "Teeny weeny afro: very short natural 4C coils, even shape, about 2.5 cm",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "breathable cap, cooler in hot weather"
+      ]
+    },
+    "priceBand": "low",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "tapered-coils",
+    "label": "Tapered coils",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/tapered-coils.jpg"
+    },
+    "thumbnail": "/catalog/refs/tapered-coils.jpg",
+    "audience": "female",
+    "length": "short",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 1,
+    "askFor": "Short tapered coily cut, ear length, shaped sides",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "breathable cap, cooler in hot weather"
+      ]
+    },
+    "priceBand": "low",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "coily-shoulder",
+    "label": "Shoulder-length coils",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/coily-shoulder.jpg"
+    },
+    "thumbnail": "/catalog/refs/coily-shoulder.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 3,
+    "askFor": "Shoulder-length type 4C coily unit, full density",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "high",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "curly-chin",
+    "label": "Curly bob (3C)",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/curly-chin.jpg"
+    },
+    "thumbnail": "/catalog/refs/curly-chin.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "none",
+    "texture": "curly",
+    "careEffort": 2,
+    "askFor": "Chin-length type 3C curly bob, defined curls",
+    "wigNotes": {
+      "fibres": [
+        "curl-set synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "curly-shoulder",
+    "label": "Shoulder-length curls (3B)",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/curly-shoulder.jpg"
+    },
+    "thumbnail": "/catalog/refs/curly-shoulder.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "none",
+    "texture": "curly",
+    "careEffort": 3,
+    "askFor": "Shoulder-length type 3B curls, defined, medium density",
+    "wigNotes": {
+      "fibres": [
+        "curl-set synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "high",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "locs-shoulder",
+    "label": "Locs, shoulder length",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/locs-shoulder.jpg"
+    },
+    "thumbnail": "/catalog/refs/locs-shoulder.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 1,
+    "askFor": "Shoulder-length locs, medium thickness",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "high",
+    "reviewed": false,
+    "protective": true
+  },
+  {
+    "id": "box-braids-shoulder",
+    "label": "Box braids",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/box-braids-shoulder.jpg"
+    },
+    "thumbnail": "/catalog/refs/box-braids-shoulder.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 1,
+    "askFor": "Shoulder-length box braids, medium size",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "mid",
+    "reviewed": false,
+    "protective": true
+  },
+  {
+    "id": "m-coily-crop",
+    "label": "Coily crop",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/m-coily-crop.jpg"
+    },
+    "thumbnail": "/catalog/refs/m-coily-crop.jpg",
+    "audience": "male",
+    "length": "short",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 1,
+    "askFor": "Short coily crop with tapered sides",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "hair system / topper"
+      ],
+      "comfort": [
+        "soft lining for a tender scalp",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "low",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "m-curly-top",
+    "label": "Curly top",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/m-curly-top.jpg"
+    },
+    "thumbnail": "/catalog/refs/m-curly-top.jpg",
+    "audience": "male",
+    "length": "short",
+    "fringe": false,
+    "parting": "none",
+    "texture": "curly",
+    "careEffort": 2,
+    "askFor": "Short curly top with faded sides",
+    "wigNotes": {
+      "fibres": [
+        "curl-set synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "hair system / topper"
+      ],
+      "comfort": [
+        "soft lining for a tender scalp",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "reviewed": false,
+    "protective": false
+  }
+]

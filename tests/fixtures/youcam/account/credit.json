@@ -1,0 +1,20 @@
+{
+  "source": "spike-output/credit-before.json",
+  "recordedAt": "2026-10-26",
+  "data": {
+    "status": 200,
+    "ms": 1068,
+    "body": {
+      "status": 200,
+      "results": [
+        {
+          "id": 1,
+          "type": "ApiPaygToken",
+          "amount": 1000,
+          "amount_dec": 1000,
+          "expiry": 1800835199000
+        }
+      ]
+    }
+  }
+}

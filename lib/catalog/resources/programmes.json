@@ -1,0 +1,69 @@
+[
+  {
+    "id": "ccs-wig-bank",
+    "country": "CA",
+    "name": "Canadian Cancer Society wig service",
+    "summary": "Lends a wig at no charge to people who can't afford one. Request it through the online wig form, or call for help filling it in.",
+    "contact": "1-888-939-3333",
+    "sourceUrl": "https://cancer.ca/en/living-with-cancer/how-we-can-help/wig-and-breast-prosthesis-service",
+    "asOf": "2026-10-26",
+    "checkNote": "The page could not be opened directly when this was checked; the details come from search excerpts of it. Confirm on the page before relying on them."
+  },
+  {
+    "id": "tata-cherian",
+    "country": "IN",
+    "name": "Tata Memorial Centre and The Cherian Foundation",
+    "summary": "500 wigs offered free to people in treatment who are economically disadvantaged, handed out through the Tata Memorial network from Tata Memorial Hospital, Mumbai (announced 19 August 2026).",
+    "sourceUrl": "https://www.freepressjournal.in/mumbai/mumbai-tata-memorial-centre-cherian-foundation-to-provide-500-free-wigs-worth-15-crore-to-cancer-patients",
+    "asOf": "2026-10-26",
+    "checkNote": "The number of wigs is limited and the article does not say how to apply. Ask your own Tata Memorial centre."
+  },
+  {
+    "id": "cope-with-cancer",
+    "country": "IN",
+    "name": "Cope With Cancer (Madat Charitable Trust)",
+    "summary": "A Mumbai charity that offers free wigs to people in and after cancer treatment, alongside discounted care and free counselling.",
+    "sourceUrl": "https://give.do/discover/KQ4/cope-with-cancer-madat-charitable-trust/",
+    "asOf": "2026-10-26",
+    "checkNote": "Described on a fundraising page; check their own website (copewithcancer.org) for how to apply."
+  },
+  {
+    "id": "christie-free-wig",
+    "country": "UK",
+    "name": "The Christie, Manchester: free wig",
+    "summary": "One free wig if your treatment causes hair loss. Ask at the hospital's cancer information centre for a voucher for the wig service.",
+    "contact": "0161 446 8100",
+    "sourceUrl": "https://www.christie.nhs.uk/patients-and-visitors/living-with-and-beyond-cancer/patient-support-services/wig-fitting/",
+    "asOf": "2026-10-26",
+    "checkNote": "This is one hospital. Entitlement and voucher values differ between NHS trusts, so ask your own hospital's cancer information centre."
+  },
+  {
+    "id": "macmillan-helpline",
+    "country": "UK",
+    "name": "Macmillan Cancer Support helpline",
+    "summary": "Information about wigs, hats and scalp care, every day from 8am to 8pm.",
+    "contact": "0808 8080 00 00",
+    "sourceUrl": "https://www.kch.nhs.uk/services/cancer/help-and-support/hair-loss-service-for-cancer-patients/",
+    "asOf": "2026-10-26",
+    "checkNote": "Taken from a hospital page that quotes the helpline."
+  },
+  {
+    "id": "acs-helpline",
+    "country": "US",
+    "name": "American Cancer Society helpline",
+    "summary": "Can refer you to programmes and resources near you. Some hospitals and cancer centres run free wig banks, so ask about them.",
+    "contact": "1-800-227-2345",
+    "sourceUrl": "https://www.cancer.org/cancer/side-effects/hair-skin-nails/hair-loss/choosing-and-wearing-wig.html",
+    "asOf": "2026-10-26",
+    "checkNote": "Wig banks vary by location and some listings are out of date. Call before you go."
+  },
+  {
+    "id": "look-good-feel-better",
+    "country": "US",
+    "name": "Look Good Feel Better",
+    "summary": "Free workshops, online and in person, with makeup, skincare and hair tips for people in treatment. Useful for practising brows. It does not provide wigs.",
+    "sourceUrl": "https://lookgoodfeelbetter.org/",
+    "asOf": "2026-10-26",
+    "checkNote": "Choose a workshop on their site."
+  }
+]

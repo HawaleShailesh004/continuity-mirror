@@ -1,0 +1,44 @@
+{
+  "source": "spike-output/stage2/colour-fileid-grace.json",
+  "recordedAt": "2026-10-26",
+  "data": [
+    {
+      "step": "task-create",
+      "path": "/s2s/v2.0/task/hair-color",
+      "request": {
+        "src_file_id": "fixture-file-1",
+        "pattern": {
+          "name": "full"
+        },
+        "palettes": [
+          {
+            "color": "#BEBDB8",
+            "color_intensity": 80,
+            "shine_intensity": 20
+          }
+        ]
+      },
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "task_id": "fixture-task-2"
+        }
+      }
+    },
+    {
+      "step": "task-final",
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "error": null,
+          "results": {
+            "url": "https://fixtures.invalid/signed/1.jpg"
+          },
+          "task_status": "success"
+        }
+      }
+    }
+  ]
+}

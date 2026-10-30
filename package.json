@@ -1,0 +1,79 @@
+{
+  "name": "continuity-mirror",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "mediapipe:sync": "node scripts/sync-mediapipe.mjs",
+    "predev": "node scripts/sync-mediapipe.mjs",
+    "prebuild": "node scripts/sync-mediapipe.mjs",
+    "test:coverage": "vitest run --coverage",
+    "api:docs": "tsx scripts/gen-api-docs.ts",
+    "fixtures:scrub": "node scripts/scrub-fixtures.mjs",
+    "guardrail": "tsx scripts/guardrail.ts",
+    "check:secrets": "tsx scripts/check-bundle-secrets.ts",
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "ci": "pnpm typecheck && pnpm lint && pnpm test && pnpm guardrail && pnpm build && pnpm check:secrets",
+    "demo:build": "tsx --conditions=react-server scripts/build-demo-personas.ts",
+    "smoke:live": "tsx scripts/smoke-live.ts"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "^1.1.1",
+    "@react-pdf/renderer": "^4.9.0",
+    "@tanstack/react-query": "^5.105.0",
+    "@upstash/redis": "^1.40.0",
+    "@vercel/blob": "^2.8.2",
+    "clsx": "^2.1.1",
+    "dexie": "^4.4.7",
+    "dexie-react-hooks": "^4.4.0",
+    "lucide-react": "^1.61.0",
+    "motion": "^14.6.0",
+    "next": "16.4.3",
+    "radix-ui": "^1.8.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "server-only": "0.0.1",
+    "sharp": "^0.35.5",
+    "sonner": "^2.0.8",
+    "tailwind-merge": "^3.7.0",
+    "vaul": "^1.1.2",
+    "zod": "^4.6.7",
+    "zustand": "^5.0.16"
+  },
+  "devDependencies": {
+    "@asteasolutions/zod-to-openapi": "^9.1.0",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^5.0.5",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.3",
+    "fake-indexeddb": "^6.2.6",
+    "fast-check": "^4.10.2",
+    "msw": "^3.0.3",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5",
+    "vitest": "^5.0.5"
+  },
+  "packageManager": "pnpm@10.15.0",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
+}

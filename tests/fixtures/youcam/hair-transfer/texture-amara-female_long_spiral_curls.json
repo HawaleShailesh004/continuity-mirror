@@ -1,0 +1,35 @@
+{
+  "source": "spike-output/stage2/texture-amara-female_long_spiral_curls.json",
+  "recordedAt": "2026-10-26",
+  "data": [
+    {
+      "step": "task-create",
+      "path": "/s2s/v2.1/task/hair-transfer",
+      "request": {
+        "src_file_id": "fixture-file-1",
+        "template_id": "female_long_spiral_curls"
+      },
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "task_id": "fixture-task-2"
+        }
+      }
+    },
+    {
+      "step": "task-final",
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "error": null,
+          "results": {
+            "url": "https://fixtures.invalid/signed/1.jpg"
+          },
+          "task_status": "success"
+        }
+      }
+    }
+  ]
+}

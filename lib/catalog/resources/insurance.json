@@ -1,0 +1,37 @@
+[
+  {
+    "id": "us-cranial-prosthesis",
+    "country": "US",
+    "title": "Asking your insurer to cover a wig",
+    "intro": "Some insurers cover part or all of the cost of a wig for medical hair loss, under a different name. Rules differ by plan, so ask before you buy.",
+    "steps": [
+      { "text": "Ask your insurer if they cover a \"cranial prosthesis\" or \"hair prosthesis\". Those are their names for a medical wig.", "basis": "cited" },
+      { "text": "Ask your doctor for a prescription or letter using the wording your insurer asks for. Many insurers require one.", "basis": "cited" },
+      { "text": "Keep the receipt for the wig, and fill in the insurer's claim form.", "basis": "cited" },
+      { "text": "Medicare plans usually don't cover a wig for hair loss from chemotherapy. Medicare Advantage plans may differ, so ask your plan.", "basis": "cited" },
+      { "text": "Keep a record of what you spend on medical costs each year, in case it helps at tax time.", "basis": "cited" },
+      { "text": "Ask whether the insurer needs a billing code on the receipt, and whether they approve it before you buy.", "basis": "guidance" }
+    ],
+    "sources": [
+      { "title": "Breastcancer.org: Insurance coverage for wigs", "url": "https://www.breastcancer.org/treatment-side-effects/hair-loss/wigs/insurance" },
+      { "title": "American Cancer Society: Choosing and wearing a wig", "url": "https://www.cancer.org/cancer/side-effects/hair-skin-nails/hair-loss/choosing-and-wearing-wig.html" }
+    ],
+    "asOf": "2026-10-26"
+  },
+  {
+    "id": "uk-hospital-wig",
+    "country": "UK",
+    "title": "Asking your hospital for a wig",
+    "intro": "Help with wig costs depends on your hospital and where in the UK you live.",
+    "steps": [
+      { "text": "Ask your hospital's cancer information centre whether you can have a free wig or a voucher.", "basis": "cited" },
+      { "text": "Some hospitals offer one free wig if treatment causes hair loss. Others work differently, so ask before you pay for one.", "basis": "cited" },
+      { "text": "Macmillan's helpline can tell you about wigs, hats and scalp care.", "basis": "cited" }
+    ],
+    "sources": [
+      { "title": "The Christie: wig fitting", "url": "https://www.christie.nhs.uk/patients-and-visitors/living-with-and-beyond-cancer/patient-support-services/wig-fitting/" },
+      { "title": "King's College Hospital: hair loss service", "url": "https://www.kch.nhs.uk/services/cancer/help-and-support/hair-loss-service-for-cancer-patients/" }
+    ],
+    "asOf": "2026-10-26"
+  }
+]

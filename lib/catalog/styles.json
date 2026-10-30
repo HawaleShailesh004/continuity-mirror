@@ -1,0 +1,1686 @@
+[
+  {
+    "id": "f-buzz-cut",
+    "label": "Buzz cut",
+    "style": {
+      "source": "template",
+      "templateId": "female_buzz_cut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_buzz_cut.jpg",
+    "audience": "female",
+    "length": "buzz",
+    "fringe": false,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 1,
+    "askFor": "Very short even buzz, no styling needed",
+    "wigNotes": {
+      "fibres": [],
+      "caps": [],
+      "comfort": [
+        "breathable cap, cooler in hot weather"
+      ]
+    },
+    "priceBand": "low",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "buzz",
+    "label": "Buzz cut",
+    "style": {
+      "source": "template",
+      "templateId": "all_buzz_cut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_buzz_cut.jpg",
+    "audience": "all",
+    "length": "buzz",
+    "fringe": false,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 1,
+    "askFor": "Even buzz cut",
+    "wigNotes": {
+      "fibres": [],
+      "caps": [],
+      "comfort": [
+        "breathable cap, cooler in hot weather"
+      ]
+    },
+    "priceBand": "low",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-crewcut",
+    "label": "Crew cut",
+    "style": {
+      "source": "template",
+      "templateId": "female_crewcut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_crewcut.jpg",
+    "audience": "female",
+    "length": "short",
+    "fringe": false,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 1,
+    "askFor": "Short crew cut, slightly longer on top",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [],
+      "comfort": [
+        "breathable cap, cooler in hot weather"
+      ]
+    },
+    "priceBand": "low",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "pixie",
+    "label": "Pixie",
+    "style": {
+      "source": "template",
+      "templateId": "all_pixie",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_pixie.jpg",
+    "audience": "female",
+    "length": "short",
+    "fringe": true,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 1,
+    "askFor": "Short pixie cut, soft fringe, textured crown",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "breathable cap, cooler in hot weather"
+      ]
+    },
+    "priceBand": "low",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-wispy-fringe-pixie",
+    "label": "Wispy fringe pixie",
+    "style": {
+      "source": "template",
+      "templateId": "all_wispy_fringe_pixie",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_wispy_fringe_pixie.jpg",
+    "audience": "female",
+    "length": "short",
+    "fringe": true,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 1,
+    "askFor": "Pixie with a long wispy fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "breathable cap, cooler in hot weather"
+      ]
+    },
+    "priceBand": "low",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-short-feather-cut",
+    "label": "Short feather cut",
+    "style": {
+      "source": "template",
+      "templateId": "all_short_feather_cut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_short_feather_cut.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "centre",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Chin-length feathered bob with a fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "bixie",
+    "label": "Bixie",
+    "style": {
+      "source": "template",
+      "templateId": "all_bixie_cut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_bixie_cut.jpg",
+    "audience": "female",
+    "length": "short",
+    "fringe": true,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 1,
+    "askFor": "Bixie: between a pixie and a bob, ear length",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "low",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "textured-comma",
+    "label": "Textured comma",
+    "style": {
+      "source": "template",
+      "templateId": "male_textured_comma",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/male_textured_comma.jpg",
+    "audience": "male",
+    "length": "short",
+    "fringe": true,
+    "parting": "none",
+    "texture": "wavy",
+    "careEffort": 1,
+    "askFor": "Short textured cut with a comma fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "hair system / topper"
+      ],
+      "comfort": [
+        "soft lining for a tender scalp",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "m-tousled-cut",
+    "label": "Tousled cut",
+    "style": {
+      "source": "template",
+      "templateId": "male_tousled_cut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/male_tousled_cut.jpg",
+    "audience": "male",
+    "length": "short",
+    "fringe": true,
+    "parting": "none",
+    "texture": "wavy",
+    "careEffort": 1,
+    "askFor": "Short tousled cut, messy fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "hair system / topper"
+      ],
+      "comfort": [
+        "soft lining for a tender scalp",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "m-wavy-undercut",
+    "label": "Wavy undercut",
+    "style": {
+      "source": "template",
+      "templateId": "male_wavy_undercut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/male_wavy_undercut.jpg",
+    "audience": "male",
+    "length": "short",
+    "fringe": true,
+    "parting": "none",
+    "texture": "wavy",
+    "careEffort": 2,
+    "askFor": "Undercut sides with a longer wavy top",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "hair system / topper"
+      ],
+      "comfort": [
+        "soft lining for a tender scalp",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "m-side-swept-undercut",
+    "label": "Side-swept undercut",
+    "style": {
+      "source": "template",
+      "templateId": "all_side_swept_undercut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_side_swept_undercut.jpg",
+    "audience": "male",
+    "length": "short",
+    "fringe": true,
+    "parting": "left",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Classic side-swept undercut",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "hair system / topper"
+      ],
+      "comfort": [
+        "soft lining for a tender scalp",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "m-afro",
+    "label": "Afro",
+    "style": {
+      "source": "template",
+      "templateId": "male_afro",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/male_afro.jpg",
+    "audience": "male",
+    "length": "short",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 2,
+    "askFor": "Natural afro, rounded shape, medium density",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "hair system / topper"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "short-bob",
+    "label": "Short bob",
+    "style": {
+      "source": "template",
+      "templateId": "all_short_bob",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_short_bob.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Chin-length bob, blunt ends, light fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "french-bob",
+    "label": "French bob",
+    "style": {
+      "source": "template",
+      "templateId": "all_french_bob",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_french_bob.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Jaw-length French bob with a soft fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-bobcut",
+    "label": "Bob with fringe",
+    "style": {
+      "source": "template",
+      "templateId": "all_bobcut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_bobcut.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Rounded bob with a full fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-blunt-bob",
+    "label": "Blunt bob",
+    "style": {
+      "source": "template",
+      "templateId": "female_blunt_bob",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_blunt_bob.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Blunt chin-length bob with a straight fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-modern-mid-part-bob",
+    "label": "Mid-part bob",
+    "style": {
+      "source": "template",
+      "templateId": "all_modern_mid_part_bob",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_modern_mid_part_bob.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": false,
+    "parting": "centre",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Chin-length bob with a centre parting",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-slicked-back-bob",
+    "label": "Slicked-back bob",
+    "style": {
+      "source": "template",
+      "templateId": "female_slicked_back_bob",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_slicked_back_bob.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": false,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Chin-length bob combed back off the face",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-hush-cut",
+    "label": "Hush cut",
+    "style": {
+      "source": "template",
+      "templateId": "all_hush_cut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_hush_cut.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": true,
+    "parting": "centre",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Soft layers with a curtain fringe, shoulder length",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "bob-curly",
+    "label": "Curly bob",
+    "style": {
+      "source": "template",
+      "templateId": "female_bobcut_curly",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_bobcut_curly.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": false,
+    "parting": "none",
+    "texture": "wavy",
+    "careEffort": 2,
+    "askFor": "Chin-length bob with loose curls",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-bobcut-wavy",
+    "label": "Wavy bob with fringe",
+    "style": {
+      "source": "template",
+      "templateId": "female_bobcut_wavy",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_bobcut_wavy.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "none",
+    "texture": "wavy",
+    "careEffort": 2,
+    "askFor": "Wavy chin-length bob with a fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-wavy-bob-with-bangs",
+    "label": "Wavy bob, bangs",
+    "style": {
+      "source": "template",
+      "templateId": "all_wavy_bob_with_bangs",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_wavy_bob_with_bangs.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "none",
+    "texture": "wavy",
+    "careEffort": 2,
+    "askFor": "Wavy bob with bangs",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-tousled-bob",
+    "label": "Tousled bob",
+    "style": {
+      "source": "template",
+      "templateId": "all_tousled_bob",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_tousled_bob.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": false,
+    "parting": "none",
+    "texture": "wavy",
+    "careEffort": 2,
+    "askFor": "Tousled, textured bob",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-wolf-cut",
+    "label": "Wolf cut",
+    "style": {
+      "source": "template",
+      "templateId": "all_wolf_cut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_wolf_cut.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "none",
+    "texture": "wavy",
+    "careEffort": 3,
+    "askFor": "Short wolf cut: shaggy layers, short fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-medium-straight",
+    "label": "Medium straight",
+    "style": {
+      "source": "template",
+      "templateId": "female_medium_straight",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_medium_straight.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "centre",
+    "texture": "straight",
+    "careEffort": 1,
+    "askFor": "Shoulder-length straight, centre parting",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "basic cap"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-choppy-bob",
+    "label": "Choppy lob",
+    "style": {
+      "source": "template",
+      "templateId": "female_choppy_bob",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_choppy_bob.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": true,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Choppy lob with a fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-soft-flipped-layers",
+    "label": "Soft flipped layers",
+    "style": {
+      "source": "template",
+      "templateId": "all_soft_flipped_layers",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_soft_flipped_layers.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": true,
+    "parting": "centre",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Shoulder-length layers flipped at the ends",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-modern-wavy-lob",
+    "label": "Wavy lob",
+    "style": {
+      "source": "template",
+      "templateId": "female_modern_wavy_lob",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_modern_wavy_lob.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "left",
+    "texture": "wavy",
+    "careEffort": 2,
+    "askFor": "Wavy long bob, side parting",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-aura-waves",
+    "label": "Aura waves",
+    "style": {
+      "source": "template",
+      "templateId": "all_aura_waves",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_aura_waves.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "centre",
+    "texture": "wavy",
+    "careEffort": 2,
+    "askFor": "Shoulder-length loose waves, centre parting",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-wavy-shag",
+    "label": "Wavy shag",
+    "style": {
+      "source": "template",
+      "templateId": "all_wavy_shag",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_wavy_shag.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": true,
+    "parting": "none",
+    "texture": "wavy",
+    "careEffort": 3,
+    "askFor": "Shoulder-length shag with a fringe and soft waves",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-face-framing-shag-cut",
+    "label": "Face-framing shag",
+    "style": {
+      "source": "template",
+      "templateId": "all_face_framing_shag_cut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_face_framing_shag_cut.jpg",
+    "audience": "female",
+    "length": "long",
+    "fringe": true,
+    "parting": "centre",
+    "texture": "straight",
+    "careEffort": 3,
+    "askFor": "Long shag with face-framing layers and a fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-defined-waves",
+    "label": "Defined waves",
+    "style": {
+      "source": "template",
+      "templateId": "all_defined_waves",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_defined_waves.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "centre",
+    "texture": "wavy",
+    "careEffort": 2,
+    "askFor": "Shoulder-length defined waves",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-classic-hollywood-waves",
+    "label": "Hollywood waves",
+    "style": {
+      "source": "template",
+      "templateId": "all_classic_hollywood_waves",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_classic_hollywood_waves.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "left",
+    "texture": "wavy",
+    "careEffort": 3,
+    "askFor": "Shoulder-length Hollywood waves, side parting",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "high",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-medium-curve-hair",
+    "label": "Medium layers",
+    "style": {
+      "source": "template",
+      "templateId": "all_medium_curve_hair",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_medium_curve_hair.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": true,
+    "parting": "centre",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Medium layers with curved ends and a fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-long-straight",
+    "label": "Long straight with fringe",
+    "style": {
+      "source": "template",
+      "templateId": "female_long_straight",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_long_straight.jpg",
+    "audience": "female",
+    "length": "long",
+    "fringe": true,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Long straight hair with a fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-side-part-straight",
+    "label": "Long side-part straight",
+    "style": {
+      "source": "template",
+      "templateId": "female_side_part_straight",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_side_part_straight.jpg",
+    "audience": "female",
+    "length": "long",
+    "fringe": false,
+    "parting": "left",
+    "texture": "straight",
+    "careEffort": 2,
+    "askFor": "Long straight hair, side parting",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-long-wavy",
+    "label": "Long wavy",
+    "style": {
+      "source": "template",
+      "templateId": "female_long_wavy",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_long_wavy.jpg",
+    "audience": "female",
+    "length": "long",
+    "fringe": false,
+    "parting": "centre",
+    "texture": "wavy",
+    "careEffort": 2,
+    "askFor": "Long wavy hair, centre parting",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-loose-waves",
+    "label": "Long loose waves",
+    "style": {
+      "source": "template",
+      "templateId": "all_loose_waves",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_loose_waves.jpg",
+    "audience": "female",
+    "length": "long",
+    "fringe": true,
+    "parting": "none",
+    "texture": "wavy",
+    "careEffort": 2,
+    "askFor": "Long loose waves with a curtain fringe",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-hime-cut",
+    "label": "Hime cut",
+    "style": {
+      "source": "template",
+      "templateId": "all_hime_cut",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/all_hime_cut.jpg",
+    "audience": "female",
+    "length": "long",
+    "fringe": true,
+    "parting": "none",
+    "texture": "straight",
+    "careEffort": 3,
+    "askFor": "Hime cut: cheek-length side locks, full fringe, long back",
+    "wigNotes": {
+      "fibres": [
+        "synthetic",
+        "heat-friendly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-long-spiral-curls",
+    "label": "Long spiral curls",
+    "style": {
+      "source": "template",
+      "templateId": "female_long_spiral_curls",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_long_spiral_curls.jpg",
+    "audience": "female",
+    "length": "long",
+    "fringe": false,
+    "parting": "none",
+    "texture": "curly",
+    "careEffort": 3,
+    "askFor": "Long spiral curls, defined, full volume",
+    "wigNotes": {
+      "fibres": [
+        "curl-set synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "high",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "f-bouncy-curls",
+    "label": "Bouncy curls",
+    "style": {
+      "source": "template",
+      "templateId": "female_bouncy_curls",
+      "keepsUsersColour": true
+    },
+    "thumbnail": "/catalog/thumbs/female_bouncy_curls.jpg",
+    "audience": "female",
+    "length": "long",
+    "fringe": false,
+    "parting": "centre",
+    "texture": "curly",
+    "careEffort": 3,
+    "askFor": "Long bouncy curls, centre parting",
+    "wigNotes": {
+      "fibres": [
+        "curl-set synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "high",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "coily-chin",
+    "label": "Chin-length coils",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/ref-coily-chin.jpg"
+    },
+    "thumbnail": "/catalog/refs/ref-coily-chin.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 2,
+    "askFor": "Chin-length 4C coily unit, natural density",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "protective": false,
+    "reviewed": false
+  },
+  {
+    "id": "twa-short",
+    "label": "Short coils (TWA)",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/twa-short.jpg"
+    },
+    "thumbnail": "/catalog/refs/twa-short.jpg",
+    "audience": "female",
+    "length": "short",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 1,
+    "askFor": "Teeny weeny afro: very short natural 4C coils, even shape, about 2.5 cm",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "breathable cap, cooler in hot weather"
+      ]
+    },
+    "priceBand": "low",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "tapered-coils",
+    "label": "Tapered coils",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/tapered-coils.jpg"
+    },
+    "thumbnail": "/catalog/refs/tapered-coils.jpg",
+    "audience": "female",
+    "length": "short",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 1,
+    "askFor": "Short tapered coily cut, ear length, shaped sides",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "breathable cap, cooler in hot weather"
+      ]
+    },
+    "priceBand": "low",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "coily-shoulder",
+    "label": "Shoulder-length coils",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/coily-shoulder.jpg"
+    },
+    "thumbnail": "/catalog/refs/coily-shoulder.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 3,
+    "askFor": "Shoulder-length type 4C coily unit, full density",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "high",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "curly-chin",
+    "label": "Curly bob (3C)",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/curly-chin.jpg"
+    },
+    "thumbnail": "/catalog/refs/curly-chin.jpg",
+    "audience": "female",
+    "length": "chin",
+    "fringe": true,
+    "parting": "none",
+    "texture": "curly",
+    "careEffort": 2,
+    "askFor": "Chin-length type 3C curly bob, defined curls",
+    "wigNotes": {
+      "fibres": [
+        "curl-set synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "monofilament top"
+      ],
+      "comfort": [
+        "lightweight cap",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "curly-shoulder",
+    "label": "Shoulder-length curls (3B)",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/curly-shoulder.jpg"
+    },
+    "thumbnail": "/catalog/refs/curly-shoulder.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "none",
+    "texture": "curly",
+    "careEffort": 3,
+    "askFor": "Shoulder-length type 3B curls, defined, medium density",
+    "wigNotes": {
+      "fibres": [
+        "curl-set synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "high",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "locs-shoulder",
+    "label": "Locs, shoulder length",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/locs-shoulder.jpg"
+    },
+    "thumbnail": "/catalog/refs/locs-shoulder.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 1,
+    "askFor": "Shoulder-length locs, medium thickness",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "high",
+    "reviewed": false,
+    "protective": true
+  },
+  {
+    "id": "box-braids-shoulder",
+    "label": "Box braids",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/box-braids-shoulder.jpg"
+    },
+    "thumbnail": "/catalog/refs/box-braids-shoulder.jpg",
+    "audience": "female",
+    "length": "shoulder",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 1,
+    "askFor": "Shoulder-length box braids, medium size",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "lace front",
+        "monofilament top"
+      ],
+      "comfort": [
+        "more hair volume means more warmth: ask about a ventilated cap"
+      ]
+    },
+    "priceBand": "mid",
+    "reviewed": false,
+    "protective": true
+  },
+  {
+    "id": "m-coily-crop",
+    "label": "Coily crop",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/m-coily-crop.jpg"
+    },
+    "thumbnail": "/catalog/refs/m-coily-crop.jpg",
+    "audience": "male",
+    "length": "short",
+    "fringe": false,
+    "parting": "none",
+    "texture": "coily",
+    "careEffort": 1,
+    "askFor": "Short coily crop with tapered sides",
+    "wigNotes": {
+      "fibres": [
+        "kinky-curly synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "hair system / topper"
+      ],
+      "comfort": [
+        "soft lining for a tender scalp",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "low",
+    "reviewed": false,
+    "protective": false
+  },
+  {
+    "id": "m-curly-top",
+    "label": "Curly top",
+    "style": {
+      "source": "reference",
+      "refPath": "/catalog/refs/m-curly-top.jpg"
+    },
+    "thumbnail": "/catalog/refs/m-curly-top.jpg",
+    "audience": "male",
+    "length": "short",
+    "fringe": false,
+    "parting": "none",
+    "texture": "curly",
+    "careEffort": 2,
+    "askFor": "Short curly top with faded sides",
+    "wigNotes": {
+      "fibres": [
+        "curl-set synthetic",
+        "human hair"
+      ],
+      "caps": [
+        "hair system / topper"
+      ],
+      "comfort": [
+        "soft lining for a tender scalp",
+        "adjustable straps"
+      ]
+    },
+    "priceBand": "mid",
+    "reviewed": false,
+    "protective": false
+  }
+]

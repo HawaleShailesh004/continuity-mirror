@@ -1,0 +1,98 @@
+{
+  "source": "spike-output/stage3/log.json",
+  "recordedAt": "2026-10-26",
+  "data": [
+    {
+      "step": "task-create",
+      "path": "/s2s/v2.0/task/text-to-image/youcam",
+      "request": {
+        "model": "youcam-image-v2",
+        "size": "1104*1472",
+        "prompt_extend": false,
+        "prompt": "Photorealistic portrait photograph of a Black woman with a chin-length rounded natural haircut of tightly defined type 4C coily hair, dense springy coils, natural black colour. Front-facing, looking at the camera, head level, framed from above the head to mid-chest, both shoulders visible. Plain light grey studio background, soft even frontal light, plain crew-neck top. Hair fully visible.",
+        "negative_prompt": "straight hair, loose waves, wig, hat, scarf, glasses, earrings, hands, multiple people, cropped head, side profile, text, watermark, blur, cartoon"
+      },
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "task_id": "fixture-task-1"
+        }
+      }
+    },
+    {
+      "step": "task-final",
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "error": null,
+          "results": {
+            "url": "https://fixtures.invalid/signed/1.jpg"
+          },
+          "task_status": "success"
+        }
+      }
+    },
+    {
+      "step": "file-init",
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "files": [
+            {
+              "content_type": "image/jpeg",
+              "file_name": "ref-coily-chin.jpg",
+              "file_id": "fixture-file-2",
+              "requests": [
+                {
+                  "method": "PUT",
+                  "url": "https://fixtures.invalid/signed/2.jpg",
+                  "headers": {
+                    "Content-Length": "162607",
+                    "Content-Type": "image/jpeg"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "step": "file-put",
+      "status": 200
+    },
+    {
+      "step": "task-create",
+      "path": "/s2s/v2.1/task/hair-transfer",
+      "request": {
+        "src_file_id": "fixture-file-3",
+        "ref_file_id": "fixture-file-2",
+        "hair_color": "src"
+      },
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "task_id": "fixture-task-4"
+        }
+      }
+    },
+    {
+      "step": "task-final",
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "error": null,
+          "results": {
+            "url": "https://fixtures.invalid/signed/3.jpg"
+          },
+          "task_status": "success"
+        }
+      }
+    }
+  ]
+}

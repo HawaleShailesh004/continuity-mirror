@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "$ref": "#/$defs/StyleCatalogItem"
+  },
+  "$defs": {
+    "StyleCatalogItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CatalogId"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "style": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "const": "template"
+                },
+                "templateId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "keepsUsersColour": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "source",
+                "templateId",
+                "keepsUsersColour"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "const": "reference"
+                },
+                "refPath": {
+                  "type": "string",
+                  "format": "starts_with",
+                  "pattern": "^\\/catalog\\/refs\\/.*"
+                }
+              },
+              "required": [
+                "source",
+                "refPath"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "thumbnail": {
+          "type": "string",
+          "format": "starts_with",
+          "pattern": "^\\/.*"
+        },
+        "audience": {
+          "type": "string",
+          "enum": [
+            "female",
+            "male",
+            "all"
+          ]
+        },
+        "length": {
+          "$ref": "#/$defs/HairLength"
+        },
+        "fringe": {
+          "type": "boolean"
+        },
+        "parting": {
+          "$ref": "#/$defs/Parting"
+        },
+        "texture": {
+          "$ref": "#/$defs/Texture"
+        },
+        "careEffort": {
+          "anyOf": [
+            {
+              "type": "number",
+              "const": 1
+            },
+            {
+              "type": "number",
+              "const": 2
+            },
+            {
+              "type": "number",
+              "const": 3
+            }
+          ]
+        },
+        "askFor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "wigNotes": {
+          "type": "object",
+          "properties": {
+            "fibres": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "caps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "comfort": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "fibres",
+            "caps",
+            "comfort"
+          ],
+          "additionalProperties": false
+        },
+        "priceBand": {
+          "type": "string",
+          "enum": [
+            "low",
+            "mid",
+            "high"
+          ]
+        },
+        "protective": {
+          "default": false,
+          "type": "boolean"
+        },
+        "reviewed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "style",
+        "thumbnail",
+        "audience",
+        "length",
+        "fringe",
+        "parting",
+        "texture",
+        "careEffort",
+        "askFor",
+        "wigNotes",
+        "priceBand",
+        "protective",
+        "reviewed"
+      ],
+      "additionalProperties": false
+    },
+    "CatalogId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$"
+    },
+    "HairLength": {
+      "type": "string",
+      "enum": [
+        "buzz",
+        "short",
+        "chin",
+        "shoulder",
+        "long"
+      ]
+    },
+    "Parting": {
+      "type": "string",
+      "enum": [
+        "left",
+        "right",
+        "centre",
+        "none"
+      ]
+    },
+    "Texture": {
+      "type": "string",
+      "enum": [
+        "straight",
+        "wavy",
+        "curly",
+        "coily"
+      ]
+    }
+  }
+}

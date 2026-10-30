@@ -1,0 +1,36 @@
+{
+  "source": "spike-output/gen-headwrap-turban.json",
+  "recordedAt": "2026-10-26",
+  "data": {
+    "job": {
+      "id": "headwrap-turban",
+      "size": "1328*1328",
+      "negative": "person, face, mannequin, multiple items, text, logo, watermark, busy background, blur, low resolution",
+      "prompt": "Product photo of a pre-tied soft jersey turban head wrap in terracotta colour, the kind worn to cover the whole head. Single product only, centered, isolated on a plain white background, studio product photography, soft shadow, the product fills most of the frame, high detail, no person, no mannequin."
+    },
+    "create": {
+      "status": 200,
+      "body": {
+        "status": 200,
+        "data": {
+          "task_id": "fixture-task-1"
+        }
+      }
+    },
+    "polls": [
+      {
+        "status": 200,
+        "body": {
+          "status": 200,
+          "data": {
+            "error": null,
+            "results": {
+              "url": "https://fixtures.invalid/signed/1.jpg"
+            },
+            "task_status": "success"
+          }
+        }
+      }
+    ]
+  }
+}

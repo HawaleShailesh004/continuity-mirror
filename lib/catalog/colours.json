@@ -1,0 +1,12 @@
+[
+  { "id": "black", "label": "Natural black", "family": "black", "hexes": ["#1C1714"], "use": ["family-default"] },
+  { "id": "dark-brown", "label": "Dark brown", "family": "dark-brown", "hexes": ["#3B2A20"], "use": ["family-default"] },
+  { "id": "brown", "label": "Brown", "family": "brown", "hexes": ["#5A3D2B"], "use": ["family-default"] },
+  { "id": "light-brown", "label": "Light brown", "family": "light-brown", "hexes": ["#8A6446"], "use": ["family-default", "softer"] },
+  { "id": "blonde", "label": "Blonde", "family": "blonde", "hexes": ["#C9A66B"], "use": ["family-default"] },
+  { "id": "red", "label": "Auburn", "family": "red", "hexes": ["#8E3B25"], "use": ["family-default", "new-chapter"] },
+  { "id": "grey", "label": "Natural silver", "family": "grey", "hexes": ["#BEBDB8"], "use": ["family-default", "regrowth"] },
+  { "id": "soft-copper", "label": "Soft copper", "family": "red", "hexes": ["#B5653A"], "use": ["new-chapter"] },
+  { "id": "brown-to-caramel", "label": "Brown to caramel", "family": "brown", "hexes": ["#4A3226", "#A87A4F"], "use": ["softer", "new-chapter"] },
+  { "id": "silver-blend", "label": "Silver blend", "family": "grey", "hexes": ["#6B6560", "#BEBDB8"], "use": ["regrowth"] }
+]

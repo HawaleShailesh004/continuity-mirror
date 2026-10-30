@@ -1,0 +1,2072 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Continuity Mirror API",
+    "version": "0.1.0",
+    "description": "Same-origin API for the Continuity Mirror PWA. Errors always use ErrorEnvelope; the frontend maps messageKey to copy."
+  },
+  "components": {
+    "schemas": {
+      "StatusResponse": {
+        "type": "object",
+        "properties": {
+          "live": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "units_low",
+              "disabled",
+              "rate_limited"
+            ]
+          },
+          "mode": {
+            "$ref": "#/components/schemas/AdapterMode"
+          },
+          "session": {
+            "type": "object",
+            "properties": {
+              "unitsUsed": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "unitsCap": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "unitsUsed",
+              "unitsCap"
+            ]
+          },
+          "capabilities": {
+            "$ref": "#/components/schemas/Capabilities"
+          },
+          "limits": {
+            "type": "object",
+            "properties": {
+              "uploadMaxBytes": {
+                "type": "integer",
+                "exclusiveMinimum": 0
+              },
+              "uploadMaxLongSide": {
+                "type": "integer",
+                "exclusiveMinimum": 0
+              },
+              "uploadMinShortSide": {
+                "type": "integer",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "uploadMaxBytes",
+              "uploadMaxLongSide",
+              "uploadMinShortSide"
+            ]
+          },
+          "version": {
+            "type": "string"
+          },
+          "serverTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "live",
+          "mode",
+          "session",
+          "capabilities",
+          "limits",
+          "version",
+          "serverTime"
+        ]
+      },
+      "AdapterMode": {
+        "type": "string",
+        "enum": [
+          "live",
+          "mock",
+          "replay"
+        ]
+      },
+      "Capabilities": {
+        "type": "object",
+        "properties": {
+          "hairStyle": {
+            "type": "boolean"
+          },
+          "hairColour": {
+            "type": "boolean"
+          },
+          "brows": {
+            "type": "boolean"
+          },
+          "headwear": {
+            "type": "boolean"
+          },
+          "scarf": {
+            "type": "boolean"
+          },
+          "regrowth": {
+            "type": "boolean"
+          },
+          "shares": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "hairStyle",
+          "hairColour",
+          "brows",
+          "headwear",
+          "scarf",
+          "regrowth",
+          "shares"
+        ]
+      },
+      "MockScenario": {
+        "type": "string",
+        "enum": [
+          "ok",
+          "slow",
+          "no_shoulder",
+          "hair_too_short",
+          "face_pose",
+          "unavailable",
+          "timeout",
+          "rate_limited",
+          "budget_exhausted",
+          "live_disabled",
+          "partial_failure",
+          "expired"
+        ]
+      },
+      "CreateBaselineResponse": {
+        "type": "object",
+        "properties": {
+          "baselineId": {
+            "$ref": "#/components/schemas/BaselineId"
+          },
+          "width": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "height": {
+            "type": "integer",
+            "exclusiveMinimum": 0
+          },
+          "normalisedImage": {
+            "type": "string"
+          },
+          "reused": {
+            "type": "boolean"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "baselineId",
+          "width",
+          "height",
+          "normalisedImage",
+          "reused",
+          "expiresAt"
+        ]
+      },
+      "BaselineId": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      },
+      "ErrorEnvelope": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "required": [
+          "error"
+        ]
+      },
+      "ErrorBody": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/ErrorCode"
+          },
+          "messageKey": {
+            "$ref": "#/components/schemas/MessageKey"
+          },
+          "retryable": {
+            "type": "boolean"
+          },
+          "youcamCode": {
+            "type": "string"
+          },
+          "details": {}
+        },
+        "required": [
+          "code",
+          "messageKey",
+          "retryable"
+        ]
+      },
+      "ErrorCode": {
+        "type": "string",
+        "enum": [
+          "VALIDATION_FAILED",
+          "IMAGE_FORMAT",
+          "IMAGE_TOO_SMALL",
+          "PAYLOAD_TOO_LARGE",
+          "RATE_LIMITED",
+          "SESSION_BUDGET_EXHAUSTED",
+          "LIVE_DISABLED",
+          "FEATURE_DISABLED",
+          "YOUCAM_REJECTED",
+          "YOUCAM_UNAVAILABLE",
+          "YOUCAM_TIMEOUT",
+          "NOT_FOUND",
+          "NOT_READY",
+          "EXPIRED",
+          "UNAUTHORISED",
+          "INTERNAL"
+        ]
+      },
+      "MessageKey": {
+        "type": "string",
+        "enum": [
+          "generic.invalidRequest",
+          "generic.somethingWrong",
+          "generic.serviceBusy",
+          "generic.busyRetry",
+          "generic.timeout",
+          "generic.notFound",
+          "generic.tryDifferentPhoto",
+          "image.format",
+          "image.tooSmall",
+          "image.tooLarge",
+          "budget.sessionReached",
+          "live.disabled",
+          "feature.disabled",
+          "result.notReady",
+          "result.expired",
+          "share.unauthorised",
+          "capture.retake.shoulders",
+          "capture.retake.faceForward",
+          "capture.retake.faceVisible",
+          "capture.retake.size",
+          "capture.hairTooShort"
+        ]
+      },
+      "DeleteBaselineResponse": {
+        "type": "object",
+        "properties": {
+          "deleted": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "upstreamRetentionDays": {
+            "type": "number",
+            "enum": [
+              30
+            ]
+          }
+        },
+        "required": [
+          "deleted",
+          "upstreamRetentionDays"
+        ]
+      },
+      "JobResponse": {
+        "type": "object",
+        "properties": {
+          "job": {
+            "$ref": "#/components/schemas/Job"
+          }
+        },
+        "required": [
+          "job"
+        ]
+      },
+      "Job": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "baselineId": {
+            "$ref": "#/components/schemas/BaselineId"
+          },
+          "clientRequestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "spec": {
+            "$ref": "#/components/schemas/JobSpec"
+          },
+          "status": {
+            "$ref": "#/components/schemas/JobStatus"
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JobStep"
+            },
+            "minItems": 1
+          },
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          },
+          "resultReady": {
+            "type": "boolean"
+          },
+          "resultExpiresAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "provenance": {
+            "$ref": "#/components/schemas/Provenance"
+          },
+          "retryAfterMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 60000
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "baselineId",
+          "clientRequestId",
+          "spec",
+          "status",
+          "steps",
+          "resultReady",
+          "provenance",
+          "retryAfterMs",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "JobSpec": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/RouteSpec"
+          },
+          {
+            "$ref": "#/components/schemas/ColourSpec"
+          },
+          {
+            "$ref": "#/components/schemas/BrowsSpec"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "route": "#/components/schemas/RouteSpec",
+            "colour": "#/components/schemas/ColourSpec",
+            "brows": "#/components/schemas/BrowsSpec"
+          }
+        }
+      },
+      "RouteSpec": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "route"
+            ]
+          },
+          "routeId": {
+            "$ref": "#/components/schemas/RouteId"
+          },
+          "styleId": {
+            "$ref": "#/components/schemas/CatalogId"
+          },
+          "colour": {
+            "$ref": "#/components/schemas/RouteColour"
+          },
+          "attempt": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5,
+            "default": 0,
+            "description": ">0 only for an intentional re-roll; part of the idempotency key"
+          }
+        },
+        "required": [
+          "kind",
+          "routeId",
+          "styleId",
+          "colour"
+        ],
+        "additionalProperties": false
+      },
+      "RouteId": {
+        "type": "string",
+        "enum": [
+          "closest",
+          "easier",
+          "new-chapter",
+          "regrowth-3m",
+          "regrowth-6m",
+          "regrowth-12m",
+          "custom"
+        ]
+      },
+      "CatalogId": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$"
+      },
+      "RouteColour": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "own"
+                ]
+              },
+              "hex": {
+                "$ref": "#/components/schemas/Hex"
+              }
+            },
+            "required": [
+              "source",
+              "hex"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "template"
+                ]
+              }
+            },
+            "required": [
+              "source"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string",
+                "enum": [
+                  "preset"
+                ]
+              },
+              "presetId": {
+                "$ref": "#/components/schemas/CatalogId"
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "ombre"
+                ]
+              }
+            },
+            "required": [
+              "source",
+              "presetId",
+              "mode"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Hex": {
+        "type": "string",
+        "pattern": "^#[0-9a-fA-F]{6}$",
+        "example": "#1C1714"
+      },
+      "ColourSpec": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "colour"
+            ]
+          },
+          "colour": {
+            "type": "object",
+            "properties": {
+              "presetId": {
+                "$ref": "#/components/schemas/CatalogId"
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "full",
+                  "ombre"
+                ]
+              }
+            },
+            "required": [
+              "presetId",
+              "mode"
+            ],
+            "additionalProperties": false
+          },
+          "attempt": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5,
+            "default": 0,
+            "description": ">0 only for an intentional re-roll; part of the idempotency key"
+          }
+        },
+        "required": [
+          "kind",
+          "colour"
+        ],
+        "additionalProperties": false
+      },
+      "BrowsSpec": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "brows"
+            ]
+          },
+          "browShapeId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,64}$"
+          },
+          "curvature": {
+            "type": "integer",
+            "minimum": -100,
+            "maximum": 100
+          },
+          "thickness": {
+            "type": "integer",
+            "minimum": -100,
+            "maximum": 100
+          },
+          "definition": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "colourHex": {
+            "$ref": "#/components/schemas/Hex"
+          },
+          "intensity": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "attempt": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5,
+            "default": 0,
+            "description": ">0 only for an intentional re-roll; part of the idempotency key"
+          }
+        },
+        "required": [
+          "kind",
+          "browShapeId",
+          "curvature",
+          "thickness",
+          "definition",
+          "colourHex",
+          "intensity"
+        ],
+        "additionalProperties": false
+      },
+      "JobStatus": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "running",
+          "succeeded",
+          "failed"
+        ]
+      },
+      "JobStep": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/StepKind"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "running",
+              "succeeded",
+              "failed"
+            ]
+          },
+          "units": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "youcamTaskId": {
+            "type": "string"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "finishedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "kind",
+          "status",
+          "units"
+        ]
+      },
+      "StepKind": {
+        "type": "string",
+        "enum": [
+          "hair-transfer",
+          "hair-color",
+          "makeup-vto"
+        ]
+      },
+      "Provenance": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "$ref": "#/components/schemas/AdapterMode"
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "$ref": "#/components/schemas/StepKind"
+                },
+                "endpoint": {
+                  "type": "string"
+                },
+                "apiVersion": {
+                  "type": "string"
+                },
+                "params": {
+                  "type": "object",
+                  "additionalProperties": {}
+                },
+                "youcamTaskId": {
+                  "type": "string"
+                },
+                "finishedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "kind",
+                "endpoint",
+                "apiVersion",
+                "params"
+              ]
+            }
+          }
+        },
+        "required": [
+          "mode",
+          "steps"
+        ]
+      },
+      "CreateJobRequest": {
+        "type": "object",
+        "properties": {
+          "baselineId": {
+            "$ref": "#/components/schemas/BaselineId"
+          },
+          "clientRequestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "spec": {
+            "$ref": "#/components/schemas/JobSpec"
+          }
+        },
+        "required": [
+          "baselineId",
+          "clientRequestId",
+          "spec"
+        ],
+        "additionalProperties": false
+      },
+      "PrivacyReceipt": {
+        "type": "object",
+        "properties": {
+          "baselines": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "baselineId": {
+                  "$ref": "#/components/schemas/BaselineId"
+                },
+                "youcamFileId": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "expiresAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "baselineId",
+                "youcamFileId",
+                "createdAt",
+                "expiresAt"
+              ]
+            }
+          },
+          "jobs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "baselineId": {
+                  "$ref": "#/components/schemas/BaselineId"
+                },
+                "kind": {
+                  "$ref": "#/components/schemas/JobKind"
+                },
+                "endpoints": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "youcamTaskIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "expiresAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "id",
+                "baselineId",
+                "kind",
+                "endpoints",
+                "youcamTaskIds",
+                "createdAt",
+                "expiresAt"
+              ]
+            }
+          },
+          "shares": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tokenPrefix": {
+                  "type": "string"
+                },
+                "itemCount": {
+                  "type": "integer"
+                },
+                "expiresAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "tokenPrefix",
+                "itemCount",
+                "expiresAt"
+              ]
+            }
+          },
+          "serverStoresImages": {
+            "type": "boolean"
+          },
+          "upstream": {
+            "type": "object",
+            "properties": {
+              "provider": {
+                "type": "string"
+              },
+              "retentionDays": {
+                "type": "number",
+                "enum": [
+                  30
+                ]
+              }
+            },
+            "required": [
+              "provider",
+              "retentionDays"
+            ]
+          }
+        },
+        "required": [
+          "baselines",
+          "jobs",
+          "shares",
+          "serverStoresImages",
+          "upstream"
+        ]
+      },
+      "JobKind": {
+        "type": "string",
+        "enum": [
+          "route",
+          "colour",
+          "brows"
+        ]
+      },
+      "CreateShareResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "$ref": "#/components/schemas/ShareToken"
+          },
+          "ownerKey": {
+            "type": "string",
+            "minLength": 22
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "token",
+          "ownerKey",
+          "url",
+          "expiresAt"
+        ]
+      },
+      "ShareToken": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9_-]{22}$"
+      },
+      "CreateShareMeta": {
+        "type": "object",
+        "properties": {
+          "consent": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              },
+              "required": [
+                "label"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 4
+          },
+          "expiresInDays": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 7
+          }
+        },
+        "required": [
+          "consent",
+          "items",
+          "expiresInDays"
+        ],
+        "additionalProperties": false
+      },
+      "ShareManifest": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "imageUrl": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key",
+                "label",
+                "imageUrl"
+              ]
+            }
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "items",
+          "expiresAt"
+        ]
+      },
+      "CreateVoteResponse": {
+        "type": "object",
+        "properties": {
+          "accepted": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "votesLeft": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "accepted",
+          "votesLeft"
+        ]
+      },
+      "CreateVoteRequest": {
+        "type": "object",
+        "properties": {
+          "itemKey": {
+            "type": "string",
+            "minLength": 1
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 140
+          }
+        },
+        "required": [
+          "itemKey"
+        ],
+        "additionalProperties": false
+      },
+      "ShareResults": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "votes": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "key",
+                "label",
+                "votes"
+              ]
+            }
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "itemKey": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": [
+                "itemKey",
+                "note",
+                "createdAt"
+              ]
+            }
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "items",
+          "notes",
+          "expiresAt"
+        ]
+      },
+      "DeleteShareResponse": {
+        "type": "object",
+        "properties": {
+          "deleted": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          }
+        },
+        "required": [
+          "deleted"
+        ]
+      },
+      "AdminMetrics": {
+        "type": "object",
+        "properties": {
+          "balance": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "unitsSpent": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "number"
+              },
+              "byKind": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "number"
+                }
+              }
+            },
+            "required": [
+              "total",
+              "byKind"
+            ]
+          },
+          "jobsByStatus": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
+          },
+          "youcamErrors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
+          },
+          "latencyMs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "p50": {
+                  "type": "number"
+                },
+                "p95": {
+                  "type": "number"
+                },
+                "n": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "p50",
+                "p95",
+                "n"
+              ]
+            }
+          }
+        },
+        "required": [
+          "balance",
+          "unitsSpent",
+          "jobsByStatus",
+          "youcamErrors",
+          "latencyMs"
+        ]
+      },
+      "AdminLiveRequest": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "enabled"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "parameters": {}
+  },
+  "paths": {
+    "/api/status": {
+      "get": {
+        "summary": "What the UI may offer right now (live generation, capabilities, session budget)",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/MockScenario"
+            },
+            "required": false,
+            "name": "x-cm-mock-scenario",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/baselines": {
+      "post": {
+        "summary": "Upload the baseline photo once; every job reuses it",
+        "description": "Multipart field `image` (JPEG/PNG/WebP; HEIC is rejected with details.hint='heic'). Downsize to long side ≤ 1600 and ≤ 1.5 MB first. The server normalises to JPEG, long side 1024, EXIF stripped, and uploads to YouCam (free). baselineId = sha256 of the normalised bytes. 201 for a new baseline, 200 when reused. Kept 24 h.",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/MockScenario"
+            },
+            "required": false,
+            "name": "x-cm-mock-scenario",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "image"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reused",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBaselineResponse"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateBaselineResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/baselines/{id}": {
+      "delete": {
+        "summary": "Forget a baseline and its jobs on our side (idempotent)",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/BaselineId"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted. YouCam keeps its copy up to 30 days.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteBaselineResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/jobs": {
+      "post": {
+        "summary": "Start a job (route / colour / brows)",
+        "description": "Idempotent: the same baseline + spec returns the existing job (200) unless it failed; the same clientRequestId returns that request's job. Use a new clientRequestId for a retry after failure. Units are reserved on create and refunded when the job fails (YouCam errors are free).",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/MockScenario"
+            },
+            "required": false,
+            "name": "x-cm-mock-scenario",
+            "in": "header"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateJobRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Existing job",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobResponse"
+                }
+              }
+            }
+          },
+          "202": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/jobs/{id}": {
+      "get": {
+        "summary": "Poll a job; wait job.retryAfterMs between polls",
+        "description": "Job ids are unguessable capability tokens (96-bit), so a job can be resumed even if the session cookie was lost. Polls within 4 s of the last check are answered from the server's cache; retryAfterMs is 2 s, 4 s after 30 s, 6 s when the YouCam call budget is exhausted. Jobs fail with YOUCAM_TIMEOUT after 180 s.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job (failed jobs carry error)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/jobs/{id}/result": {
+      "get": {
+        "summary": "Stream the result image once job.resultReady; save it on the device immediately",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Result image",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/privacy/receipt": {
+      "get": {
+        "summary": "What our server holds for this session (no images)",
+        "responses": {
+          "200": {
+            "description": "Receipt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrivacyReceipt"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shares": {
+      "post": {
+        "summary": "(P1) Create an expiring share link for chosen results",
+        "description": "Multipart: `meta` (JSON, CreateShareMeta, with `consent: true`) and `images` (one file per item, same order, ≤ 2 MB each, ≤ 4.4 MB total). Images are re-encoded to JPEG (≤ 1024 px, metadata stripped) and stored privately until the link expires or is revoked. 5 creates per hour per session. 403 FEATURE_DISABLED when shares are off (status.capabilities.shares).",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "meta": {
+                    "$ref": "#/components/schemas/CreateShareMeta"
+                  },
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                },
+                "required": [
+                  "meta",
+                  "images"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created; keep ownerKey on the device",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateShareResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shares/{token}": {
+      "get": {
+        "summary": "(P1) Helper view manifest",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/ShareToken"
+            },
+            "required": true,
+            "name": "token",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Manifest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShareManifest"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "(P1) Revoke now: deletes images and votes",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/ShareToken"
+            },
+            "required": true,
+            "name": "token",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "x-owner-key",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteShareResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shares/{token}/items/{key}": {
+      "get": {
+        "summary": "(P1) A shared image (the manifest's imageUrl)",
+        "description": "Streams the image through our server; storage is private. 410 once the link is expired or revoked.",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/ShareToken"
+            },
+            "required": true,
+            "name": "token",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "key",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Image",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shares/{token}/votes": {
+      "post": {
+        "summary": "(P1) Helper vote (5 per helper per share)",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/ShareToken"
+            },
+            "required": true,
+            "name": "token",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateVoteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/shares/{token}/results": {
+      "get": {
+        "summary": "(P1) Owner view of votes",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/ShareToken"
+            },
+            "required": true,
+            "name": "token",
+            "in": "path"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "name": "x-owner-key",
+            "in": "header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShareResults"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/webhooks/youcam": {
+      "post": {
+        "summary": "YouCam task webhook (Standard Webhooks signature)",
+        "description": "Verified with webhook-id / webhook-timestamp / webhook-signature (HMAC-SHA256, YOUCAM_WEBHOOK_SECRET, 5 min tolerance) and deduped by webhook-id. Treated as a nudge: only the task id is read from the body, and the job is advanced by asking YouCam (same path and lock as polling). 404 when no secret is configured.",
+        "responses": {
+          "200": {
+            "description": "Handled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "outcome": {
+                      "type": "string",
+                      "enum": [
+                        "duplicate",
+                        "ignored",
+                        "advanced",
+                        "busy"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "ok",
+                    "outcome"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cron/cleanup": {
+      "get": {
+        "summary": "Daily cleanup of expired shares and orphaned images (Vercel Cron, Bearer CRON_SECRET)",
+        "responses": {
+          "200": {
+            "description": "Report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "expired": {
+                      "type": "integer"
+                    },
+                    "orphanBlobs": {
+                      "type": "integer"
+                    },
+                    "live": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "expired",
+                    "orphanBlobs",
+                    "live"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/metrics": {
+      "get": {
+        "summary": "Operator metrics (Bearer ADMIN_TOKEN)",
+        "responses": {
+          "200": {
+            "description": "Metrics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminMetrics"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/live": {
+      "post": {
+        "summary": "Kill switch for live generation (Bearer ADMIN_TOKEN)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminLiveRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "New state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "enabled"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error envelope; `error.code` says why",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "webhooks": {}
+}

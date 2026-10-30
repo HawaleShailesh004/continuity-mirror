@@ -1,0 +1,34 @@
+# secrets
+.env
+.env.*
+!.env.example
+*.pem
+
+# deps & builds
+node_modules/
+.pnp
+.pnp.*
+.next/
+.next-*/
+out/
+build/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+.vercel
+
+# spike scratch (raw responses may contain signed URLs)
+spike-output/
+spike/node_modules/
+
+# MediaPipe WASM runtime (13 MB per variant): copied from node_modules by scripts/sync-mediapipe.mjs
+public/mediapipe/wasm/
+
+# playwright
+test-results/
+playwright-report/
+
+# misc
+.DS_Store
+npm-debug.log*
+.pnpm-debug.log*
