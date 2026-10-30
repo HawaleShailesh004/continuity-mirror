@@ -1,5 +1,6 @@
 "use client";
 
+import { ViewTransition } from "react";
 import Link from "next/link";
 import * as m from "motion/react-m";
 import { Button } from "@/components/ui/button";
@@ -37,6 +38,8 @@ export function PathCard({
   slow,
   verdict,
   href,
+  changed,
+  viewName,
   onRetry,
 }: {
   name: string;
@@ -51,6 +54,10 @@ export function PathCard({
   verdict?: Verdict["feelsLikeMe"];
   /** Where "Open" goes once the result is ready. */
   href: string;
+  /** "What changed", in a few words (lib/client/what-changed.ts). */
+  changed?: string;
+  /** Shared-element name: the photo morphs into the same-named photo on the compare screen. */
+  viewName?: string;
   onRetry?: () => void;
 }) {
   const calm = useCalmMotion();
@@ -71,16 +78,15 @@ export function PathCard({
         />
       ) : (
         <>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          {/* The photo slowly develops while it waits: a long, gentle blur 28 → 10 px (still, with reduced motion). */}
+          <m.img
             src={baselineSrc}
             alt=""
             aria-hidden="true"
-            className={cn(
-              "absolute inset-0 size-full scale-105 object-cover object-[50%_20%]",
-              !failed && "blur-xl",
-              failed && "opacity-40 blur-md",
-            )}
+            className={cn("absolute inset-0 size-full scale-105 object-cover object-[50%_20%]", failed && "opacity-40")}
+            initial={{ filter: failed ? "blur(12px)" : "blur(28px)" }}
+            animate={{ filter: failed ? "blur(12px)" : calm ? "blur(20px)" : "blur(10px)" }}
+            transition={calm || failed ? { duration: 0 } : { duration: 40, ease: "linear" }}
           />
           {!failed && <ProgressiveBlur className="absolute inset-0" blurIntensity={2} />}
           <div className="absolute inset-x-3 bottom-3">
@@ -123,10 +129,22 @@ export function PathCard({
 
   return (
     <article className="relative flex flex-col gap-2.5" aria-label={name}>
-      {photo}
-      <div className="flex flex-col gap-0.5 px-1">
-        <h2 className="text-base font-bold">{heading}</h2>
+      {viewName && ready ? (
+        <ViewTransition name={viewName} share="morph">
+          {photo}
+        </ViewTransition>
+      ) : (
+        photo
+      )}
+      <div className="flex flex-col gap-1 px-1">
+        <h2 className="font-display text-lg leading-snug font-medium">{heading}</h2>
         <p className="text-sm text-text-soft">{blurb}</p>
+        {changed && (
+          <p className="text-sm font-semibold text-text">
+            <span className="sr-only">{copy.paths.changedTitle}: </span>
+            {changed}
+          </p>
+        )}
       </div>
       {ready && <StyleDirectionLabel />}
     </article>

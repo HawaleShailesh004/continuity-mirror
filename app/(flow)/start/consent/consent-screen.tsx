@@ -7,6 +7,7 @@ import { BottomBar } from "@/components/cm/bottom-bar";
 import { Screen } from "@/components/cm/screen";
 import { ErrorState } from "@/components/cm/states";
 import { Button, ButtonLink } from "@/components/ui/button";
+import { PersonaPicker } from "@/components/cm/persona-picker";
 import { ChoiceChips } from "@/components/ui/choice-chips";
 import { CheckboxRow } from "@/components/ui/checkbox";
 import { copy } from "@/content/copy";
@@ -17,17 +18,18 @@ import { useJourney, type Mood } from "@/lib/client/store";
 import { PERSONAS } from "@/lib/contracts/mocks/fixtures";
 import type { ErrorBody } from "@/lib/contracts";
 
+/* A calm checklist row: an icon, a short title, a sentence. No boxes. */
 function Block({ icon: Icon, title, children }: { icon: LucideIcon; title: string; children: ReactNode }) {
   return (
-    <section className="flex gap-4 rounded-card bg-surface p-5">
+    <li className="flex gap-4 py-4 first:pt-0 last:pb-0">
       <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-peach" aria-hidden="true">
         <Icon className="size-5" />
       </span>
-      <div className="flex flex-col gap-1">
+      <section className="flex flex-col gap-1">
         <h2 className="text-base">{title}</h2>
         <p className="text-text-soft">{children}</p>
-      </div>
-    </section>
+      </section>
+    </li>
   );
 }
 
@@ -70,6 +72,7 @@ export function ConsentScreen() {
       title={t.title}
       backHref="/"
       step={{ n: 1, total: 5 }}
+      wide={sample}
       bottom={
         <BottomBar>
           {sample ? (
@@ -93,32 +96,33 @@ export function ConsentScreen() {
         </BottomBar>
       }
     >
-      <p className="text-text-soft">{t.intro}</p>
-
-      <div className="flex flex-col gap-3">
-        <Block icon={CameraIcon} title={t.photoTitle}>
-          {t.photoBody}
-        </Block>
-        <Block icon={InfoIcon} title={t.notTitle}>
-          {t.notBody}
-        </Block>
-        <Block icon={Trash2Icon} title={t.controlTitle}>
-          {t.controlBody}
-        </Block>
-      </div>
-
       {sample && (
         <section className="flex flex-col gap-3">
-          <h2 className="text-base">{t.samplePersonaTitle}</h2>
-          <p className="-mt-2 text-sm text-text-muted">{t.samplePersonaHint}</p>
-          <ChoiceChips
+          <h2 className="font-display text-xl font-medium md:text-2xl">{t.samplePersonaTitle}</h2>
+          <p className="-mt-1 text-sm text-text-soft">{t.samplePersonaHint}</p>
+          <PersonaPicker
             label={t.samplePersonaLabel}
             value={personaId}
             onValueChange={setPersonaId}
-            options={PERSONAS.map((p) => ({ value: p.id, label: p.name }))}
+            options={PERSONAS.map((p) => ({ id: p.id, name: p.name, age: p.age, line: t.samplePersonaLines[p.id] ?? "", photo: p.baseline }))}
           />
         </section>
       )}
+
+      <div className="flex flex-col gap-3">
+        <p className="text-text-soft">{t.intro}</p>
+        <ul className="flex flex-col divide-y divide-line">
+          <Block icon={CameraIcon} title={t.photoTitle}>
+            {t.photoBody}
+          </Block>
+          <Block icon={InfoIcon} title={t.notTitle}>
+            {t.notBody}
+          </Block>
+          <Block icon={Trash2Icon} title={t.controlTitle}>
+            {t.controlBody}
+          </Block>
+        </ul>
+      </div>
 
       {helper && (
         <section className="flex flex-col gap-2 rounded-card bg-peach p-5">

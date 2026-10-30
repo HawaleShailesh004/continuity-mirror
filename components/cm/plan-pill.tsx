@@ -4,6 +4,7 @@ import Link from "next/link";
 import * as m from "motion/react-m";
 import { HeartIcon } from "lucide-react";
 import { useCalmMotion } from "@/components/motion/motion-provider";
+import { PLAN_PILL_ID } from "./heart-flight";
 import { copy } from "@/content/copy";
 import { spring } from "@/lib/client/motion";
 
@@ -20,6 +21,7 @@ export function PlanPill({ count }: { count: number }) {
     <Link
       href="/plan"
       transitionTypes={["nav-forward"]}
+      id={PLAN_PILL_ID}
       aria-label={copy.nav.planPillLabel(count)}
       className="fixed right-5 bottom-[calc(env(safe-area-inset-bottom)+6rem)] z-30 flex h-12 items-center gap-2 rounded-full bg-surface-raised px-5 text-sm font-semibold shadow-raised"
     >
@@ -28,7 +30,7 @@ export function PlanPill({ count }: { count: number }) {
         key={count}
         initial={calm ? { opacity: 0 } : { scale: 0.85, opacity: 0.4 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={calm ? { duration: 0.15 } : spring.ui}
+        transition={calm ? { duration: 0.15 } : { ...spring.ui, delay: 0.55 }}
       >
         {copy.nav.planPill(count)}
       </m.span>

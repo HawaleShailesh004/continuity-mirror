@@ -39,3 +39,32 @@ export async function reachPlanWithLook(page: Page, look = "Closest to me") {
   await page.getByRole("link", { name: /Open my plan, 1 look saved/ }).click();
   await page.getByRole("heading", { name: "My plan", level: 1 }).waitFor();
 }
+
+/**
+ * Answer the six snapshot tags of a real person (nothing is pre-chosen for them):
+ * each tag opens a sheet; a one-choice sheet closes itself, colour and brows have "Done".
+ */
+export async function answerSnapshot(page: Page) {
+  const open = (group: string) => page.getByRole("button", { name: new RegExp(`^(${group}: |Choose ${group.toLowerCase()})`) }).click();
+  const choose = (name: string) => page.getByRole("dialog").getByRole("radio", { name, exact: true }).click();
+  const done = async () => {
+    await page.getByRole("dialog").getByRole("button", { name: "Done" }).click();
+    await page.getByRole("dialog").waitFor({ state: "hidden" });
+  };
+  const single = async (group: string, name: string) => {
+    await open(group);
+    await choose(name);
+    await page.getByRole("dialog").waitFor({ state: "hidden" });
+  };
+  await open("Hair colour");
+  await choose("Dark brown");
+  await done();
+  await single("Length", "Shoulder length");
+  await single("Parting", "No parting");
+  await single("Fringe", "No fringe");
+  await single("Texture", "Straight");
+  await open("Brows");
+  await choose("Soft arch");
+  await choose("Dark");
+  await done();
+}

@@ -28,6 +28,8 @@
   --glow: #ffd9b8;
   --focus: #1f4373;
   --on-photo: #ffffff;
+  /* A dark fall-off under white text on a photo (same in both modes). */
+  --scrim: rgb(10 16 26 / 0.88);
   --dawn-1: #ece9f4;
   --dawn-2: #f9e7ea;
   --dawn-3: #fbe6d5;
@@ -129,6 +131,7 @@
   --color-peach: var(--peach);
   --color-glow: var(--glow);
   --color-focus: var(--focus);
+  --color-scrim: var(--scrim);
   --color-on-photo: var(--on-photo); /* handles and lines over photos, both modes */
 
   --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;

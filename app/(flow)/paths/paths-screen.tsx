@@ -1,23 +1,50 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useSyncExternalStore } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
+import * as m from "motion/react-m";
+import type { Variants } from "motion/react";
 import { BottomBar } from "@/components/cm/bottom-bar";
 import { BudgetNote } from "@/components/cm/budget-note";
 import { HowMadeDrawer } from "@/components/cm/how-made-drawer";
 import { PathCard } from "@/components/cm/path-card";
+import { PhotoStage } from "@/components/cm/photo-stage";
+import { WaitingTips } from "@/components/cm/waiting-tips";
+import { useCalmMotion } from "@/components/motion/motion-provider";
 import { Screen } from "@/components/cm/screen";
 import { RetakeCoach } from "@/components/cm/retake-coach";
 import { ErrorState, SampleModeBanner } from "@/components/cm/states";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { copy } from "@/content/copy";
-import { styles } from "@/lib/catalog";
+import { colours, styles } from "@/lib/catalog";
 import { db, rowError, type JobRow } from "@/lib/client/db";
 import { useJourneyGuard, useNavigate, useNow, useObjectUrl, useObjectUrls, useStatus } from "@/lib/client/hooks";
 import { viewRow } from "@/lib/client/job-view";
 import { ensureRouteJobs, retryRow } from "@/lib/client/journey";
+import { spring } from "@/lib/client/motion";
+import { whatChanged } from "@/lib/client/what-changed";
 import { useJourney } from "@/lib/client/store";
 import { errorBody } from "@/lib/contracts/errors";
+
+const LARGE = "(min-width: 1024px)";
+const subscribeLarge = (onChange: () => void) => {
+  const mq = window.matchMedia(LARGE);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+};
+
+/** The three paths are dealt out from the baseline photo, 120 ms apart (moment 3); with reduced motion they fade in. */
+const deal = (large: boolean, calm: boolean): Variants => ({
+  hidden: (i: number) => (calm ? { opacity: 0 } : large ? { opacity: 0, x: -(i + 1) * 250, scale: 0.8, rotate: -3 } : { opacity: 0, y: -(i + 1) * 120, scale: 0.88 }),
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    y: 0,
+    scale: 1,
+    rotate: 0,
+    transition: calm ? { duration: 0.15 } : { ...spring.layout, delay: 0.15 + i * 0.12 },
+  }),
+});
 
 /** One preview costs about this many units (a route is 2–3); only used to word the budget note. */
 const UNITS_PER_PREVIEW = 3;
@@ -35,6 +62,9 @@ export function PathsScreen() {
   const status = useStatus();
   const now = useNow();
   const navigate = useNavigate();
+  const calm = useCalmMotion();
+  const large = useSyncExternalStore(subscribeLarge, () => window.matchMedia(LARGE).matches, () => false);
+  const snapshot = useLiveQuery(async () => (baselineId ? (await db.snapshots.get(baselineId))?.snapshot : undefined), [baselineId]);
 
   useEffect(() => {
     if (ready && baselineId) void ensureRouteJobs(baselineId, routes);
@@ -110,14 +140,24 @@ export function PathsScreen() {
       )}
 
       {baselineUrl && !blockingError && !photoProblem && !(liveOff && cards.every((c) => !c.row?.jobId)) && (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {cards.map(({ route, row, view }) => {
+        <div className="grid gap-6 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-10">
+          <aside className="flex items-center gap-4 lg:sticky lg:top-24 lg:flex-col lg:items-stretch lg:gap-3 lg:self-start">
+            <PhotoStage src={baselineUrl} alt={copy.compare.altBefore} aspect="aspect-3/4" className="w-20 shrink-0 lg:w-full" />
+            <div className="flex flex-col gap-0.5">
+              <p className="font-display text-lg font-medium">{copy.paths.beforeTitle}</p>
+              <p className="text-sm text-text-soft">{copy.paths.beforeBody}</p>
+            </div>
+          </aside>
+          <div className="flex flex-col gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {cards.map(({ route, row, view }, i) => {
             const style = styles.find((s) => s.id === route.styleId);
             const url = row ? resultUrls.get(row.clientRequestId) : undefined;
             const expired = row?.result === "expired";
+            const changed = style && snapshot ? whatChanged(style, route.colour, snapshot, colours).line : undefined;
             return (
+              <m.div key={route.routeKey} custom={i} variants={deal(large, calm)} initial="hidden" animate="visible">
               <PathCard
-                key={route.routeKey}
                 name={copy.paths.routes[route.routeId].name}
                 blurb={copy.paths.routes[route.routeId].blurb}
                 baselineSrc={baselineUrl}
@@ -128,10 +168,16 @@ export function PathsScreen() {
                 error={expired ? { ...errorBody("EXPIRED"), retryable: true } : view?.error}
                 slow={view?.slow}
                 href={`/paths/${route.routeKey}`}
+                changed={changed}
+                viewName={`photo-${route.routeKey}`}
                 onRetry={row ? () => void retryRow(row) : undefined}
               />
+              </m.div>
             );
           })}
+          </div>
+          {cards.some((c) => c.view && c.view.status !== "succeeded" && c.view.status !== "failed") && <WaitingTips />}
+          </div>
         </div>
       )}
 

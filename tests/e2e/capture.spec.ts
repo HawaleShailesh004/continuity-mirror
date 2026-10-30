@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
-import { pickFile } from "./helpers";
+import { answerSnapshot, pickFile } from "./helpers";
 
 /*
  * The capture screen end to end, with a fake camera: a canvas streams a sample
@@ -98,12 +98,10 @@ test.describe("capture", () => {
     expect(uploads.length).toBe(1);
 
     // A real person's snapshot starts empty: nothing is guessed about their hair.
-    await expect(page.getByRole("radio", { name: "Black" })).not.toBeChecked();
+    await expect(page.getByRole("button", { name: "Choose hair colour" })).toBeVisible();
     const next = page.getByRole("button", { name: "See my three paths" });
     await expect(next).toBeDisabled();
-    for (const name of ["Dark brown", "Shoulder length", "No parting", "No fringe", "Straight", "Soft arch", "Dark"]) {
-      await page.getByRole("radio", { name, exact: true }).first().click();
-    }
+    await answerSnapshot(page);
     await expect(next).toBeEnabled();
 
     expect(foreign, "nothing may leave our own origin").toEqual([]);

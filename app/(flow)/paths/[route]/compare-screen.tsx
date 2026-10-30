@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState, ViewTransition } from "react";
 import Link from "next/link";
 import { useLiveQuery } from "dexie-react-hooks";
 import { toast } from "sonner";
 import { BottomBar } from "@/components/cm/bottom-bar";
 import { BudgetNote } from "@/components/cm/budget-note";
 import { CompareView } from "@/components/cm/compare-view";
+import { HeartFlight } from "@/components/cm/heart-flight";
 import { HowMadeDrawer } from "@/components/cm/how-made-drawer";
 import { PathCard } from "@/components/cm/path-card";
 import { PlanPill } from "@/components/cm/plan-pill";
@@ -22,6 +23,7 @@ import { cuesFromSnapshot, type CueKey } from "@/lib/client/cues";
 import { db, type JobRow } from "@/lib/client/db";
 import { useJourneyGuard, useNavigate, useNow, useObjectUrl, useStatus } from "@/lib/client/hooks";
 import { viewRow } from "@/lib/client/job-view";
+import { whatChanged } from "@/lib/client/what-changed";
 import { enqueueVariant, retryRow, toggleLook } from "@/lib/client/journey";
 import { useJourney } from "@/lib/client/store";
 import { planAlternatives, ROUTE_KEYS } from "@/lib/planner";
@@ -87,6 +89,8 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
   const baselineUrl = useObjectUrl(baseline?.image);
   const resultUrl = useObjectUrl(result?.image);
 
+  const [flight, setFlight] = useState<{ x: number; y: number } | null>(null);
+  const endFlight = useCallback(() => setFlight(null), []);
   const [variantOpen, setVariantOpen] = useState(false);
   const [colourOpen, setColourOpen] = useState(false);
 
@@ -113,6 +117,7 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
   const style = styles.find((s) => s.id === (spec?.styleId ?? route.styleId));
   const own = spec?.colour.source === "own";
   const expired = current?.result === "expired";
+  const changed = style && snapshot ? whatChanged(style, spec?.colour ?? route.colour, snapshot.snapshot, colours).line : undefined;
   const saved = Boolean(current && plan?.looks.includes(current.clientRequestId));
   const savedCount = plan?.looks.length ?? 0;
   const stored = Boolean(current?.result === "stored" && resultUrl);
@@ -129,9 +134,13 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
   const setChanged = (unwantedChanges: CueKey[]) =>
     verdictRow && db.verdicts.put({ ...verdictRow, unwantedChanges, updatedAt: new Date().toISOString() });
 
-  const save = async () => {
+  const save = async (event: React.MouseEvent<HTMLElement>) => {
     if (!current) return;
-    if (await toggleLook(current.clientRequestId)) toast(copy.compare.saved);
+    const box = event.currentTarget.getBoundingClientRect();
+    if (await toggleLook(current.clientRequestId)) {
+      setFlight({ x: box.left + box.width / 2, y: box.top + box.height / 2 });
+      toast(copy.compare.saved);
+    }
   };
 
   const makeTry = async (key: string, styleId: string, colour: typeof route.colour) => {
@@ -153,7 +162,37 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
       backHref="/paths"
       step={{ n: 5, total: 5 }}
       baselineSrc={baselineUrl}
-      wide
+      stage={
+        stored && resultUrl ? (
+          <ViewTransition name={`photo-${routeKey}`} share="morph">
+            <div className="relative isolate">
+              <div aria-hidden="true" className="bg-morning-glow absolute -inset-x-10 -inset-y-8 -z-10 opacity-80" />
+              <CompareView
+                beforeSrc={baselineUrl}
+                afterSrc={resultUrl}
+                afterAlt={copy.compare.alt(style?.label ?? route.styleId, own)}
+                routeName={name}
+                sample={isSample}
+                hint
+              />
+            </div>
+          </ViewTransition>
+        ) : (
+          <div className="mx-auto w-full max-w-md">
+            <PathCard
+              name={name}
+              blurb={copy.paths.routes[route.routeId].blurb}
+              baselineSrc={baselineUrl}
+              status={expired ? "failed" : (view?.status ?? "queued")}
+              steps={view?.steps ?? []}
+              error={expired ? { ...errorBody("EXPIRED"), retryable: true } : view?.error}
+              slow={view?.slow}
+              href="#"
+              onRetry={current ? () => void retryRow(current).then((row) => setPickedId(row.clientRequestId)) : undefined}
+            />
+          </div>
+        )
+      }
       bottom={
         <BottomBar className="flex-row md:justify-end">
           {!isSample && (
@@ -195,32 +234,17 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
         />
       )}
 
-      <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_22rem] md:items-start md:gap-12">
-        {stored && resultUrl ? (
-          <CompareView
-            beforeSrc={baselineUrl}
-            afterSrc={resultUrl}
-            afterAlt={copy.compare.alt(style?.label ?? route.styleId, own)}
-            routeName={name}
-            sample={isSample}
-            hint
-          />
-        ) : (
-          <div className="mx-auto w-full max-w-md">
-            <PathCard
-              name={name}
-              blurb={copy.paths.routes[route.routeId].blurb}
-              baselineSrc={baselineUrl}
-              status={expired ? "failed" : (view?.status ?? "queued")}
-              steps={view?.steps ?? []}
-              error={expired ? { ...errorBody("EXPIRED"), retryable: true } : view?.error}
-              slow={view?.slow}
-              href="#"
-              onRetry={current ? () => void retryRow(current).then((row) => setPickedId(row.clientRequestId)) : undefined}
-            />
-          </div>
+      <div className="flex flex-col gap-1">
+        <p className="font-display text-xl font-medium md:text-2xl">{copy.paths.routes[route.routeId].blurb}</p>
+        {changed && (
+          <p className="text-sm font-semibold text-text-soft">
+            <span className="sr-only">{copy.paths.changedTitle}: </span>
+            {changed}
+          </p>
         )}
+      </div>
 
+      <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-6">
           <VerdictControl
             value={verdictRow?.feelsLikeMe ?? null}
@@ -244,6 +268,7 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
       </div>
 
       <PlanPill count={savedCount} />
+      {flight && <HeartFlight from={flight} onDone={endFlight} />}
 
       <Sheet open={variantOpen} onOpenChange={setVariantOpen} title={copy.compare.variantTitle} description={copy.compare.variantBody}>
         <ul className="grid grid-cols-2 gap-3">

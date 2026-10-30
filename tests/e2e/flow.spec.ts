@@ -1,6 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
-import { pickFile } from "./helpers";
+import { answerSnapshot, pickFile } from "./helpers";
 
 /*
  * The sample-person journey end to end against the in-browser mock API (MSW,
@@ -45,9 +45,7 @@ async function reachSnapshot(page: Page) {
   await expect(page.getByRole("heading", { name: "Use this photo?" })).toBeVisible({ timeout: 90_000 });
   await page.getByRole("button", { name: "Use this photo" }).click();
   await expect(page.getByRole("heading", { name: "What makes your hair look like you?" })).toBeVisible({ timeout: 20_000 });
-  for (const name of ["Dark brown", "Shoulder length", "No parting", "No fringe", "Straight", "Soft arch", "Dark"]) {
-    await page.getByRole("radio", { name, exact: true }).first().click();
-  }
+  await answerSnapshot(page);
 }
 
 async function seeThreePaths(page: Page) {

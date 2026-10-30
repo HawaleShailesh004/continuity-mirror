@@ -129,6 +129,7 @@ export function HairPicker({
     <div className="flex flex-col gap-3">
       <div
         ref={frame}
+        data-vaul-no-drag=""
         style={{ aspectRatio: ratio }}
         className={cn(
           "relative max-h-80 w-full max-w-60 self-center overflow-hidden rounded-image bg-peach",
@@ -180,7 +181,7 @@ export function HairPicker({
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="font-semibold">{copy.snapshot.tapHairTitle}</p>
           <p className="text-sm text-text-soft">
-            {picking ? copy.snapshot.tapHairActive : value ? `${copy.snapshot.tapHairPicked} · ${value}` : copy.snapshot.tapHairAdvice}
+            {picking ? copy.snapshot.tapHairActive : value ? copy.snapshot.tapHairPicked : copy.snapshot.tapHairAdvice}
           </p>
         </div>
         {value && !picking ? (
@@ -209,7 +210,7 @@ export function HairPicker({
             value={value ? "picked" : "default"}
             onValueChange={(v) => onChange(v === "picked" ? lastPicked : undefined)}
             options={[
-              { value: "picked", label: copy.snapshot.tapHairUsePicked(lastPicked), swatch: lastPicked },
+              { value: "picked", label: copy.snapshot.tapHairUsePicked, swatch: lastPicked },
               { value: "default", label: copy.snapshot.tapHairUseDefault, swatch: fallbackHex },
             ]}
           />

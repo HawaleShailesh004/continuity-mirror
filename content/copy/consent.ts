@@ -23,5 +23,11 @@ export const consent = {
   samplePersonaTitle: "Choose a sample person",
   samplePersonaHint: "AI-generated people, not real. Pick whose hair feels closest to yours.",
   samplePersonaLabel: "Sample person",
+  samplePersonaLines: {
+    meera: "Straight, shoulder length",
+    amara: "Coily, shoulder length",
+    daniel: "Curly, short",
+    grace: "Silver, chin length",
+  } as Record<string, string>,
   starting: "Getting your photo ready",
 } as const;
