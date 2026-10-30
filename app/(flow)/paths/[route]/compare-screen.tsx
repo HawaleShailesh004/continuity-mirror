@@ -6,6 +6,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { toast } from "sonner";
 import { BottomBar } from "@/components/cm/bottom-bar";
 import { BudgetNote } from "@/components/cm/budget-note";
+import { CheckedRow } from "@/components/cm/checked-row";
 import { CompareView } from "@/components/cm/compare-view";
 import { HeartFlight } from "@/components/cm/heart-flight";
 import { HowMadeDrawer } from "@/components/cm/how-made-drawer";
@@ -246,6 +247,7 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
 
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-6">
+          {stored && <CheckedRow check={current?.check} onTryAgain={current ? () => void retryRow(current).then((row) => setPickedId(row.clientRequestId)) : undefined} />}
           <VerdictControl
             value={verdictRow?.feelsLikeMe ?? null}
             onValueChange={(v) => void setVerdict(v)}
