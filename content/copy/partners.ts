@@ -4,6 +4,17 @@ export const partners = {
   intro: "People come to a fitting with ideas and worries. Continuity Mirror helps them arrive prepared, in their own words and with their own photo.",
   status: "This is where we’d like to take the idea. It isn’t a service you can sign up for today.",
 
+  flowTitle: "How it fits a fitting",
+  flowLabel: "From the client to the fitter to a shop's own catalogue",
+  flowNow: "Works today",
+  flowLater: "What we’d build with you",
+  flow: [
+    { title: "Client", text: "Explores on their own device and saves the looks they like.", now: true },
+    { title: "Consultation pack", text: "One PDF with their photo, the looks and what to ask for.", now: true },
+    { title: "Fitter", text: "Reads it before the visit, if the client chooses to share it.", now: false },
+    { title: "Your catalogue", text: "Previews show the styles a shop really stocks.", now: false },
+  ],
+
   whoTitle: "Who it could help",
   who: [
     { title: "Wig salons and fitters", body: "Clients arrive with the looks they like and the words to ask for, so the first conversation starts further along." },

@@ -9,5 +9,7 @@ export const landing = {
   continueWhereLeftOff: "Continue where you left off",
   sampleOnly: "Photo previews are paused for now. You can still explore with a sample person.",
   privacy: "Private by default. Delete everything anytime.",
+  heroSliderLabel: "Compare you, before with the Closest to me preview",
+  heroSliderValue: (percent: number) => `Showing ${percent}% of the new style`,
   heroAlt: "Sample person: a woman with shoulder-length coily hair",
 } as const;

@@ -43,7 +43,7 @@ export function ForFitters() {
         <ScissorsIcon aria-hidden="true" className="size-8 shrink-0 text-text-soft" />
         <div className="flex flex-col gap-2">
           <p className="text-sm font-semibold text-action">{t.kicker}</p>
-          <h2 id="fitters-title" className="text-xl">
+          <h2 id="fitters-title" className="font-display text-xl font-medium">
             {t.title}
           </h2>
           <p className="max-w-170 text-text-soft">{t.text}</p>

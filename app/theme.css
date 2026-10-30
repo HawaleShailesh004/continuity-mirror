@@ -161,6 +161,8 @@
   --text-2xl--line-height: 1.15;
   --text-3xl: 2.25rem;
   --text-3xl--line-height: 1.15;
+  --text-4xl: 3rem;
+  --text-4xl--line-height: 1.08;
 
   --tracking-tight: -0.01em;
   --tracking-tighter: -0.02em;

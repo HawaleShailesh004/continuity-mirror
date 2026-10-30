@@ -1,3 +1,4 @@
+import { ArrowDownIcon, ArrowRightIcon } from "lucide-react";
 import { Screen } from "@/components/cm/screen";
 import { buttonClass } from "@/components/ui/button";
 import { copy } from "@/content/copy";
@@ -30,6 +31,29 @@ export default function PartnersPage() {
       <p role="note" className="rounded-card bg-peach px-5 py-4 text-sm font-semibold text-text-soft">
         {t.status}
       </p>
+
+      <section aria-labelledby="flow-title" className="flex flex-col gap-4">
+        <h2 id="flow-title" className="font-display text-xl font-medium md:text-2xl">
+          {t.flowTitle}
+        </h2>
+        <ol aria-label={t.flowLabel} className="flex flex-col items-stretch gap-2 md:flex-row md:items-stretch">
+          {t.flow.map((step, i) => (
+            <li key={step.title} className="flex flex-col items-center gap-2 md:flex-1 md:flex-row">
+              <div className={"flex w-full flex-1 flex-col gap-1 rounded-card p-4 " + (step.now ? "bg-surface-raised shadow-pill" : "border border-dashed border-line bg-transparent")}>
+                <p className="text-xs font-semibold text-text-muted">{step.now ? t.flowNow : t.flowLater}</p>
+                <h3 className="font-display text-lg leading-snug font-medium">{step.title}</h3>
+                <p className="text-sm text-text-soft">{step.text}</p>
+              </div>
+              {i < t.flow.length - 1 && (
+                <>
+                  <ArrowDownIcon aria-hidden="true" className="size-5 shrink-0 text-text-muted md:hidden" />
+                  <ArrowRightIcon aria-hidden="true" className="hidden size-5 shrink-0 text-text-muted md:block" />
+                </>
+              )}
+            </li>
+          ))}
+        </ol>
+      </section>
 
       <section aria-labelledby="who-title" className="flex flex-col gap-3">
         <h2 id="who-title" className="text-lg">

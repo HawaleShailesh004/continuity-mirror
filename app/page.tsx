@@ -30,7 +30,7 @@ export default function Home() {
       exit={{ "nav-forward": "nav-forward", "nav-back": "nav-back", default: "none" }}
       default="none"
     >
-      <div className="flex flex-1 flex-col">
+      <div className="grain flex flex-1 flex-col bg-dawn-5" style={{ "--shell-top": "var(--dawn-5)" } as React.CSSProperties}>
       <SiteHeader />
       <main id="main" className="flex flex-1 flex-col overflow-x-clip">
         <section className="px-5 pt-8 pb-16 md:px-8 md:pt-12 md:pb-24">
@@ -46,7 +46,7 @@ export default function Home() {
                 as="h1"
                 per="line"
                 preset="fade-in-blur"
-                className="text-2xl leading-[1.15] tracking-tight md:text-3xl"
+                className="text-3xl leading-[1.1] tracking-tight md:text-4xl"
               >
                 {t.headline}
               </TextEffect>

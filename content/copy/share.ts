@@ -48,6 +48,7 @@ export const share = {
   dismiss: "Remove from list",
 
   // The helper's page
+  feelsLikeYou: "This one feels like you",
   helperTitle: "Which one feels most like them?",
   helperIntro: "Someone asked for your opinion. On the left of each picture is how they look now. On the right is a style they’re thinking about.",
   helperPick: "Pick the one that still feels most like them.",

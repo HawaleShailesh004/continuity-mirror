@@ -60,7 +60,8 @@ test.describe("sample person journey", () => {
   test("three real jobs finish, the verdict and saved look survive a reload", async ({ page }) => {
     await useScenario(page, "ok");
     await reachSnapshot(page);
-    // The audience preference is the user's choice and is remembered.
+    // The audience preference is the user's choice and is remembered. It lives under "More about you".
+    await page.getByRole("button", { name: "More about you" }).click();
     await expect(page.getByRole("radio", { name: "All styles" })).toBeChecked();
     await page.getByRole("radio", { name: "Women’s styles" }).click();
     await expect(page.getByRole("radio", { name: "Women’s styles" })).toBeChecked();
@@ -70,7 +71,7 @@ test.describe("sample person journey", () => {
     await expect(page.getByRole("link", { name: "Closest to me", exact: true })).toBeVisible({ timeout: 30_000 });
     await expect(page.getByRole("link", { name: "Familiar, easier", exact: true })).toBeVisible();
     await expect(page.getByRole("link", { name: "New chapter", exact: true })).toBeVisible();
-    await expect(page.getByText("Style direction, not exact wig fit")).toHaveCount(3);
+    await expect(page.getByText("Style direction, not exact wig fit").filter({ visible: true })).toHaveCount(3);
     await page.waitForTimeout(600);
     expect((await axe(page)).violations).toEqual([]);
 
@@ -102,7 +103,7 @@ test.describe("sample person journey", () => {
     for (const name of ["Closest to me", "Familiar, easier", "New chapter"]) {
       await expect(page.getByRole("link", { name, exact: true })).toBeVisible({ timeout: 90_000 });
     }
-    await expect(page.getByText("Style direction, not exact wig fit")).toHaveCount(3);
+    await expect(page.getByText("Style direction, not exact wig fit").filter({ visible: true })).toHaveCount(3);
   });
 
   test("one path failing offers its own retry and leaves the others usable", async ({ page }) => {

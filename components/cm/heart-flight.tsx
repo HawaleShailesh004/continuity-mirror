@@ -14,12 +14,23 @@ export const PLAN_PILL_ID = "plan-pill";
  * first save) is aimed at where it will appear. With reduced motion there is no
  * flight at all: the pill's count simply changes.
  */
-export function HeartFlight({ from, onDone }: { from: { x: number; y: number }; onDone: () => void }) {
+export function HeartFlight({
+  from,
+  to: target,
+  onDone,
+}: {
+  from: { x: number; y: number };
+  /** Where it lands; the plan pill by default. */
+  to?: { x: number; y: number };
+  onDone: () => void;
+}) {
   const calm = useCalmMotion();
   const rect = document.getElementById(PLAN_PILL_ID)?.getBoundingClientRect();
-  const to = rect
-    ? { x: rect.left + 26, y: rect.top + rect.height / 2 }
-    : { x: window.innerWidth - 20 - 36, y: window.innerHeight - 96 - 24 };
+  const to =
+    target ??
+    (rect
+      ? { x: rect.left + 26, y: rect.top + rect.height / 2 }
+      : { x: window.innerWidth - 20 - 36, y: window.innerHeight - 96 - 24 });
   const dx = to.x - from.x;
   const dy = to.y - from.y;
 

@@ -17,7 +17,7 @@ export function SiteHeader() {
   const t = home;
 
   return (
-    <header className="px-5 pt-[max(1rem,env(safe-area-inset-top))] md:px-8">
+    <header className="sticky top-0 z-30 bg-(--shell-top)/80 px-5 pt-[max(1rem,env(safe-area-inset-top))] pb-2 backdrop-blur-md md:px-8">
       <div className="mx-auto flex w-full max-w-280 items-center justify-between gap-3">
         <Link href="/" className="flex min-h-11 items-center gap-2 text-lg font-bold">
           <Mark />
@@ -46,7 +46,7 @@ export function FinalCall() {
     <section aria-labelledby="final-title" className="relative isolate overflow-hidden px-5 py-20 md:px-8 md:py-28">
       <div aria-hidden="true" className="bg-morning-glow absolute inset-x-0 -bottom-1/2 -z-10 mx-auto h-full max-w-200" />
       <BlurFade inView className="mx-auto flex max-w-150 flex-col items-center gap-5 text-center">
-        <h2 id="final-title" className="text-2xl md:text-3xl">
+        <h2 id="final-title" className="font-display text-2xl font-medium md:text-3xl">
           {t.title}
         </h2>
         <p className="text-lg text-text-soft">{t.text}</p>

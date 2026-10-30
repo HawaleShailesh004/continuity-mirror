@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { CheckCircle2Icon, LinkIcon } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { CheckCircle2Icon, HeartIcon, LinkIcon } from "lucide-react";
 import { BottomBar } from "@/components/cm/bottom-bar";
+import { HeartFlight } from "@/components/cm/heart-flight";
 import { ErrorState } from "@/components/cm/states";
 import { Button } from "@/components/ui/button";
 import { app } from "@/content/copy/app";
@@ -34,6 +35,8 @@ export function HelperScreen({ token }: { token: string }) {
   const [votesLeft, setVotesLeft] = useState<number>();
   const [problem, setProblem] = useState<ErrorBody>();
   const heading = useRef<HTMLHeadingElement>(null);
+  const [flight, setFlight] = useState<{ from: { x: number; y: number }; to: { x: number; y: number } } | null>(null);
+  const endFlight = useCallback(() => setFlight(null), []);
 
   useEffect(() => {
     let cancelled = false;
@@ -58,13 +61,16 @@ export function HelperScreen({ token }: { token: string }) {
     heading.current?.focus({ preventScroll: true });
   }, [load.state]);
 
-  const send = async () => {
+  const send = async (event: React.MouseEvent<HTMLElement>) => {
     if (!picked) return;
+    const button = event.currentTarget.getBoundingClientRect();
+    const tile = document.querySelector<HTMLElement>(`[data-look="${picked}"]`)?.getBoundingClientRect();
     setPhase("sending");
     setProblem(undefined);
     try {
       const res = await api.vote(token, { itemKey: picked, ...(note.trim() ? { note: note.trim() } : {}) });
       rememberVote(token, picked);
+      if (tile) setFlight({ from: { x: button.left + button.width / 2, y: button.top + button.height / 2 }, to: { x: tile.left + tile.width / 2, y: tile.top + tile.height / 2 } });
       setVotesLeft(res.votesLeft);
       setPhase("sent");
     } catch (error) {
@@ -125,7 +131,7 @@ export function HelperScreen({ token }: { token: string }) {
           <legend className="mb-1 text-base font-bold">{t.helperPick}</legend>
           <div className="grid gap-4 md:grid-cols-2" role="radiogroup" aria-label={t.helperGroup}>
             {manifest.items.map((item) => (
-              <label key={item.key} className="relative flex cursor-pointer flex-col gap-2">
+              <label key={item.key} data-look={item.key} className="relative flex cursor-pointer flex-col gap-2">
                 <input
                   type="radio"
                   name="look"
@@ -143,6 +149,12 @@ export function HelperScreen({ token }: { token: string }) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={item.imageUrl} alt={t.optionAlt(item.label)} className="block w-full" />
                 </span>
+                {picked === item.key && (
+                  <span className="pointer-events-none absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-action px-3 py-1.5 text-sm font-semibold text-on-action">
+                    <HeartIcon aria-hidden="true" className="size-4 fill-current" />
+                    {t.feelsLikeYou}
+                  </span>
+                )}
                 <span className="flex flex-col px-1">
                   <span className="font-bold">{item.label}</span>
                   <span className="text-xs text-text-muted">{t.helperLabel}</span>
@@ -188,13 +200,14 @@ export function HelperScreen({ token }: { token: string }) {
   const choosing = Boolean(manifest) && phase !== "sent" && !(answered && picked === null);
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-180 flex-1 flex-col">
+    <div className="grain flex min-h-dvh w-full flex-1 flex-col bg-dawn-5" style={{ "--shell-top": "var(--dawn-5)" } as React.CSSProperties}>
+    <div className="mx-auto flex w-full max-w-180 flex-1 flex-col">
       <header className="px-5 pt-[max(1.25rem,env(safe-area-inset-top))] pb-3 md:px-8">
         <p className="text-sm font-semibold text-text-muted">{app.name}</p>
       </header>
       <main id="main" className="flex flex-1 flex-col gap-6 px-5 pt-2 pb-8 md:px-8">
         <div className="flex flex-col gap-2">
-          <h1 ref={heading} tabIndex={-1} className="text-2xl leading-tight outline-none">
+          <h1 ref={heading} tabIndex={-1} className="text-3xl leading-tight outline-none md:text-4xl">
             {load.state === "ended" ? t.endedTitle : t.helperTitle}
           </h1>
           {manifest && choosing && <p className="text-text-soft">{t.helperIntro}</p>}
@@ -203,11 +216,13 @@ export function HelperScreen({ token }: { token: string }) {
       </main>
       {choosing && (
         <BottomBar className="md:items-center">
-          <Button size="lg" full className="md:max-w-sm" disabled={!picked} loading={phase === "sending"} onClick={() => void send()}>
+          <Button size="lg" full className="md:max-w-sm" disabled={!picked} loading={phase === "sending"} onClick={(e) => void send(e)}>
             {phase === "sending" ? t.sending : t.send}
           </Button>
         </BottomBar>
       )}
+    </div>
+      {flight && <HeartFlight from={flight.from} to={flight.to} onDone={endFlight} />}
     </div>
   );
 }

@@ -37,7 +37,7 @@ export function Section({
       <div className="mx-auto flex w-full max-w-280 flex-col gap-10">
         <BlurFade inView className="flex max-w-170 flex-col gap-3">
           {kicker && <p className="text-sm font-semibold text-action">{kicker}</p>}
-          <h2 id={`${id}-title`} className="text-2xl md:text-3xl">
+          <h2 id={`${id}-title`} className="font-display text-2xl font-medium md:text-3xl">
             {title}
           </h2>
           {lead && <p className="text-lg text-text-soft">{lead}</p>}
