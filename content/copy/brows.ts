@@ -21,6 +21,7 @@ export const brows = {
   shapeHint: "Pick the shape that looks most like your own brows. It’s a starting point for you or a make-up artist.",
   familyLabel: "Brow shape",
   styleLabel: "Which one",
+  chosenShape: "Your chosen shape",
   families: { straight: "Straight", "soft-arch": "Soft arch", "high-arch": "High arch", rounded: "Rounded" },
   thickness: { thin: "Fine", balanced: "Balanced", thick: "Full" },
   colourTitle: "Colour",

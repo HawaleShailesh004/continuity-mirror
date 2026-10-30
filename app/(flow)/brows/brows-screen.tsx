@@ -6,6 +6,8 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { DownloadIcon } from "lucide-react";
 import { toast } from "sonner";
 import { BottomBar } from "@/components/cm/bottom-bar";
+import { BrowGlyph } from "@/components/cm/brow-glyph";
+import { BrowShapePicker } from "@/components/cm/brow-shape-picker";
 import { BudgetNote } from "@/components/cm/budget-note";
 import { HowMadeDrawer } from "@/components/cm/how-made-drawer";
 import { JobProgress } from "@/components/cm/job-progress";
@@ -194,12 +196,24 @@ export function BrowsScreen() {
       <div className="grid gap-8 md:grid-cols-2 md:items-start md:gap-12">
         <div className="flex flex-col gap-6">
           <section aria-labelledby="record-title" className="flex flex-col gap-3">
-            <h2 id="record-title" className="text-lg">
+            <h2 id="record-title" className="font-display text-xl font-medium md:text-2xl">
               {t.recordTitle}
             </h2>
-            <div className="overflow-hidden rounded-image bg-peach">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={recordUrl} alt={t.recordAlt} className="block w-full" />
+            <div className="relative isolate md:max-w-md">
+              <div aria-hidden="true" className="bg-morning-glow absolute -inset-x-8 -inset-y-6 -z-10 opacity-80" />
+              <div className="overflow-hidden rounded-image bg-peach shadow-raised">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={recordUrl} alt={t.recordAlt} className="block w-full" />
+              </div>
+            </div>
+            <div className="flex items-center gap-4 rounded-card bg-surface/80 px-5 py-4 md:max-w-md">
+              <div className="w-28 shrink-0">
+                <BrowGlyph key={shape.id + record.darkness} family={shape.shape} thickness={shape.thickness} colour={colourFor(record.darkness)} draw />
+              </div>
+              <div className="flex min-w-0 flex-col">
+                <p className="text-xs font-semibold text-text-muted">{t.chosenShape}</p>
+                <p className="font-display text-lg leading-tight font-medium">{shape.name}</p>
+              </div>
             </div>
             <p className="text-sm text-text-muted">{record.found === "face" ? t.found : t.guess}</p>
             {record.found === "guess" && (
@@ -248,7 +262,7 @@ export function BrowsScreen() {
 
         <div className="flex flex-col gap-8">
           <section aria-labelledby="shape-title" className="flex flex-col gap-3">
-            <h2 id="shape-title" className="text-lg">
+            <h2 id="shape-title" className="font-display text-xl font-medium md:text-2xl">
               {t.shapeTitle}
             </h2>
             <p className="-mt-1 text-sm text-text-muted">{t.shapeHint}</p>
@@ -258,11 +272,12 @@ export function BrowsScreen() {
               onValueChange={pickFamily}
               options={BROW_FAMILIES.map((f) => ({ value: f, label: t.families[f] }))}
             />
-            <ChoiceChips
+            <BrowShapePicker
               label={t.styleLabel}
               value={shape.id}
               onValueChange={(id) => void update({ shapeId: id })}
-              options={shapesIn(family).map((s) => ({ value: s.id, label: `${t.thickness[s.thickness]}: ${s.name}` }))}
+              colour={colourFor(record.darkness)}
+              options={shapesIn(family).map((s) => ({ id: s.id, name: s.name, family: s.shape, thickness: s.thickness, thicknessLabel: t.thickness[s.thickness] }))}
             />
             <p className="text-sm text-text-soft">{shape.description}</p>
           </section>

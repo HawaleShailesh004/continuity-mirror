@@ -35,7 +35,7 @@ test("brow record: found on the photo, a recipe saved to the plan, a third page 
 
   // Choose a shape and colour; add a note.
   await page.getByRole("radio", { name: "High arch", exact: true }).click();
-  await page.getByRole("radio", { name: /Balanced: High arch, balanced/ }).click();
+  await page.getByRole("radio", { name: /^High arch, balanced/ }).click();
   await page.getByRole("radio", { name: "Medium" }).click();
   await page.getByLabel("Anything to tell a make-up artist or fitter?").fill("My left brow sits a little higher.");
   await page.waitForTimeout(600);
