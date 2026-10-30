@@ -7,6 +7,7 @@ import type { IdentitySnapshot, JobSpec } from "@/lib/contracts";
 import { api } from "./api";
 import { dataUrlToBlob } from "./data-url";
 import { clearEverything, db, type JobRow, type PlanRow } from "./db";
+import { measuredHairHex, prewarmHair } from "./check/hair";
 import { enqueue, retry, send } from "./jobs";
 import { planRegrowth, planRoutes, type PlannedRoute } from "@/lib/planner";
 import { DEMO_BROWS_KEY, DEMO_REGROWTH_KEYS, demoRoutes, installDemo, installDemoItems, isDemoBaseline, loadManifest } from "./demo";
@@ -46,11 +47,12 @@ export async function saveSnapshot(baselineId: string, snapshot: IdentitySnapsho
 /** Anything the planner hands back that can become a route job: the three paths, or a regrowth stage. */
 type PlannedJob = Pick<PlannedRoute, "routeId" | "styleId" | "colour"> & { routeKey: string };
 
-const routeSpec = (route: PlannedJob): JobSpec => ({
+/** Own-colour routes restore with the hair colour measured from the photo when there is one (see check/hair.ts). */
+const routeSpec = (route: PlannedJob, measuredHex?: string | null): JobSpec => ({
   kind: "route",
   routeId: route.routeId,
   styleId: route.styleId,
-  colour: route.colour,
+  colour: route.colour.source === "own" && measuredHex ? { source: "own", hex: measuredHex } : route.colour,
   attempt: 0,
 });
 
@@ -64,8 +66,9 @@ export async function ensureRouteJobs(baselineId: string, routes: readonly Plann
   // Sample results are already on the device; there is nothing to make.
   if (isDemoBaseline(baselineId)) return;
   const rows = await db.jobs.where("baselineId").equals(baselineId).toArray();
+  const measured = routes.some((r) => r.colour.source === "own") ? await measuredHairHex(baselineId) : null;
   for (const route of routes) {
-    const spec = routeSpec(route);
+    const spec = routeSpec(route, measured);
     const current = rows.find((r) => r.routeKey === route.routeKey && !r.superseded && !r.variantOf);
     if (current && JSON.stringify(current.spec) === JSON.stringify(spec)) {
       // Reload mid-send: re-send the same clientRequestId (the server returns the same job).
@@ -205,6 +208,7 @@ export async function adoptBaseline(photo: Blob, source: "camera" | "upload"): P
     createdAt: new Date().toISOString(),
     expiresAt: created.expiresAt,
   });
+  prewarmHair(created.baselineId);
 
   if (previous && previous !== created.baselineId) {
     const earlier = await db.snapshots.get(previous);

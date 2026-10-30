@@ -8,6 +8,8 @@ import type { JobSpec } from "@/lib/contracts";
 import { errorBody } from "@/lib/contracts/errors";
 
 const mockApi = vi.hoisted(() => ({ createJob: vi.fn(), job: vi.fn(), result: vi.fn() }));
+// The result check loads MediaPipe; it has its own tests (result-check-run.test.ts).
+vi.mock("@/lib/client/check/run", () => ({ checkStored: vi.fn(), afterRepair: vi.fn() }));
 vi.mock("@/lib/client/api", async (original) => ({ ...(await original<typeof import("@/lib/client/api")>()), api: mockApi }));
 
 const BASELINE = "a".repeat(64);

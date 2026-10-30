@@ -62,6 +62,22 @@ export type EngineCtx = Pick<ServerContext, "env" | "kv" | "now" | "youcam">;
 const iso = (ms?: number) => (ms === undefined ? undefined : new Date(ms).toISOString());
 const isTerminal = (job: StoredJob) => job.status === "succeeded" || job.status === "failed";
 
+/**
+ * The result URL a repair job recolours. Only a finished route or colour job of the same baseline,
+ * still inside its result window, can be repaired (not a brows job, and never a repair of a repair,
+ * so a loop can't spend units).
+ */
+async function repairSourceUrl(ctx: Pick<EngineCtx, "kv" | "now">, fromJobId: string, baselineId: string): Promise<string> {
+  const from = await getJob(ctx.kv, fromJobId);
+  if (!from || from.baselineId !== baselineId) throw new ApiError("NOT_FOUND", { details: "the job to repair is unknown" });
+  if (from.spec.kind !== "route" && from.spec.kind !== "colour") throw new ApiError("VALIDATION_FAILED", { details: [{ path: "spec.fromJobId", message: "only a route or colour result can be repaired" }] });
+  if (from.status !== "succeeded" || !from.resultAt) throw new ApiError("NOT_READY");
+  if (ctx.now() - from.resultAt > RESULT_TTL_MS) throw new ApiError("EXPIRED");
+  const url = from.steps.at(-1)?.resultUrl;
+  if (!url) throw new ApiError("INTERNAL");
+  return url;
+}
+
 /* ------------------------------------------------------------------- view */
 
 export function toPublicJob(job: StoredJob, now: number, retryAfterMs?: number): Job {
@@ -141,6 +157,7 @@ async function submitNext(ctx: EngineCtx, job: StoredJob) {
     const body = fillBody(step.body, {
       baselineFileId: baseline.fileId,
       previousResultUrl: job.steps[index - 1]?.resultUrl,
+      ...(job.spec.kind === "repair" ? { sourceResultUrl: await repairSourceUrl(ctx, job.spec.fromJobId, job.baselineId) } : {}),
       ...(needsStyleRef(step.body) && job.spec.kind === "route" ? { styleRefFileId: await styleRefFileId(ctx, job.spec.styleId, meta) } : {}),
     });
     const { taskId } = await ctx.youcam.createTask(step.kind, body, meta);
@@ -283,6 +300,7 @@ export async function createJob(ctx: Ctx): Promise<{ status: 200 | 202; job: Job
   if (spec.kind === "route" && spec.routeId.startsWith("regrowth") && !ctx.env.CAP_REGROWTH) throw new ApiError("FEATURE_DISABLED", { details: "regrowth" });
 
   if (!(await getBaseline(ctx, baselineId))) throw new ApiError("NOT_FOUND", { details: "baseline expired or unknown; upload it again" });
+  if (spec.kind === "repair") await repairSourceUrl(ctx, spec.fromJobId, baselineId);
 
   // Same baseline + spec → the existing job (no units), unless it failed.
   const idemKey = createHash("sha256").update(`${baselineId}:${canonicalJson(spec)}`).digest("hex");

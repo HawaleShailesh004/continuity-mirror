@@ -373,6 +373,9 @@
           },
           {
             "$ref": "#/components/schemas/BrowsSpec"
+          },
+          {
+            "$ref": "#/components/schemas/RepairSpec"
           }
         ],
         "discriminator": {
@@ -380,7 +383,8 @@
           "mapping": {
             "route": "#/components/schemas/RouteSpec",
             "colour": "#/components/schemas/ColourSpec",
-            "brows": "#/components/schemas/BrowsSpec"
+            "brows": "#/components/schemas/BrowsSpec",
+            "repair": "#/components/schemas/RepairSpec"
           }
         }
       },
@@ -599,6 +603,35 @@
           "definition",
           "colourHex",
           "intensity"
+        ],
+        "additionalProperties": false
+      },
+      "RepairSpec": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "repair"
+            ]
+          },
+          "fromJobId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 64,
+            "description": "the succeeded job whose result is repaired"
+          },
+          "colourHex": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}$",
+            "example": "#1C1714",
+            "description": "the baseline's measured hair colour"
+          }
+        },
+        "required": [
+          "kind",
+          "fromJobId",
+          "colourHex"
         ],
         "additionalProperties": false
       },
@@ -858,7 +891,8 @@
         "enum": [
           "route",
           "colour",
-          "brows"
+          "brows",
+          "repair"
         ]
       },
       "CreateShareResponse": {

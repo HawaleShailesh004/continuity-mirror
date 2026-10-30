@@ -7,6 +7,8 @@ import type { ColourPreset, StyleCatalogItem } from "./schema";
 export const SRC_BASELINE = "<baseline>";
 export const SRC_PREVIOUS = "<previous step result>";
 export const SRC_STYLE_REF = "<style reference>";
+/** The result of the job a repair job repairs. */
+export const SRC_SOURCE_RESULT = "<source job result>";
 
 export const STEP_META: Record<StepKind, { endpoint: string; apiVersion: string; units: number }> = {
   "hair-transfer": { endpoint: "/s2s/v2.1/task/hair-transfer", apiVersion: "v2.1", units: 2 },
@@ -87,6 +89,8 @@ export function planSteps(spec: JobSpec, catalog: CatalogLookup): PlannedStep[] 
       const preset = presetOrThrow(catalog, spec.colour.presetId);
       return [step("hair-color", colourBody({ src_file_id: SRC_BASELINE }, preset.hexes, spec.colour.mode))];
     }
+    case "repair":
+      return [step("hair-color", colourBody({ src_file_url: SRC_SOURCE_RESULT }, [spec.colourHex], "full"))];
     case "brows": {
       if (!catalog.brow(spec.browShapeId)) throw new UnknownCatalogIdError("browShapeId", spec.browShapeId);
       const bands = catalog.browBands;

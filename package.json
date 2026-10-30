@@ -23,7 +23,8 @@
     "check:contrast": "node scripts/check-contrast.mjs",
     "ci": "pnpm typecheck && pnpm lint && pnpm test && pnpm guardrail && pnpm build && pnpm check:secrets",
     "demo:build": "tsx --conditions=react-server scripts/build-demo-personas.ts",
-    "smoke:live": "tsx scripts/smoke-live.ts"
+    "smoke:live": "tsx scripts/smoke-live.ts",
+    "eval": "tsx scripts/eval-check.ts"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "^1.1.1",

@@ -172,6 +172,67 @@ describe("route job: happy path", () => {
   });
 });
 
+describe("repair job (result check)", () => {
+  const repair = (fromJobId: string, colourHex = "#211B13"): JobSpecInput => ({ kind: "repair", fromJobId, colourHex });
+
+  it("recolours a finished result in one 1-unit Hair Color step and streams it", async () => {
+    const c = client();
+    const baselineId = await c.upload();
+    const source = await settle(c, (await jobOf(await c.create(baselineId, route()), 202)).id);
+    const unitsBefore = (await c.status()).session.unitsUsed;
+
+    const job = await jobOf(await c.create(baselineId, repair(source.id)), 202);
+    expect(job.steps.map((s) => s.kind)).toEqual(["hair-color"]);
+    expect(job.provenance.steps[0]).toMatchObject({
+      endpoint: "/s2s/v2.0/task/hair-color",
+      params: { src_file_url: "<source job result>", palettes: [{ color: "#211B13" }] },
+    });
+    const done = await settle(c, job.id);
+    expect(done).toMatchObject({ status: "succeeded", resultReady: true });
+    expect(JSON.stringify(done)).not.toContain("mock://"); // the source's upstream URL stays on the server
+    expect((await c.status()).session.unitsUsed - unitsBefore).toBe(1);
+    expect((await c.result(job.id)).status).toBe(200);
+  });
+
+  it("the same repair is the same job; a different colour is a new one", async () => {
+    const c = client();
+    const baselineId = await c.upload();
+    const source = await settle(c, (await jobOf(await c.create(baselineId, route()), 202)).id);
+    const a = await jobOf(await c.create(baselineId, repair(source.id)), 202);
+    const again = await jobOf(await c.create(baselineId, repair(source.id)), 200);
+    const other = await jobOf(await c.create(baselineId, repair(source.id, "#2A1D18")), 202);
+    expect(again.id).toBe(a.id);
+    expect(other.id).not.toBe(a.id);
+  });
+
+  it("refuses a source that is unknown, unfinished, from another photo, a brows job, or itself a repair", async () => {
+    const c = client();
+    const baselineId = await c.upload();
+    await expectError(await c.create(baselineId, repair("job_doesnotexist")), 404, "NOT_FOUND");
+
+    const running = await jobOf(await c.create(baselineId, route()), 202);
+    await expectError(await c.create(baselineId, repair(running.id)), 409, "NOT_READY");
+
+    const done = await settle(c, running.id);
+    const otherPhoto = await c.upload(new Uint8Array(await sharp(meera).modulate({ brightness: 1.05 }).jpeg().toBuffer()));
+    await expectError(await c.create(otherPhoto, repair(done.id)), 404, "NOT_FOUND");
+
+    const brows = await settle(c, (await jobOf(await c.create(baselineId, { kind: "brows", browShapeId: "SoftArch1", curvature: 0, thickness: 10, definition: 40, colourHex: "#2B1E16", intensity: 60 }), 202)).id);
+    await expectError(await c.create(baselineId, repair(brows.id)), 400, "VALIDATION_FAILED");
+
+    const fix = await settle(c, (await jobOf(await c.create(baselineId, repair(done.id)), 202)).id);
+    await expectError(await c.create(baselineId, repair(fix.id)), 400, "VALIDATION_FAILED");
+  });
+
+  it("refuses once the source result has expired", async () => {
+    const c = client();
+    const baselineId = await c.upload();
+    const source = await settle(c, (await jobOf(await c.create(baselineId, route()), 202)).id);
+    now += 111 * 60_000;
+    await expectError(await c.create(baselineId, repair(source.id)), 410, "EXPIRED");
+  });
+});
+
 describe("idempotency", () => {
   it("same clientRequestId or same spec → same job, no extra units; re-roll is a new job", async () => {
     const c = client();

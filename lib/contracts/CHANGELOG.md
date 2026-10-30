@@ -33,3 +33,9 @@ First version, from the backend plan §3 adjusted to the B0 facts:
 - `PrivacyReceipt.serverStoresImages` is now a boolean: true only while the session has a live share link (was the constant `false`, which would have been untrue once shares exist).
 - Real share routes replace the MockBackend stub: `GET /api/shares/:token/items/:key` serves the images (the manifest's `imageUrl`), unknown/malformed/expired/revoked tokens all return 410, and `GET /api/cron/cleanup` (Bearer `CRON_SECRET`) removes expired shares.
 - `status.capabilities.shares` is true by default locally and false on Vercel until configured.
+
+## 0.2.0 · Fri 30 Oct 2026 (B2 result check, post-freeze, additive; docs/adr/0008)
+
+- New job kind `repair` (`RepairSpec`: `{ kind: 'repair', fromJobId, colourHex }`) in `JobSpec` and `JobKind`. One `hair-color` step, 1 unit, over an earlier job's result (`src_file_url` filled server-side from that job; the URL never leaves the server). The source must be a finished `route` or `colour` job of the same baseline inside its result window; otherwise `NOT_FOUND`, `NOT_READY`, `EXPIRED` or `VALIDATION_FAILED`. A repair of a repair is refused.
+- Existing clients are unaffected: no field of any existing type changed, and `repair` jobs are only ever created by `lib/client/check/run.ts`.
+- `docs/API.md` and `docs/openapi.json` regenerated; the mock backend serves a repair job with its source's image.

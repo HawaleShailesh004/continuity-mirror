@@ -12,3 +12,4 @@ Format: context, decision, consequences. Contract changes after the freeze (Tue 
 | [0005](0005-no-headwear-brow-record.md) | Headwear and scarf previews are out; brows lead with a Brow Record |
 | [0006](0006-content-security-policy.md) | A static CSP with inline scripts allowed and hash-listed styles |
 | [0007](0007-mock-and-replay-modes.md) | Three YouCam adapters (live, mock, replay) and a stateless mock |
+| [0008](0008-result-check-and-repair.md) | Every result is checked on the device; a drifted colour is repaired once, and never made worse |

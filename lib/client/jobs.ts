@@ -39,12 +39,14 @@ export async function enqueue(input: {
   routeKey: string;
   spec: JobSpec;
   variantOf?: string;
+  repairOf?: string;
 }): Promise<JobRow> {
   const row: JobRow = {
     clientRequestId: newRequestId(),
     baselineId: input.baselineId,
     routeKey: input.routeKey,
     variantOf: input.variantOf,
+    repairOf: input.repairOf,
     spec: input.spec,
     result: "none",
     createdAt: new Date().toISOString(),
@@ -67,6 +69,7 @@ export async function send(row: JobRow): Promise<void> {
     await db.jobs.update(row.clientRequestId, { jobId: job.id, job, sendError: undefined });
   } catch (error) {
     await db.jobs.update(row.clientRequestId, { sendError: toApiError(error).body });
+    if (row.repairOf) await markRepair(row.repairOf, "failed");
   } finally {
     inFlight.delete(row.clientRequestId);
   }
@@ -90,6 +93,18 @@ export async function resumeUnsent(baselineId: string): Promise<void> {
 /** Record the latest server copy of a job. */
 export async function applyJob(clientRequestId: string, job: Job): Promise<void> {
   await db.jobs.update(clientRequestId, { jobId: job.id, job });
+  if (job.status === "failed") {
+    const row = await db.jobs.get(clientRequestId);
+    if (row?.repairOf) await markRepair(row.repairOf, "failed");
+  }
+}
+
+/** Record how a repair went on the result it was meant to fix (the result check's badge reads it). */
+export async function markRepair(sourceId: string, state: "queued" | "adjusted" | "failed", deltaEAfter?: number): Promise<void> {
+  const source = await db.jobs.get(sourceId);
+  if (!source?.check) return;
+  const repaired = { state, ...(deltaEAfter === undefined ? {} : { deltaEAfter }) };
+  await db.jobs.update(sourceId, { check: { ...source.check, ...(state === "adjusted" ? { outcome: "checked" as const } : {}), repaired } });
 }
 
 /**
@@ -102,6 +117,25 @@ export async function storeResult(row: JobRow): Promise<void> {
   inFlight.add(`result:${row.clientRequestId}`);
   try {
     const image = await recompressPng(await api.result(row.jobId));
+    if (row.repairOf) {
+      // A repair never becomes a result of its own: it replaces the image of the result it fixed and
+      // keeps the first one beside it, with its YouCam step added to "How this was made".
+      const sourceId = row.repairOf;
+      await db.transaction("rw", db.results, db.jobs, async () => {
+        const source = await db.results.get(sourceId);
+        if (source) {
+          await db.results.put({
+            ...source,
+            image,
+            original: source.original ?? source.image,
+            provenance: { ...source.provenance, steps: [...source.provenance.steps, ...job.provenance.steps] },
+          });
+        }
+        await db.jobs.update(row.clientRequestId, { result: "stored" });
+      });
+      void import("./check/run").then((m) => m.afterRepair(sourceId));
+      return;
+    }
     await db.transaction("rw", db.results, db.jobs, async () => {
       await db.results.put({
         clientRequestId: row.clientRequestId,
@@ -112,6 +146,8 @@ export async function storeResult(row: JobRow): Promise<void> {
       });
       await db.jobs.update(row.clientRequestId, { result: "stored" });
     });
+    // Off the main bundle (it brings MediaPipe) and off the critical path: the user already has the image.
+    void import("./check/run").then((m) => m.checkStored(row.clientRequestId));
   } catch (error) {
     if (error instanceof ApiError && error.body.code === "EXPIRED") {
       await db.jobs.update(row.clientRequestId, { result: "expired" });

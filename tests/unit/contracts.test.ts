@@ -31,7 +31,7 @@ describe("job specs", () => {
   it("defaults attempt to 0 and accepts every colour source", () => {
     for (const colour of [{ source: "own", hex: "#3b2a20" }, { source: "template" }, { source: "preset", presetId: "soft-copper", mode: "ombre" }]) {
       const spec = JobSpec.parse({ kind: "route", routeId: "closest", styleId: "short-bob", colour });
-      expect(spec.attempt).toBe(0);
+      expect(spec.kind === "route" && spec.attempt).toBe(0);
     }
   });
 

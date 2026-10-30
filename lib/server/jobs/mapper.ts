@@ -1,7 +1,7 @@
 import "server-only";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { catalog, SRC_BASELINE, SRC_PREVIOUS, SRC_STYLE_REF, type CatalogLookup } from "@/lib/catalog";
+import { catalog, SRC_BASELINE, SRC_PREVIOUS, SRC_SOURCE_RESULT, SRC_STYLE_REF, type CatalogLookup } from "@/lib/catalog";
 import type { MockScenario } from "@/lib/contracts/api";
 import { keys, TTL } from "../keys";
 import type { KV } from "../store/kv";
@@ -11,13 +11,16 @@ import type { YouCamAdapter } from "../youcam/adapter";
  * Fill a planned step body's placeholders with real sources. Bodies come only from
  * lib/catalog/pipeline (an allowlist), so nothing the client sent reaches YouCam unmapped.
  */
-export function fillBody(body: Record<string, unknown>, src: { baselineFileId: string; previousResultUrl?: string; styleRefFileId?: string }) {
+export function fillBody(body: Record<string, unknown>, src: { baselineFileId: string; previousResultUrl?: string; styleRefFileId?: string; sourceResultUrl?: string }) {
   const out: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(body)) {
     if (value === SRC_BASELINE) out[key] = src.baselineFileId;
     else if (value === SRC_PREVIOUS) {
       if (!src.previousResultUrl) throw new Error(`no previous result for ${key}`);
       out[key] = src.previousResultUrl;
+    } else if (value === SRC_SOURCE_RESULT) {
+      if (!src.sourceResultUrl) throw new Error(`no source result for ${key}`);
+      out[key] = src.sourceResultUrl;
     } else if (value === SRC_STYLE_REF) {
       if (!src.styleRefFileId) throw new Error(`no style reference for ${key}`);
       out[key] = src.styleRefFileId;

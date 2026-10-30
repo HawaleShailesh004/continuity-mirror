@@ -307,6 +307,8 @@ export class MockBackend {
       throw err;
     }
 
+    if (spec.kind === "repair" && !this.jobs.has(spec.fromJobId)) return fail("NOT_FOUND", { details: "the job to repair is unknown or expired" });
+
     const byRequest = [...this.jobs.values()].find((j) => j.clientRequestId === clientRequestId);
     if (byRequest) return json({ job: this.view(byRequest) }, 200);
 
@@ -332,6 +334,16 @@ export class MockBackend {
     this.jobs.set(job.id, job);
     this.changed();
     return json({ job: this.view(job) }, 202);
+  }
+
+  /** A repair job shows the image of the job it repairs (the mock can't recolour). */
+  private sourceSpec(spec: JobSpec): JobSpec {
+    for (let hops = 0; spec.kind === "repair" && hops < 4; hops++) {
+      const source = this.jobs.get(spec.fromJobId);
+      if (!source) break;
+      spec = source.spec;
+    }
+    return spec;
   }
 
   private failureFor(scenario: MockScenario, spec: JobSpec, idemKey: string): Pick<StoredJob, "failure" | "hangs"> {
@@ -440,7 +452,7 @@ export class MockBackend {
     if (view.status === "failed") return fail("NOT_FOUND", { details: "job failed; there is no result" });
     if (!view.resultReady) return fail("NOT_READY");
     if (job.scenario === "expired" || this.opts.now() > Date.parse(view.resultExpiresAt!)) return fail("EXPIRED");
-    const image = await this.opts.loadImage(pickResultImage(job.spec));
+    const image = await this.opts.loadImage(pickResultImage(this.sourceSpec(job.spec)));
     return new Response(image, { status: 200, headers: { "content-type": "image/jpeg", "cache-control": "private, no-store" } });
   }
 

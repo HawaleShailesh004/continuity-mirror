@@ -6,6 +6,7 @@
  */
 import Dexie, { type EntityTable } from "dexie";
 import type { ErrorBody, IdentitySnapshot, Job, JobSpec, Plan, Provenance, Verdict } from "@/lib/contracts";
+import type { ResultCheck } from "./check/judge";
 
 export type BaselineRow = {
   /** baselineId from the server (sha256 of the normalised bytes). */
@@ -16,6 +17,8 @@ export type BaselineRow = {
   height: number;
   source: "camera" | "upload" | "sample";
   personaId?: string;
+  /** Hair colour measured from this photo on the device (lib/client/check/hair.ts); preferred over a tapped hex. */
+  hairHex?: string;
   createdAt: string;
   /** Server-side expiry of the uploaded copy. */
   expiresAt: string;
@@ -46,6 +49,10 @@ export type JobRow = {
   result: "none" | "stored" | "expired";
   /** Anything to say about this image (a sample result that reuses an identical earlier one). */
   note?: string;
+  /** What the on-device result check found (lib/client/check), once it has run. */
+  check?: ResultCheck;
+  /** Set on a repair job: the clientRequestId whose stored result it recolours. Never shown as a path. */
+  repairOf?: string;
   createdAt: string;
 };
 
@@ -53,6 +60,8 @@ export type ResultRow = {
   clientRequestId: string;
   baselineId: string;
   image: Blob;
+  /** The first image YouCam returned, kept when a repair replaced `image` with a colour-corrected one. */
+  original?: Blob;
   provenance: Provenance;
   createdAt: string;
 };

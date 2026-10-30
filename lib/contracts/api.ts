@@ -123,10 +123,23 @@ export const BrowsSpec = z
   })
   .meta({ id: "BrowsSpec" });
 
-export const JobSpec = z.discriminatedUnion("kind", [RouteSpec, ColourSpec, BrowsSpec]).meta({ id: "JobSpec" });
+/**
+ * One Hair Color pass over an earlier job's result, to bring a drifted hair colour back to the baseline's.
+ * Used by the result check (lib/client/check): the client measures both images on the device and sends
+ * the hex it measured. 1 unit. The source job must belong to the same baseline and still have its result.
+ */
+export const RepairSpec = z
+  .strictObject({
+    kind: z.literal("repair"),
+    fromJobId: z.string().min(8).max(64).describe("the succeeded job whose result is repaired"),
+    colourHex: Hex.describe("the baseline's measured hair colour"),
+  })
+  .meta({ id: "RepairSpec" });
+
+export const JobSpec = z.discriminatedUnion("kind", [RouteSpec, ColourSpec, BrowsSpec, RepairSpec]).meta({ id: "JobSpec" });
 export type JobSpec = z.infer<typeof JobSpec>;
 export type JobSpecInput = z.input<typeof JobSpec>;
-export const JobKind = z.enum(["route", "colour", "brows"]).meta({ id: "JobKind" });
+export const JobKind = z.enum(["route", "colour", "brows", "repair"]).meta({ id: "JobKind" });
 export type JobKind = z.infer<typeof JobKind>;
 
 export const CreateJobRequest = z
