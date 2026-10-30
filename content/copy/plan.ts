@@ -7,6 +7,13 @@ export const plan = {
   askForTitle: "What to ask for",
   askForHint: "Words to use at a wig shop. Our guidance, not a recommendation.",
   askFor: "Ask for",
+  /** Added to a style's shape from the person's own answers (see lib/client/ask-for.ts). */
+  askForParts: {
+    parting: { left: "left parting", right: "right parting", centre: "centre parting" },
+    fringeYes: "with a fringe",
+    fringeNo: "no fringe",
+    colour: (family: string | null) => (family ? `matched to my own ${family} hair` : "matched to my own colour"),
+  },
   fibres: "Fibre options",
   caps: "Cap options",
   comfort: "Comfort notes",

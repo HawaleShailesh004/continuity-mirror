@@ -37,6 +37,21 @@ test.describe("sample person", () => {
     await expect(page.getByText("/s2s/v2.1/task/hair-transfer").first()).toBeVisible();
   });
 
+  test("F9: the plan's words use the person's own answers, not the template's", async ({ page }) => {
+    // Meera's snapshot says a left parting and no fringe; her saved looks must be asked for that way.
+    await page.goto("/start/consent?sample=1");
+    await page.getByRole("radio", { name: /Meera/ }).click();
+    await page.getByRole("button", { name: "I understand, continue" }).click();
+    await page.getByRole("button", { name: "See my three paths" }).click();
+    await page.getByRole("link", { name: "Closest to me", exact: true }).click();
+    await page.getByRole("button", { name: "Save to my plan" }).click();
+    await page.getByRole("link", { name: /Open my plan, 1 look saved/ }).click();
+    const ask = page.getByRole("region", { name: "What to ask for" });
+    await expect(ask.getByText(/left parting/).first()).toBeVisible();
+    await expect(ask.getByText(/no fringe/).first()).toBeVisible();
+    await expect(page.getByText(/centre parting/i).filter({ visible: true })).toHaveCount(0);
+  });
+
   test("save looks → plan → pack PDF → privacy → delete everything", async ({ page }) => {
     test.slow();
     await reachPaths(page);

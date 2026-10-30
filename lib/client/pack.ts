@@ -6,6 +6,7 @@
 import { copy } from "@/content/copy";
 import type { InsuranceGuide, Programme, StyleCatalogItem } from "@/lib/catalog";
 import type { IdentitySnapshot, Plan } from "@/lib/contracts";
+import { askForLine } from "./ask-for";
 import { cuesFromSnapshot } from "./cues";
 
 export type PackLook = {
@@ -54,7 +55,7 @@ export function buildPackModel(input: {
   return {
     looks: input.looks.map(({ style, ownColour }) => ({
       name: style.label,
-      askFor: style.askFor,
+      askFor: askForLine(style, input.snapshot, ownColour),
       fibres: style.wigNotes.fibres,
       caps: style.wigNotes.caps,
       comfort: style.wigNotes.comfort,

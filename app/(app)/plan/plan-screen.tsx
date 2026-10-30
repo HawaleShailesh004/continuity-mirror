@@ -19,6 +19,7 @@ import { insuranceGuides, programmes } from "@/lib/catalog";
 import { db } from "@/lib/client/db";
 import { useCapability } from "@/lib/client/hooks";
 import { toggleLook, updatePlan } from "@/lib/client/journey";
+import { askForLine } from "@/lib/client/ask-for";
 import { createShareLink } from "@/lib/client/share";
 import { usePlan } from "@/lib/client/use-plan";
 
@@ -36,7 +37,7 @@ const checklistItems = (Object.keys(copy.plan.checklist) as (keyof typeof copy.p
  * while the desktop columns group "what I chose" apart from "what to do about it".
  */
 export function PlanScreen() {
-  const { ready, plan, looks, baselineBlob, browUrl } = usePlan();
+  const { ready, plan, looks, baselineBlob, browUrl, snapshot } = usePlan();
   // Optional modules appear only when the server offers them (or the person already has something in them).
   const browsOn = useCapability("brows");
   const regrowthOn = useCapability("regrowth");
@@ -54,7 +55,7 @@ export function PlanScreen() {
 
   const empty = ready && looks.length === 0;
   // One "what to ask for" per style, even if two saved looks share it.
-  const askStyles = looks.filter((l, i) => looks.findIndex((x) => x.style.id === l.style.id) === i);
+  const askLooks = looks.filter((l, i) => looks.findIndex((x) => x.style.id === l.style.id && x.ownColour === l.ownColour) === i);
 
   const notesFor = (style: (typeof looks)[number]["style"]) => [
     ...(style.careEffort > care ? [copy.plan.noteCare] : []),
@@ -200,8 +201,8 @@ export function PlanScreen() {
                 {copy.plan.askForTitle}
               </h2>
               <p className="-mt-1 text-sm text-text-muted">{copy.plan.askForHint}</p>
-              {askStyles.map((l) => (
-                <AskForSpec key={l.style.id} style={l.style} />
+              {askLooks.map((l) => (
+                <AskForSpec key={`${l.style.id}:${l.ownColour}`} style={l.style} line={askForLine(l.style, snapshot, l.ownColour)} />
               ))}
               <p className="rounded-card bg-peach px-5 py-4 text-sm text-text-soft">
                 {copy.plan.climateNotes[climate]} <span className="font-semibold">{copy.plan.guidanceNote}</span>
