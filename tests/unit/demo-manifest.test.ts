@@ -1,8 +1,9 @@
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
-import { describe, expect, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "vitest";
 import { catalog, estimateUnits, planSteps } from "@/lib/catalog";
-import { DemoManifest } from "@/lib/contracts/demo";
+import type { ResultCheck } from "@/lib/client/check/judge";
+import { DemoManifest, type DemoCheck } from "@/lib/contracts/demo";
 import { PERSONAS } from "@/lib/contracts/mocks/fixtures";
 import { planRegrowth, planRoutes } from "@/lib/planner";
 
@@ -89,5 +90,32 @@ describe("public/demo/manifest.json", () => {
       0,
     );
     expect(total).toBeLessThan(25 * 1024 * 1024);
+  });
+});
+
+describe("sample checks and repairs", () => {
+  it("DemoCheck has exactly the shape of the app's ResultCheck", () => {
+    expectTypeOf<DemoCheck>().toEqualTypeOf<ResultCheck>();
+  });
+
+  it("a repaired item keeps its first image, and every repair step is a Hair Color pass", () => {
+    for (const p of manifest.personas)
+      for (const i of p.items) {
+        if (i.repairStep) expect(i.original, `${p.id}/${i.key}`).toBeDefined();
+        if (i.original) {
+          const bytes = readFileSync(join(publicDir, i.original));
+          expect([...bytes.subarray(0, 2)], i.original).toEqual([0xff, 0xd8]);
+          expect(i.repairStep?.kind, `${p.id}/${i.key}`).toBe("hair-color");
+        }
+      }
+  });
+
+  it("every route and colour item carries its baked check, and none asks the device to repair", () => {
+    for (const p of manifest.personas)
+      for (const i of p.items) {
+        if (i.spec.kind !== "route" && i.spec.kind !== "colour") continue;
+        expect(i.check, `${p.id}/${i.key}`).toBeDefined();
+        expect(i.check, `${p.id}/${i.key}`).not.toHaveProperty("repairHex");
+      }
   });
 });

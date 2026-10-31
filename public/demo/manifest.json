@@ -79,6 +79,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.006067458138798448
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#211B13",
+              "resultHex": "#3E2C22",
+              "deltaE": 8.732499713374715
+            },
+            "checkedAt": "2026-10-31T19:23:11.131Z"
+          },
           "createdAt": "2026-10-26T14:47:02.006Z"
         },
         {
@@ -129,6 +143,20 @@
                 "finishedAt": "2026-10-26T14:47:08.459Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.0022218346601567095
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#211B13",
+              "resultHex": "#4A3424",
+              "deltaE": 11.885978846528957
+            },
+            "checkedAt": "2026-10-31T19:23:12.233Z"
           },
           "createdAt": "2026-10-26T14:47:10.830Z"
         },
@@ -185,8 +213,8 @@
               }
             ]
           },
-          "createdAt": "2026-10-26T14:47:11.673Z",
-          "note": "Brow previews are subtle on brows that are still there. The Brow Record (your own brows, photographed) is the main feature."
+          "note": "Brow previews are subtle on brows that are still there. The Brow Record (your own brows, photographed) is the main feature.",
+          "createdAt": "2026-10-26T14:47:11.673Z"
         },
         {
           "key": "easier",
@@ -242,6 +270,20 @@
                 "finishedAt": "2026-10-26T17:11:43.811Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.006446628984488101
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#211B13",
+              "resultHex": "#271E1A",
+              "deltaE": 3.5280227634238757
+            },
+            "checkedAt": "2026-10-31T19:23:13.261Z"
           },
           "createdAt": "2026-10-26T17:11:46.730Z"
         },
@@ -300,6 +342,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "repairable",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.008023031844342665
+            },
+            "colour": {
+              "status": "drifted",
+              "baselineHex": "#211B13",
+              "resultHex": "#30241E",
+              "deltaE": 5.377813829709851
+            },
+            "checkedAt": "2026-10-31T19:23:14.377Z"
+          },
           "createdAt": "2026-10-26T17:11:46.841Z"
         },
         {
@@ -356,6 +412,20 @@
                 "finishedAt": "2026-10-26T17:11:53.962Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "repairable",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.009477177347001566
+            },
+            "colour": {
+              "status": "drifted",
+              "baselineHex": "#211B13",
+              "resultHex": "#2A1F1B",
+              "deltaE": 4.828607850623712
+            },
+            "checkedAt": "2026-10-31T19:23:15.447Z"
           },
           "createdAt": "2026-10-26T17:11:55.688Z"
         },
@@ -414,6 +484,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.006791648855549704
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#211B13",
+              "resultHex": "#34251E",
+              "deltaE": 6.753747454570478
+            },
+            "checkedAt": "2026-10-31T19:23:16.345Z"
+          },
           "createdAt": "2026-10-26T17:12:13.774Z"
         },
         {
@@ -470,6 +554,20 @@
                 "finishedAt": "2026-10-26T17:12:14.686Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "repairable",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.006562005290725325
+            },
+            "colour": {
+              "status": "drifted",
+              "baselineHex": "#211B13",
+              "resultHex": "#261C17",
+              "deltaE": 4.2995692371000755
+            },
+            "checkedAt": "2026-10-31T19:23:17.329Z"
           },
           "createdAt": "2026-10-26T17:12:17.193Z"
         },
@@ -528,8 +626,22 @@
               }
             ]
           },
-          "createdAt": "2026-10-26T17:11:46.730Z",
-          "note": "Same style and colour as \"Familiar, easier\", so this is the same result."
+          "note": "Same style and colour as \"Familiar, easier\", so this is the same result.",
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.006446628984488101
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#211B13",
+              "resultHex": "#271E1A",
+              "deltaE": 3.5280227634238757
+            },
+            "checkedAt": "2026-10-31T19:23:18.342Z"
+          },
+          "createdAt": "2026-10-26T17:11:46.730Z"
         }
       ],
       "failures": []
@@ -589,6 +701,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.005638241277222232
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#0C1210",
+              "resultHex": "#091011",
+              "deltaE": 2.120804158441197
+            },
+            "checkedAt": "2026-10-31T19:23:19.542Z"
+          },
           "createdAt": "2026-10-26T14:47:50.322Z"
         },
         {
@@ -627,6 +753,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.005406197435153905
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#0C1210",
+              "resultHex": "#091113",
+              "deltaE": 2.3677590581071963
+            },
+            "checkedAt": "2026-10-31T19:23:20.687Z"
+          },
           "createdAt": "2026-10-26T14:47:50.411Z"
         },
         {
@@ -664,6 +804,20 @@
                 "finishedAt": "2026-10-26T14:48:03.450Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.004667614813137464
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#0C1210",
+              "resultHex": "#101417",
+              "deltaE": 3.5059751571779807
+            },
+            "checkedAt": "2026-10-31T19:23:21.683Z"
           },
           "createdAt": "2026-10-26T14:48:04.990Z"
         },
@@ -707,6 +861,20 @@
                 "finishedAt": "2026-10-26T14:48:02.254Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.0029546609446516273
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#0C1210",
+              "resultHex": "#59281B",
+              "deltaE": 26.839552288842484
+            },
+            "checkedAt": "2026-10-31T19:23:22.852Z"
           },
           "createdAt": "2026-10-26T14:48:05.037Z"
         },
@@ -766,6 +934,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.007850789900682902
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#0C1210",
+              "resultHex": "#34241C",
+              "deltaE": 14.565116207527689
+            },
+            "checkedAt": "2026-10-31T19:23:24.071Z"
+          },
           "createdAt": "2026-10-26T14:48:06.857Z"
         },
         {
@@ -821,8 +1003,8 @@
               }
             ]
           },
-          "createdAt": "2026-10-26T14:48:18.989Z",
-          "note": "Brow previews are subtle on brows that are still there. The Brow Record (your own brows, photographed) is the main feature."
+          "note": "Brow previews are subtle on brows that are still there. The Brow Record (your own brows, photographed) is the main feature.",
+          "createdAt": "2026-10-26T14:48:18.989Z"
         },
         {
           "key": "regrowth-3m",
@@ -859,6 +1041,20 @@
                 "finishedAt": "2026-10-26T14:48:19.118Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.006505291765315184
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#0C1210",
+              "resultHex": "#0E1718",
+              "deltaE": 3.0419903341395975
+            },
+            "checkedAt": "2026-10-31T19:23:24.993Z"
           },
           "createdAt": "2026-10-26T14:48:20.551Z"
         },
@@ -898,6 +1094,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.00704729211022567
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#0C1210",
+              "resultHex": "#0C1516",
+              "deltaE": 2.5474517898769338
+            },
+            "checkedAt": "2026-10-31T19:23:25.980Z"
+          },
           "createdAt": "2026-10-26T14:48:21.692Z"
         },
         {
@@ -935,6 +1145,20 @@
                 "finishedAt": "2026-10-26T14:48:26.332Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.006090809549612676
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#0C1210",
+              "resultHex": "#091113",
+              "deltaE": 2.4004073515286777
+            },
+            "checkedAt": "2026-10-31T19:23:27.084Z"
           },
           "createdAt": "2026-10-26T14:48:27.976Z"
         }
@@ -1002,6 +1226,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.0033879330441081625
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#201C14",
+              "resultHex": "#4A3726",
+              "deltaE": 12.815764555281694
+            },
+            "checkedAt": "2026-10-31T19:23:28.088Z"
+          },
           "createdAt": "2026-10-26T14:48:58.005Z"
         },
         {
@@ -1057,8 +1295,8 @@
               }
             ]
           },
-          "createdAt": "2026-10-26T14:49:06.981Z",
-          "note": "Brow previews are subtle on brows that are still there. The Brow Record (your own brows, photographed) is the main feature."
+          "note": "Brow previews are subtle on brows that are still there. The Brow Record (your own brows, photographed) is the main feature.",
+          "createdAt": "2026-10-26T14:49:06.981Z"
         },
         {
           "key": "closest",
@@ -1095,6 +1333,20 @@
                 "finishedAt": "2026-10-26T17:12:11.046Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.0037706764968204395
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#201C14",
+              "resultHex": "#1A1A16",
+              "deltaE": 3.4441457030596827
+            },
+            "checkedAt": "2026-10-31T19:23:28.960Z"
           },
           "createdAt": "2026-10-26T17:12:12.961Z"
         },
@@ -1152,6 +1404,20 @@
                 "finishedAt": "2026-10-26T17:12:37.475Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "repairable",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.009554163067190561
+            },
+            "colour": {
+              "status": "drifted",
+              "baselineHex": "#201C14",
+              "resultHex": "#33261D",
+              "deltaE": 6.979942248159759
+            },
+            "checkedAt": "2026-10-31T19:23:29.876Z"
           },
           "createdAt": "2026-10-26T17:12:39.566Z"
         },
@@ -1211,6 +1477,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.004104675884139147
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#201C14",
+              "resultHex": "#5F2C1D",
+              "deltaE": 21.128053052139208
+            },
+            "checkedAt": "2026-10-31T19:23:30.761Z"
+          },
           "createdAt": "2026-10-26T17:12:50.941Z"
         },
         {
@@ -1268,6 +1548,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "repairable",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.00909919185925657
+            },
+            "colour": {
+              "status": "drifted",
+              "baselineHex": "#201C14",
+              "resultHex": "#32251C",
+              "deltaE": 6.860414210935578
+            },
+            "checkedAt": "2026-10-31T19:23:31.702Z"
+          },
           "createdAt": "2026-10-26T17:12:51.059Z"
         },
         {
@@ -1306,8 +1600,22 @@
               }
             ]
           },
-          "createdAt": "2026-10-26T17:12:12.961Z",
-          "note": "Same style and colour as \"Closest to me\", so this is the same result."
+          "note": "Same style and colour as \"Closest to me\", so this is the same result.",
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.0037706764968204395
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#201C14",
+              "resultHex": "#1A1A16",
+              "deltaE": 3.4441457030596827
+            },
+            "checkedAt": "2026-10-31T19:23:32.583Z"
+          },
+          "createdAt": "2026-10-26T17:12:12.961Z"
         },
         {
           "key": "regrowth-6m",
@@ -1364,8 +1672,22 @@
               }
             ]
           },
-          "createdAt": "2026-10-26T17:12:39.566Z",
-          "note": "Same style and colour as \"Familiar, easier\", so this is the same result."
+          "note": "Same style and colour as \"Familiar, easier\", so this is the same result.",
+          "check": {
+            "outcome": "repairable",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.009554163067190561
+            },
+            "colour": {
+              "status": "drifted",
+              "baselineHex": "#201C14",
+              "resultHex": "#33261D",
+              "deltaE": 6.979942248159759
+            },
+            "checkedAt": "2026-10-31T19:23:33.538Z"
+          },
+          "createdAt": "2026-10-26T17:12:39.566Z"
         },
         {
           "key": "regrowth-12m",
@@ -1422,8 +1744,22 @@
               }
             ]
           },
-          "createdAt": "2026-10-26T17:12:51.059Z",
-          "note": "Same style and colour as \"A variant of Closest to me\", so this is the same result."
+          "note": "Same style and colour as \"A variant of Closest to me\", so this is the same result.",
+          "check": {
+            "outcome": "repairable",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.00909919185925657
+            },
+            "colour": {
+              "status": "drifted",
+              "baselineHex": "#201C14",
+              "resultHex": "#32251C",
+              "deltaE": 6.860414210935578
+            },
+            "checkedAt": "2026-10-31T19:23:34.522Z"
+          },
+          "createdAt": "2026-10-26T17:12:51.059Z"
         }
       ],
       "failures": []
@@ -1502,6 +1838,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.01024633822641196
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#99968D",
+              "resultHex": "#9C9D98",
+              "deltaE": 3.1712846401804957
+            },
+            "checkedAt": "2026-10-31T19:23:35.579Z"
+          },
           "createdAt": "2026-10-26T14:49:43.520Z"
         },
         {
@@ -1558,6 +1908,20 @@
                 "finishedAt": "2026-10-26T14:49:52.253Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.009517004234725806
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#99968D",
+              "resultHex": "#92938E",
+              "deltaE": 2.893749820383927
+            },
+            "checkedAt": "2026-10-31T19:23:36.588Z"
           },
           "createdAt": "2026-10-26T14:49:54.973Z"
         },
@@ -1617,6 +1981,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.009830078846147838
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#99968D",
+              "resultHex": "#6C5549",
+              "deltaE": 26.334939186955527
+            },
+            "checkedAt": "2026-10-31T19:23:37.629Z"
+          },
           "createdAt": "2026-10-26T14:49:54.979Z"
         },
         {
@@ -1659,6 +2037,20 @@
                 "finishedAt": "2026-10-26T14:50:02.335Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.0056996643612036
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#99968D",
+              "resultHex": "#9A674A",
+              "deltaE": 22.540398140865292
+            },
+            "checkedAt": "2026-10-31T19:23:38.749Z"
           },
           "createdAt": "2026-10-26T14:50:04.421Z"
         },
@@ -1715,8 +2107,8 @@
               }
             ]
           },
-          "createdAt": "2026-10-26T14:50:08.919Z",
-          "note": "Brow previews are subtle on brows that are still there. The Brow Record (your own brows, photographed) is the main feature."
+          "note": "Brow previews are subtle on brows that are still there. The Brow Record (your own brows, photographed) is the main feature.",
+          "createdAt": "2026-10-26T14:50:08.919Z"
         },
         {
           "key": "variant-1",
@@ -1772,6 +2164,20 @@
                 "finishedAt": "2026-10-26T14:50:14.277Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.008031952630212086
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#99968D",
+              "resultHex": "#9E9F9A",
+              "deltaE": 3.54022540915716
+            },
+            "checkedAt": "2026-10-31T19:23:39.801Z"
           },
           "createdAt": "2026-10-26T14:50:15.730Z"
         },
@@ -1830,6 +2236,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.006928559972429114
+            },
+            "colour": {
+              "status": "skipped",
+              "baselineHex": "#99968D",
+              "resultHex": "#878882",
+              "deltaE": 5.62324005003638
+            },
+            "checkedAt": "2026-10-31T19:23:40.816Z"
+          },
           "createdAt": "2026-10-26T14:50:25.799Z"
         },
         {
@@ -1887,6 +2307,20 @@
               }
             ]
           },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.009410103344137737
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#99968D",
+              "resultHex": "#90918C",
+              "deltaE": 3.2666149992850215
+            },
+            "checkedAt": "2026-10-31T19:23:42.082Z"
+          },
           "createdAt": "2026-10-26T14:50:34.446Z"
         },
         {
@@ -1943,6 +2377,20 @@
                 "finishedAt": "2026-10-26T14:50:39.014Z"
               }
             ]
+          },
+          "check": {
+            "outcome": "checked",
+            "face": {
+              "status": "unchanged",
+              "drift": 0.008658432702501526
+            },
+            "colour": {
+              "status": "kept",
+              "baselineHex": "#99968D",
+              "resultHex": "#9B9C97",
+              "deltaE": 2.995331414098076
+            },
+            "checkedAt": "2026-10-31T19:23:43.198Z"
           },
           "createdAt": "2026-10-26T14:50:41.085Z"
         }

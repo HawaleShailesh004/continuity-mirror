@@ -8,6 +8,24 @@ import { ErrorBody } from "./errors";
 const IsoDate = z.iso.datetime();
 const DemoPath = z.string().regex(/^\/demo\/[a-z0-9_/-]+\.jpg$/);
 
+/** What the on-device result check found for a sample (lib/client/check/judge.ts ResultCheck, same shape). */
+export const DemoCheck = z
+  .object({
+    outcome: z.enum(["checked", "repairable", "needs-look", "unchecked"]),
+    face: z.object({ status: z.enum(["unchanged", "changed", "unknown"]), drift: z.number().nullable() }),
+    colour: z.object({
+      status: z.enum(["kept", "drifted", "skipped"]),
+      baselineHex: z.string().nullable(),
+      resultHex: z.string().nullable(),
+      deltaE: z.number().nullable(),
+    }),
+    repairHex: z.string().optional(),
+    repaired: z.object({ state: z.enum(["queued", "adjusted", "failed"]), deltaEAfter: z.number().optional() }).optional(),
+    checkedAt: IsoDate,
+  })
+  .meta({ id: "DemoCheck" });
+export type DemoCheck = z.infer<typeof DemoCheck>;
+
 export const DemoItemKind = z.enum(["route", "variant", "colour", "brows", "regrowth"]).meta({ id: "DemoItemKind" });
 
 /** One genuine result image. `provenance` is exactly what "How this was made" shows (placeholders, real task ids). */
@@ -26,6 +44,12 @@ export const DemoItem = z
     provenance: Provenance,
     /** Anything the UI should say about this image (e.g. brow previews are subtle on brows that are still there). */
     note: z.string().optional(),
+    /** The result check, measured when the samples were built (scripts/repair-demo.ts). */
+    check: DemoCheck.optional(),
+    /** The image YouCam first returned, kept when a colour repair replaced it (`image` is the repaired one). */
+    original: DemoPath.optional(),
+    /** The Hair Color step that repaired it, shown in "How this was made" after the item's own steps. */
+    repairStep: Provenance.shape.steps.element.optional(),
     createdAt: IsoDate,
   })
   .meta({ id: "DemoItem" });

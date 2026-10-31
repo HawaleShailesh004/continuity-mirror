@@ -43,3 +43,7 @@ First version, from the backend plan §3 adjusted to the B0 facts:
 ## 0.2.1 · Fri 30 Oct 2026 (fringe job, post-freeze, additive)
 
 - New job kind `fringe` (`FringeSpec`: `{ kind: 'fringe', templateId, attempt }`) and step kind `hair-bang` (`POST /s2s/v2.0/task/hair-bang`, 1 unit, source is the baseline). `templateId` must be one of the 20 YouCam Bangs templates in `lib/catalog/fringes.json`, otherwise `VALIDATION_FAILED`. No existing type changed. Client helper: `enqueueFringe` (`lib/client/journey.ts`); offer first: `suggestedFringes(audience)`.
+
+## 0.2.2 · Sun 1 Nov 2026 (sample checks, post-freeze, additive)
+
+- `DemoItem` gains optional `check`, `original`, `repairStep` (samples carry their result check and colour repair; win-plan T1). Additive, no client change required.

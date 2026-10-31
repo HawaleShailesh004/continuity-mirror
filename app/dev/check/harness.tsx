@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { deltaE2000 } from "@/lib/client/check/colour";
+import { deltaE2000, labToHex, repairColour } from "@/lib/client/check/colour";
+import { judge, type ResultCheck } from "@/lib/client/check/judge";
 import { faceDrift } from "@/lib/client/check/face";
-import { measure } from "@/lib/client/check/measure";
+import { loadCheckModels, measure } from "@/lib/client/check/measure";
 import { db } from "@/lib/client/db";
 
 type Row = { person: string; key: string; kind: string; drift: number | null; baselineHex: string | null; resultHex: string | null; deltaE: number | null; coverage: number | null };
@@ -14,6 +15,9 @@ declare global {
   interface Window {
     __checkRows?: Row[];
     __checkDone?: boolean;
+    __cmJudge?: (baselineSrc: string, resultSrc: string, expectOwnColour: boolean) => Promise<ResultCheck>;
+    __cmRepairHex?: (baselineSrc: string, resultSrc: string) => Promise<string | null>;
+    __cmReady?: boolean;
   }
 }
 
@@ -24,6 +28,18 @@ export function CheckHarness() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      if (new URLSearchParams(location.search).get("api")) {
+        window.__cmJudge = async (baselineSrc, resultSrc, expectOwnColour) =>
+          judge(await measure(baselineSrc), await measure(resultSrc), { expectOwnColour });
+        window.__cmRepairHex = async (baselineSrc, resultSrc) => {
+          const [b, r] = await Promise.all([measure(baselineSrc), measure(resultSrc)]);
+          return b.hair && r.hair ? labToHex(repairColour(b.hair.lab, r.hair.lab)) : null;
+        };
+        await loadCheckModels();
+        window.__cmReady = true;
+        setStatus("api ready");
+        return;
+      }
       if (new URLSearchParams(location.search).get("live")) {
         // Measure what is stored on this device: the baseline, each result and, when a repair swapped it, the original.
         const out: Row[] = [];
