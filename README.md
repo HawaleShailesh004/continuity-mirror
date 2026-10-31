@@ -104,7 +104,7 @@ If the colour drifted, the app makes **one** Hair Color pass and asks for the me
 | Different person in the same pose caught (negative control) | **4 of 4** (smallest drift 0.017; threshold 0.013) |
 | Own-colour results that drifted and get a repair | **7 of 18** (39 %) |
 | Live repair, end to end | ΔE **4.6 → 1.3**, face unchanged |
-| Sample results repaired before shipping | **6** results (13 sample items share them), ΔE 3.5–7.0 → 0.8–3.0, one Hair Color pass each; the first version is one tap away |
+| Sample results repaired before shipping | **6** results (9 sample items share them), ΔE 3.5–7.0 → 0.8–3.0, one Hair Color pass each; the first version is one tap away |
 
 The person sees one quiet line ("Your face is unchanged · Colour adjusted to match yours") and can open the first version. Numbers are never shown to them.
 
