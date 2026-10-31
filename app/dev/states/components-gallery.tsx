@@ -2,8 +2,10 @@
 
 import { useState, type ReactNode } from "react";
 import { toast } from "sonner";
+import type { ResultCheck } from "@/lib/client/check/judge";
 import { AskForSpec } from "@/components/cm/ask-for-spec";
 import { BudgetNote } from "@/components/cm/budget-note";
+import { CheckedRow } from "@/components/cm/checked-row";
 import { Checklist } from "@/components/cm/checklist";
 import { CompareView } from "@/components/cm/compare-view";
 import { CueChecklist } from "@/components/cm/cue-checklist";
@@ -58,6 +60,15 @@ function Block({ title, children }: { title: string; children: ReactNode }) {
     </section>
   );
 }
+
+/** What a successful repair stores: outcome "checked" plus the repaired state (markRepair in lib/client/jobs.ts). */
+const ADJUSTED: ResultCheck = {
+  outcome: "checked",
+  face: { status: "unchanged", drift: 0.004 },
+  colour: { status: "drifted", baselineHex: "#2A1D18", resultHex: "#1B170D", deltaE: 5.4 },
+  repaired: { state: "adjusted", deltaEAfter: 1.2 },
+  checkedAt: "2026-11-01T00:00:00.000Z",
+};
 
 const Row = ({ children }: { children: ReactNode }) => <div className="flex flex-wrap items-start gap-4">{children}</div>;
 const Cell = ({ label, children, className }: { label: string; children: ReactNode; className?: string }) => (
@@ -321,6 +332,14 @@ export function ComponentGallery() {
           />
         </div>
         <PlanPill count={2} />
+      </Block>
+
+      <Block title="CheckedRow · adjusted, sample wording, first-version toggle">
+        <div className="grid max-w-3xl gap-4 md:grid-cols-2">
+          <CheckedRow check={ADJUSTED} />
+          <CheckedRow check={ADJUSTED} sample firstVersion={{ showing: false, onToggle: () => {} }} />
+          <CheckedRow check={ADJUSTED} sample firstVersion={{ showing: true, onToggle: () => {} }} />
+        </div>
       </Block>
 
       <Block title="HairPicker">

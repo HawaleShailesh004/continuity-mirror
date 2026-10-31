@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { ChoiceChips } from "@/components/ui/choice-chips";
 import { Sheet } from "@/components/ui/sheet";
 import { copy } from "@/content/copy";
-import { colours, styles } from "@/lib/catalog";
+import { colours, STEP_META, styles } from "@/lib/catalog";
 import { cuesFromSnapshot, type CueKey } from "@/lib/client/cues";
 import { db, type JobRow } from "@/lib/client/db";
 import { useJourneyGuard, useNavigate, useNow, useObjectUrl, useStatus } from "@/lib/client/hooks";
@@ -89,6 +89,11 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
   );
   const baselineUrl = useObjectUrl(baseline?.image);
   const resultUrl = useObjectUrl(result?.image);
+  // When a colour repair replaced the image, the first version stays one tap away.
+  const originalUrl = useObjectUrl(result?.original);
+  const currentId = current?.clientRequestId;
+  const [firstFor, setFirstFor] = useState<string>();
+  const showFirst = firstFor === currentId; // switching try resets it
 
   const [flight, setFlight] = useState<{ x: number; y: number } | null>(null);
   const endFlight = useCallback(() => setFlight(null), []);
@@ -181,7 +186,7 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
               <div aria-hidden="true" className="bg-morning-glow absolute -inset-x-10 -inset-y-8 -z-10 opacity-80" />
               <CompareView
                 beforeSrc={baselineUrl}
-                afterSrc={resultUrl}
+                afterSrc={showFirst && originalUrl ? originalUrl : resultUrl}
                 afterAlt={copy.compare.alt(style?.label ?? route.styleId, own)}
                 routeName={name}
                 sample={isSample}
@@ -260,7 +265,12 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
 
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-6">
-          {stored && <CheckedRow check={current?.check} onTryAgain={current ? () => void retryRow(current).then((row) => setPickedId(row.clientRequestId)) : undefined} />}
+          {stored && <CheckedRow
+              check={current?.check}
+              sample={isSample}
+              firstVersion={originalUrl ? { showing: showFirst, onToggle: () => setFirstFor(showFirst ? undefined : currentId) } : undefined}
+              onTryAgain={current ? () => void retryRow(current).then((row) => setPickedId(row.clientRequestId)) : undefined}
+            />}
           <VerdictControl
             value={verdictRow?.feelsLikeMe ?? null}
             onValueChange={(v) => void setVerdict(v)}
@@ -276,7 +286,7 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
           <div className="flex flex-col items-start gap-1">
             {!isSample && unitsLeft !== undefined && <BudgetNote remaining={Math.floor(unitsLeft / UNITS_PER_PREVIEW)} />}
             {current?.job && result && (
-              <HowMadeDrawer provenance={result.provenance} units={current.job.steps.map((s) => s.units)} />
+              <HowMadeDrawer provenance={result.provenance} units={result.provenance.steps.map((s) => STEP_META[s.kind].units)} />
             )}
           </div>
         </div>

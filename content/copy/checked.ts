@@ -1,6 +1,7 @@
 // Words for the on-device result check (components/cm/checked-row.tsx). Client-safe, kept apart from the aggregate copy.
 export const copy = {
   title: "Checked on your device",
+  titleSample: "Checked when this sample was made",
   faceKept: "Your face is unchanged",
   colourKept: "Your colour is kept",
   adjusting: "Matching your colour",
@@ -8,4 +9,6 @@ export const copy = {
   colourMayDiffer: "Colour may differ a little from yours",
   faceChanged: "Something looks different. Try this one again?",
   tryAgain: "Try again",
+  seeFirst: "See the first version",
+  seeAdjusted: "Back to the adjusted version",
 } as const;

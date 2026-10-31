@@ -61,6 +61,14 @@ function toJob(baselineId: string, item: DemoItem): Job {
   };
 }
 
+/** What a repair appends in a live session (`storeResult` in jobs.ts): the source's steps, then the Hair Color pass. */
+const provenanceOf = (item: DemoItem) =>
+  item.repairStep ? { ...item.provenance, steps: [...item.provenance.steps, item.repairStep] } : item.provenance;
+
+/** The first version YouCam returned, for the items a colour repair replaced. */
+const fetchOriginals = (items: readonly DemoItem[]) =>
+  Promise.all(items.map(async (item) => (item.original ? await (await fetch(item.original)).blob() : undefined)));
+
 /**
  * Put a sample person's baseline, answers and genuine results on the device.
  * Returns the baseline id (`demo-<persona>`: never sent to the API).
@@ -74,6 +82,7 @@ export async function installDemo(persona: DemoPersona): Promise<string> {
       item.spec.kind === "route" && ((item.kind === "route" && ROUTE_KEYS.has(item.key)) || item.kind === "variant"),
   );
   const images = await Promise.all(wanted.map(async (item) => (await fetch(item.image)).blob()));
+  const originals = await fetchOriginals(wanted);
 
   await db.transaction("rw", [db.baselines, db.snapshots, db.jobs, db.results], async () => {
     await db.baselines.put({
@@ -104,6 +113,8 @@ export async function installDemo(persona: DemoPersona): Promise<string> {
         job,
         result: "stored",
         note: item.note,
+        // Measured when the samples were built, so the Checked row shows and nothing re-runs on the device.
+        check: item.check,
         createdAt: item.createdAt,
       };
       await db.jobs.put(row);
@@ -111,7 +122,8 @@ export async function installDemo(persona: DemoPersona): Promise<string> {
         clientRequestId: job.clientRequestId,
         baselineId,
         image: images[i]!,
-        provenance: item.provenance,
+        original: originals[i],
+        provenance: provenanceOf(item),
         createdAt: item.createdAt,
       });
     }
@@ -134,6 +146,7 @@ export async function installDemoItems(personaId: string, keys: readonly string[
   const have = new Set((await db.jobs.where("baselineId").equals(baselineId).toArray()).map((r) => r.routeKey));
   const wanted = persona.items.filter((item) => keys.includes(item.key) && !have.has(item.key));
   const images = await Promise.all(wanted.map(async (item) => (await fetch(item.image)).blob()));
+  const originals = await fetchOriginals(wanted);
 
   await db.transaction("rw", [db.jobs, db.results], async () => {
     for (const [i, item] of wanted.entries()) {
@@ -147,13 +160,15 @@ export async function installDemoItems(personaId: string, keys: readonly string[
         job,
         result: "stored",
         note: item.note,
+        check: item.check,
         createdAt: item.createdAt,
       });
       await db.results.put({
         clientRequestId: job.clientRequestId,
         baselineId,
         image: images[i]!,
-        provenance: item.provenance,
+        original: originals[i],
+        provenance: provenanceOf(item),
         createdAt: item.createdAt,
       });
     }

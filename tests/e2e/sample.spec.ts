@@ -1,6 +1,8 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
+import { readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 /*
  * The sample-person journey from the landing page to a downloaded PDF and
@@ -35,6 +37,27 @@ test.describe("sample person", () => {
     await page.getByRole("button", { name: "How this was made" }).click();
     await expect(page.getByText("Made live with YouCam")).toBeVisible();
     await expect(page.getByText("/s2s/v2.1/task/hair-transfer").first()).toBeVisible();
+  });
+
+  test("T6: a sample says when it was checked, and a repaired one offers its first version", async ({ page }) => {
+    const manifest = JSON.parse(readFileSync(join(process.cwd(), "public/demo/manifest.json"), "utf8")) as {
+      personas: { id: string; items: { key: string; label: string; original?: string }[] }[];
+    };
+    const meera = manifest.personas.find((p) => p.id === "meera")!;
+    const repaired = meera.items.find((i) => ["closest", "easier", "new-chapter"].includes(i.key) && i.original);
+
+    await page.goto("/start/consent?sample=1");
+    await page.getByRole("radio", { name: /Meera/ }).click();
+    await page.getByRole("button", { name: "I understand, continue" }).click();
+    await page.getByRole("button", { name: "See my three paths" }).click();
+    await page.getByRole("link", { name: (repaired ?? meera.items.find((i) => i.key === "closest")!).label, exact: true }).click();
+    await expect(page.getByText("Checked when this sample was made")).toBeVisible();
+    // Until the samples are repaired (pnpm demo:repair --live) there is no first version to offer.
+    if (!repaired) return;
+    await expect(page.getByText("Colour adjusted to match yours")).toBeVisible();
+    const toggle = page.getByRole("button", { name: "See the first version" });
+    await toggle.click();
+    await expect(page.getByRole("button", { name: "Back to the adjusted version" })).toHaveAttribute("aria-pressed", "true");
   });
 
   test("F9: the plan's words use the person's own answers, not the template's", async ({ page }) => {
