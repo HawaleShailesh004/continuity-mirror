@@ -2,7 +2,7 @@
   "version": 1,
   "generatedAt": "2026-10-26T17:12:51.338Z",
   "mode": "live",
-  "unitsSpent": 124,
+  "unitsSpent": 130,
   "personas": [
     {
       "id": "meera",
@@ -91,7 +91,7 @@
               "resultHex": "#3E2C22",
               "deltaE": 8.732499713374715
             },
-            "checkedAt": "2026-10-31T19:23:11.131Z"
+            "checkedAt": "2026-10-31T19:51:31.091Z"
           },
           "createdAt": "2026-10-26T14:47:02.006Z"
         },
@@ -156,7 +156,7 @@
               "resultHex": "#4A3424",
               "deltaE": 11.885978846528957
             },
-            "checkedAt": "2026-10-31T19:23:12.233Z"
+            "checkedAt": "2026-10-31T19:51:33.353Z"
           },
           "createdAt": "2026-10-26T14:47:10.830Z"
         },
@@ -283,7 +283,32 @@
               "resultHex": "#271E1A",
               "deltaE": 3.5280227634238757
             },
-            "checkedAt": "2026-10-31T19:23:13.261Z"
+            "repaired": {
+              "state": "adjusted",
+              "deltaEAfter": 0.7902777974375319
+            },
+            "checkedAt": "2026-10-31T19:51:35.392Z"
+          },
+          "original": "/demo/meera/easier-first.jpg",
+          "repairStep": {
+            "kind": "hair-color",
+            "endpoint": "/s2s/v2.0/task/hair-color",
+            "apiVersion": "v2.0",
+            "params": {
+              "pattern": {
+                "name": "full"
+              },
+              "palettes": [
+                {
+                  "color": "#1F1A10",
+                  "color_intensity": 80,
+                  "shine_intensity": 20
+                }
+              ],
+              "src_file_url": "<source job result>"
+            },
+            "youcamTaskId": "Q3Z005qoTeYXA9Wi2RWUewa7T1uhWKedqgRtpvNl8IkfZ0tqZaPZLdPNpInooEQXDtzZw-qXapKUf8ErhvArwA",
+            "finishedAt": "2026-10-31T19:50:28.878Z"
           },
           "createdAt": "2026-10-26T17:11:46.730Z"
         },
@@ -343,7 +368,7 @@
             ]
           },
           "check": {
-            "outcome": "repairable",
+            "outcome": "checked",
             "face": {
               "status": "unchanged",
               "drift": 0.008023031844342665
@@ -354,7 +379,32 @@
               "resultHex": "#30241E",
               "deltaE": 5.377813829709851
             },
-            "checkedAt": "2026-10-31T19:23:14.377Z"
+            "repaired": {
+              "state": "adjusted",
+              "deltaEAfter": 1.1280183871633471
+            },
+            "checkedAt": "2026-10-31T19:51:39.533Z"
+          },
+          "original": "/demo/meera/closest-first.jpg",
+          "repairStep": {
+            "kind": "hair-color",
+            "endpoint": "/s2s/v2.0/task/hair-color",
+            "apiVersion": "v2.0",
+            "params": {
+              "pattern": {
+                "name": "full"
+              },
+              "palettes": [
+                {
+                  "color": "#1B170D",
+                  "color_intensity": 80,
+                  "shine_intensity": 20
+                }
+              ],
+              "src_file_url": "<source job result>"
+            },
+            "youcamTaskId": "NcM_XZ-cEsg8yk5PeNiVDu8P0SPvGazOg8BM7Dbx5mYPnL1QNH34ICR1tIA6jjz8DtzZw-qXapKUf8ErhvArwA",
+            "finishedAt": "2026-10-31T19:50:40.952Z"
           },
           "createdAt": "2026-10-26T17:11:46.841Z"
         },
@@ -414,7 +464,7 @@
             ]
           },
           "check": {
-            "outcome": "repairable",
+            "outcome": "checked",
             "face": {
               "status": "unchanged",
               "drift": 0.009477177347001566
@@ -425,7 +475,32 @@
               "resultHex": "#2A1F1B",
               "deltaE": 4.828607850623712
             },
-            "checkedAt": "2026-10-31T19:23:15.447Z"
+            "repaired": {
+              "state": "adjusted",
+              "deltaEAfter": 1.4577118165362124
+            },
+            "checkedAt": "2026-10-31T19:51:43.991Z"
+          },
+          "original": "/demo/meera/variant-1-first.jpg",
+          "repairStep": {
+            "kind": "hair-color",
+            "endpoint": "/s2s/v2.0/task/hair-color",
+            "apiVersion": "v2.0",
+            "params": {
+              "pattern": {
+                "name": "full"
+              },
+              "palettes": [
+                {
+                  "color": "#1D190F",
+                  "color_intensity": 80,
+                  "shine_intensity": 20
+                }
+              ],
+              "src_file_url": "<source job result>"
+            },
+            "youcamTaskId": "CUgjfGH0AHHhnP9K6TR6gdcqqzLBI9ghVleRJe0rgIQV3Pz5VqhE2E0Q4X2FbnoEDtzZw-qXapKUf8ErhvArwA",
+            "finishedAt": "2026-10-31T19:50:53.578Z"
           },
           "createdAt": "2026-10-26T17:11:55.688Z"
         },
@@ -496,7 +571,7 @@
               "resultHex": "#34251E",
               "deltaE": 6.753747454570478
             },
-            "checkedAt": "2026-10-31T19:23:16.345Z"
+            "checkedAt": "2026-10-31T19:51:48.439Z"
           },
           "createdAt": "2026-10-26T17:12:13.774Z"
         },
@@ -556,7 +631,7 @@
             ]
           },
           "check": {
-            "outcome": "repairable",
+            "outcome": "checked",
             "face": {
               "status": "unchanged",
               "drift": 0.006562005290725325
@@ -567,7 +642,32 @@
               "resultHex": "#261C17",
               "deltaE": 4.2995692371000755
             },
-            "checkedAt": "2026-10-31T19:23:17.329Z"
+            "repaired": {
+              "state": "adjusted",
+              "deltaEAfter": 1.323082998719613
+            },
+            "checkedAt": "2026-10-31T19:51:50.327Z"
+          },
+          "original": "/demo/meera/regrowth-6m-first.jpg",
+          "repairStep": {
+            "kind": "hair-color",
+            "endpoint": "/s2s/v2.0/task/hair-color",
+            "apiVersion": "v2.0",
+            "params": {
+              "pattern": {
+                "name": "full"
+              },
+              "palettes": [
+                {
+                  "color": "#1F1B11",
+                  "color_intensity": 80,
+                  "shine_intensity": 20
+                }
+              ],
+              "src_file_url": "<source job result>"
+            },
+            "youcamTaskId": "MwvehmxtQD8O_Kj1yPhH5c-GlrCOOqh3t4J5tDq9Faygetvs8w7qYTIeZQlGURWkDtzZw-qXapKUf8ErhvArwA",
+            "finishedAt": "2026-10-31T19:51:04.313Z"
           },
           "createdAt": "2026-10-26T17:12:17.193Z"
         },
@@ -639,7 +739,32 @@
               "resultHex": "#271E1A",
               "deltaE": 3.5280227634238757
             },
-            "checkedAt": "2026-10-31T19:23:18.342Z"
+            "repaired": {
+              "state": "adjusted",
+              "deltaEAfter": 0.7902777974375319
+            },
+            "checkedAt": "2026-10-31T19:51:54.319Z"
+          },
+          "original": "/demo/meera/easier-first.jpg",
+          "repairStep": {
+            "kind": "hair-color",
+            "endpoint": "/s2s/v2.0/task/hair-color",
+            "apiVersion": "v2.0",
+            "params": {
+              "pattern": {
+                "name": "full"
+              },
+              "palettes": [
+                {
+                  "color": "#1F1A10",
+                  "color_intensity": 80,
+                  "shine_intensity": 20
+                }
+              ],
+              "src_file_url": "<source job result>"
+            },
+            "youcamTaskId": "Q3Z005qoTeYXA9Wi2RWUewa7T1uhWKedqgRtpvNl8IkfZ0tqZaPZLdPNpInooEQXDtzZw-qXapKUf8ErhvArwA",
+            "finishedAt": "2026-10-31T19:50:28.878Z"
           },
           "createdAt": "2026-10-26T17:11:46.730Z"
         }
@@ -713,7 +838,7 @@
               "resultHex": "#091011",
               "deltaE": 2.120804158441197
             },
-            "checkedAt": "2026-10-31T19:23:19.542Z"
+            "checkedAt": "2026-10-31T19:51:58.661Z"
           },
           "createdAt": "2026-10-26T14:47:50.322Z"
         },
@@ -765,7 +890,7 @@
               "resultHex": "#091113",
               "deltaE": 2.3677590581071963
             },
-            "checkedAt": "2026-10-31T19:23:20.687Z"
+            "checkedAt": "2026-10-31T19:52:00.928Z"
           },
           "createdAt": "2026-10-26T14:47:50.411Z"
         },
@@ -817,7 +942,7 @@
               "resultHex": "#101417",
               "deltaE": 3.5059751571779807
             },
-            "checkedAt": "2026-10-31T19:23:21.683Z"
+            "checkedAt": "2026-10-31T19:52:02.813Z"
           },
           "createdAt": "2026-10-26T14:48:04.990Z"
         },
@@ -874,7 +999,7 @@
               "resultHex": "#59281B",
               "deltaE": 26.839552288842484
             },
-            "checkedAt": "2026-10-31T19:23:22.852Z"
+            "checkedAt": "2026-10-31T19:52:05.134Z"
           },
           "createdAt": "2026-10-26T14:48:05.037Z"
         },
@@ -946,7 +1071,7 @@
               "resultHex": "#34241C",
               "deltaE": 14.565116207527689
             },
-            "checkedAt": "2026-10-31T19:23:24.071Z"
+            "checkedAt": "2026-10-31T19:52:07.425Z"
           },
           "createdAt": "2026-10-26T14:48:06.857Z"
         },
@@ -1054,7 +1179,7 @@
               "resultHex": "#0E1718",
               "deltaE": 3.0419903341395975
             },
-            "checkedAt": "2026-10-31T19:23:24.993Z"
+            "checkedAt": "2026-10-31T19:52:09.084Z"
           },
           "createdAt": "2026-10-26T14:48:20.551Z"
         },
@@ -1106,7 +1231,7 @@
               "resultHex": "#0C1516",
               "deltaE": 2.5474517898769338
             },
-            "checkedAt": "2026-10-31T19:23:25.980Z"
+            "checkedAt": "2026-10-31T19:52:10.832Z"
           },
           "createdAt": "2026-10-26T14:48:21.692Z"
         },
@@ -1158,7 +1283,7 @@
               "resultHex": "#091113",
               "deltaE": 2.4004073515286777
             },
-            "checkedAt": "2026-10-31T19:23:27.084Z"
+            "checkedAt": "2026-10-31T19:52:12.816Z"
           },
           "createdAt": "2026-10-26T14:48:27.976Z"
         }
@@ -1238,7 +1363,7 @@
               "resultHex": "#4A3726",
               "deltaE": 12.815764555281694
             },
-            "checkedAt": "2026-10-31T19:23:28.088Z"
+            "checkedAt": "2026-10-31T19:52:14.617Z"
           },
           "createdAt": "2026-10-26T14:48:58.005Z"
         },
@@ -1346,7 +1471,7 @@
               "resultHex": "#1A1A16",
               "deltaE": 3.4441457030596827
             },
-            "checkedAt": "2026-10-31T19:23:28.960Z"
+            "checkedAt": "2026-10-31T19:52:16.269Z"
           },
           "createdAt": "2026-10-26T17:12:12.961Z"
         },
@@ -1406,7 +1531,7 @@
             ]
           },
           "check": {
-            "outcome": "repairable",
+            "outcome": "checked",
             "face": {
               "status": "unchanged",
               "drift": 0.009554163067190561
@@ -1417,7 +1542,32 @@
               "resultHex": "#33261D",
               "deltaE": 6.979942248159759
             },
-            "checkedAt": "2026-10-31T19:23:29.876Z"
+            "repaired": {
+              "state": "adjusted",
+              "deltaEAfter": 2.9557159139270794
+            },
+            "checkedAt": "2026-10-31T19:52:18.130Z"
+          },
+          "original": "/demo/daniel/easier-first.jpg",
+          "repairStep": {
+            "kind": "hair-color",
+            "endpoint": "/s2s/v2.0/task/hair-color",
+            "apiVersion": "v2.0",
+            "params": {
+              "pattern": {
+                "name": "full"
+              },
+              "palettes": [
+                {
+                  "color": "#16170E",
+                  "color_intensity": 80,
+                  "shine_intensity": 20
+                }
+              ],
+              "src_file_url": "<source job result>"
+            },
+            "youcamTaskId": "9Io1l6LZG08qdIfuKaei_9kPKVL6TPe7GMPYbp4_BNSfKJAomOIKZ-TG-rzUNg5rDtzZw-qXapKUf8ErhvArwA",
+            "finishedAt": "2026-10-31T19:51:15.972Z"
           },
           "createdAt": "2026-10-26T17:12:39.566Z"
         },
@@ -1489,7 +1639,7 @@
               "resultHex": "#5F2C1D",
               "deltaE": 21.128053052139208
             },
-            "checkedAt": "2026-10-31T19:23:30.761Z"
+            "checkedAt": "2026-10-31T19:52:21.656Z"
           },
           "createdAt": "2026-10-26T17:12:50.941Z"
         },
@@ -1549,7 +1699,7 @@
             ]
           },
           "check": {
-            "outcome": "repairable",
+            "outcome": "checked",
             "face": {
               "status": "unchanged",
               "drift": 0.00909919185925657
@@ -1560,7 +1710,32 @@
               "resultHex": "#32251C",
               "deltaE": 6.860414210935578
             },
-            "checkedAt": "2026-10-31T19:23:31.702Z"
+            "repaired": {
+              "state": "adjusted",
+              "deltaEAfter": 1.2664150450037253
+            },
+            "checkedAt": "2026-10-31T19:52:23.424Z"
+          },
+          "original": "/demo/daniel/variant-1-first.jpg",
+          "repairStep": {
+            "kind": "hair-color",
+            "endpoint": "/s2s/v2.0/task/hair-color",
+            "apiVersion": "v2.0",
+            "params": {
+              "pattern": {
+                "name": "full"
+              },
+              "palettes": [
+                {
+                  "color": "#17170F",
+                  "color_intensity": 80,
+                  "shine_intensity": 20
+                }
+              ],
+              "src_file_url": "<source job result>"
+            },
+            "youcamTaskId": "aL3LLXe236AxZ5lmPS9Pp7DB26EmyoH-c0WjJMvLpxzJfsw035ecFoyb_-Hf0toUDtzZw-qXapKUf8ErhvArwA",
+            "finishedAt": "2026-10-31T19:51:28.833Z"
           },
           "createdAt": "2026-10-26T17:12:51.059Z"
         },
@@ -1613,7 +1788,7 @@
               "resultHex": "#1A1A16",
               "deltaE": 3.4441457030596827
             },
-            "checkedAt": "2026-10-31T19:23:32.583Z"
+            "checkedAt": "2026-10-31T19:52:27.022Z"
           },
           "createdAt": "2026-10-26T17:12:12.961Z"
         },
@@ -1674,7 +1849,7 @@
           },
           "note": "Same style and colour as \"Familiar, easier\", so this is the same result.",
           "check": {
-            "outcome": "repairable",
+            "outcome": "checked",
             "face": {
               "status": "unchanged",
               "drift": 0.009554163067190561
@@ -1685,7 +1860,32 @@
               "resultHex": "#33261D",
               "deltaE": 6.979942248159759
             },
-            "checkedAt": "2026-10-31T19:23:33.538Z"
+            "repaired": {
+              "state": "adjusted",
+              "deltaEAfter": 2.9557159139270794
+            },
+            "checkedAt": "2026-10-31T19:52:28.933Z"
+          },
+          "original": "/demo/daniel/easier-first.jpg",
+          "repairStep": {
+            "kind": "hair-color",
+            "endpoint": "/s2s/v2.0/task/hair-color",
+            "apiVersion": "v2.0",
+            "params": {
+              "pattern": {
+                "name": "full"
+              },
+              "palettes": [
+                {
+                  "color": "#16170E",
+                  "color_intensity": 80,
+                  "shine_intensity": 20
+                }
+              ],
+              "src_file_url": "<source job result>"
+            },
+            "youcamTaskId": "9Io1l6LZG08qdIfuKaei_9kPKVL6TPe7GMPYbp4_BNSfKJAomOIKZ-TG-rzUNg5rDtzZw-qXapKUf8ErhvArwA",
+            "finishedAt": "2026-10-31T19:51:15.972Z"
           },
           "createdAt": "2026-10-26T17:12:39.566Z"
         },
@@ -1746,7 +1946,7 @@
           },
           "note": "Same style and colour as \"A variant of Closest to me\", so this is the same result.",
           "check": {
-            "outcome": "repairable",
+            "outcome": "checked",
             "face": {
               "status": "unchanged",
               "drift": 0.00909919185925657
@@ -1757,7 +1957,32 @@
               "resultHex": "#32251C",
               "deltaE": 6.860414210935578
             },
-            "checkedAt": "2026-10-31T19:23:34.522Z"
+            "repaired": {
+              "state": "adjusted",
+              "deltaEAfter": 1.2664150450037253
+            },
+            "checkedAt": "2026-10-31T19:52:32.632Z"
+          },
+          "original": "/demo/daniel/variant-1-first.jpg",
+          "repairStep": {
+            "kind": "hair-color",
+            "endpoint": "/s2s/v2.0/task/hair-color",
+            "apiVersion": "v2.0",
+            "params": {
+              "pattern": {
+                "name": "full"
+              },
+              "palettes": [
+                {
+                  "color": "#17170F",
+                  "color_intensity": 80,
+                  "shine_intensity": 20
+                }
+              ],
+              "src_file_url": "<source job result>"
+            },
+            "youcamTaskId": "aL3LLXe236AxZ5lmPS9Pp7DB26EmyoH-c0WjJMvLpxzJfsw035ecFoyb_-Hf0toUDtzZw-qXapKUf8ErhvArwA",
+            "finishedAt": "2026-10-31T19:51:28.833Z"
           },
           "createdAt": "2026-10-26T17:12:51.059Z"
         }
@@ -1850,7 +2075,7 @@
               "resultHex": "#9C9D98",
               "deltaE": 3.1712846401804957
             },
-            "checkedAt": "2026-10-31T19:23:35.579Z"
+            "checkedAt": "2026-10-31T19:52:36.423Z"
           },
           "createdAt": "2026-10-26T14:49:43.520Z"
         },
@@ -1921,7 +2146,7 @@
               "resultHex": "#92938E",
               "deltaE": 2.893749820383927
             },
-            "checkedAt": "2026-10-31T19:23:36.588Z"
+            "checkedAt": "2026-10-31T19:52:38.485Z"
           },
           "createdAt": "2026-10-26T14:49:54.973Z"
         },
@@ -1993,7 +2218,7 @@
               "resultHex": "#6C5549",
               "deltaE": 26.334939186955527
             },
-            "checkedAt": "2026-10-31T19:23:37.629Z"
+            "checkedAt": "2026-10-31T19:52:40.535Z"
           },
           "createdAt": "2026-10-26T14:49:54.979Z"
         },
@@ -2050,7 +2275,7 @@
               "resultHex": "#9A674A",
               "deltaE": 22.540398140865292
             },
-            "checkedAt": "2026-10-31T19:23:38.749Z"
+            "checkedAt": "2026-10-31T19:52:42.617Z"
           },
           "createdAt": "2026-10-26T14:50:04.421Z"
         },
@@ -2177,7 +2402,7 @@
               "resultHex": "#9E9F9A",
               "deltaE": 3.54022540915716
             },
-            "checkedAt": "2026-10-31T19:23:39.801Z"
+            "checkedAt": "2026-10-31T19:52:44.779Z"
           },
           "createdAt": "2026-10-26T14:50:15.730Z"
         },
@@ -2248,7 +2473,7 @@
               "resultHex": "#878882",
               "deltaE": 5.62324005003638
             },
-            "checkedAt": "2026-10-31T19:23:40.816Z"
+            "checkedAt": "2026-10-31T19:52:46.635Z"
           },
           "createdAt": "2026-10-26T14:50:25.799Z"
         },
@@ -2319,7 +2544,7 @@
               "resultHex": "#90918C",
               "deltaE": 3.2666149992850215
             },
-            "checkedAt": "2026-10-31T19:23:42.082Z"
+            "checkedAt": "2026-10-31T19:52:48.721Z"
           },
           "createdAt": "2026-10-26T14:50:34.446Z"
         },
@@ -2390,7 +2615,7 @@
               "resultHex": "#9B9C97",
               "deltaE": 2.995331414098076
             },
-            "checkedAt": "2026-10-31T19:23:43.198Z"
+            "checkedAt": "2026-10-31T19:52:50.889Z"
           },
           "createdAt": "2026-10-26T14:50:41.085Z"
         }
