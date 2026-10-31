@@ -50,8 +50,10 @@ export class UpstashKV implements KV {
     return first === undefined ? Promise.resolve(0) : this.redis.sadd(key, first, ...rest);
   }
 
-  sMembers(key: string) {
-    return this.redis.smembers(key);
+  // The SDK parses JSON-looking members into objects (and digit strings into numbers); callers expect the strings they stored.
+  async sMembers(key: string) {
+    const members: unknown[] = await this.redis.smembers(key);
+    return members.map((m) => (typeof m === "string" ? m : JSON.stringify(m)));
   }
 
   sRem(key: string, ...members: string[]) {
