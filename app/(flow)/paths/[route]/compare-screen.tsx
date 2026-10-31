@@ -103,7 +103,18 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
 
   if (!ready || !route || !snapshot || !baselineUrl || !baselineId) {
     return (
-      <Screen title={copy.compare.title} backHref="/paths" step={{ n: 5, total: 5 }} wide>
+      <Screen
+        title={copy.compare.title}
+        backHref="/paths"
+        step={{ n: 5, total: 5 }}
+        wide
+        stage={
+          // A named placeholder in the very first commit gives the Paths photo something to morph into.
+          <ViewTransition name={`photo-${routeKey}`} share="morph">
+            <div className="mx-auto aspect-4/5 w-full max-w-md rounded-image bg-peach md:aspect-3/4" />
+          </ViewTransition>
+        }
+      >
         {null}
       </Screen>
     );
@@ -189,6 +200,8 @@ export function CompareScreen({ routeKey }: { routeKey: string }) {
               error={expired ? { ...errorBody("EXPIRED"), retryable: true } : view?.error}
               slow={view?.slow}
               href="#"
+              viewName={`photo-${routeKey}`}
+              holdName
               onRetry={current ? () => void retryRow(current).then((row) => setPickedId(row.clientRequestId)) : undefined}
             />
           </div>

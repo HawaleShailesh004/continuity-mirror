@@ -40,6 +40,7 @@ export function PathCard({
   href,
   changed,
   viewName,
+  holdName,
   onRetry,
 }: {
   name: string;
@@ -58,6 +59,8 @@ export function PathCard({
   changed?: string;
   /** Shared-element name: the photo morphs into the same-named photo on the compare screen. */
   viewName?: string;
+  /** Keep the shared name while the result is still loading, so an arriving morph has a target at first commit. */
+  holdName?: boolean;
   onRetry?: () => void;
 }) {
   const calm = useCalmMotion();
@@ -129,7 +132,7 @@ export function PathCard({
 
   return (
     <article className="relative flex flex-col gap-2.5" aria-label={name}>
-      {viewName && ready ? (
+      {viewName && (ready || holdName) ? (
         <ViewTransition name={viewName} share="morph">
           {photo}
         </ViewTransition>
