@@ -18,7 +18,7 @@ export type WhatChanged = {
 };
 
 export function whatChanged(
-  style: Pick<StyleCatalogItem, "length" | "texture" | "fringe">,
+  style: Pick<StyleCatalogItem, "length" | "texture" | "fringe" | "parting">,
   colour: RouteColour,
   snapshot: IdentitySnapshot,
   presets: readonly Pick<ColourPreset, "id" | "label">[],
@@ -41,6 +41,10 @@ export function whatChanged(
     const id = colour.presetId;
     changes.push(t.colour(presets.find((c) => c.id === id)?.label.toLowerCase() ?? ""));
   }
+
+  // Parting is less visible than colour, so it goes last and is the first thing the three-item limit drops.
+  if (style.parting !== "none" && snapshot.parting !== "none" && style.parting !== snapshot.parting)
+    changes.push(t.parting(copy.snapshot.tagParting[style.parting]));
 
   const kept = colour.source === "own";
   const line = changes.length === 0 ? (kept ? t.sameKept : t.same) : [...changes.slice(0, 3), ...(kept ? [t.keptColour] : [])].slice(0, 3).join(" · ");

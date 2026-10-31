@@ -12,7 +12,7 @@ const meera: IdentitySnapshot = {
   brows: { shape: "soft-arch", darkness: "dark" },
 };
 const own = { source: "own", hex: "#2A1D18" } as const;
-const bob = { length: "chin", texture: "straight", fringe: false } as const;
+const bob = { length: "chin", texture: "straight", fringe: false, parting: "left" } as const;
 
 describe("whatChanged", () => {
   it("says what stayed the same when only the colour is the person's own", () => {
@@ -44,5 +44,12 @@ describe("whatChanged", () => {
       expect(r.changes.length).toBeLessThanOrEqual(3);
       expect(r.line.length).toBeGreaterThan(3);
     }
+  });
+
+  it("names a different parting, after the colour note, and only when both partings are known", () => {
+    const centre = styles.find((s) => s.id === "f-medium-straight")!;
+    expect(whatChanged(centre, own, meera, colours).line).toBe("Centre parting · Your colour kept");
+    expect(whatChanged({ ...centre, parting: "none" }, own, meera, colours).changes).toEqual([]);
+    expect(whatChanged(centre, own, { ...meera, parting: "none" }, colours).changes).toEqual([]);
   });
 });

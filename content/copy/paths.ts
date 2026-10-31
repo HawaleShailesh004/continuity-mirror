@@ -22,6 +22,7 @@ export const paths = {
     moreTexture: "More texture",
     addsFringe: "Adds a fringe",
     noFringe: "No fringe",
+    parting: (label: string) => label,
     colour: (label: string) => (label ? `Colour: ${label}` : "A different colour"),
     keptColour: "Your colour kept",
     sameKept: "Same length and texture, in your colour",
