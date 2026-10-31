@@ -11,9 +11,15 @@ export const home = {
 
   eyebrow: "For anyone facing hair loss from cancer treatment",
   trust: ["No account or email", "Nothing rates how you look", "About 10 minutes", "Delete everything anytime"],
-  heroCardLabel: "Closest to me",
   heroBeforeAlt: "Amara, a sample person, with shoulder-length coily hair",
-  heroAfterAlt: "Amara’s Closest to me preview: a coily style in her own colour",
+  heroLooks: [
+    { id: "closest", src: "/demo/amara/closest.jpg", short: "Closest", label: "Closest to me", alt: "Amara’s Closest to me preview: a coily style in her own colour" },
+    { id: "easier", src: "/demo/amara/easier.jpg", short: "Easier", label: "Familiar, easier", alt: "Amara’s Familiar, easier preview: a shorter coily cut with a fringe, in her own colour" },
+    { id: "new-chapter", src: "/demo/amara/new-chapter.jpg", short: "New chapter", label: "New chapter", alt: "Amara’s New chapter preview: her own curls in a warm caramel brown" },
+    { id: "regrowth", src: "/demo/amara/regrowth-6m.jpg", short: "Regrowth", label: "Regrowth, about 6 months", alt: "A regrowth idea for Amara: short tapered coils", note: "A possibility, not a prediction" },
+  ],
+  heroLooksLabel: "Choose a preview",
+  heroStart: 2, // index of New chapter
 
   window: {
     kicker: "Why now",

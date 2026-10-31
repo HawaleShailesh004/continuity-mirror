@@ -17,10 +17,11 @@ export function HeroVisual() {
       <div aria-hidden="true" className="bg-morning-glow animate-sunrise absolute -inset-10 -z-10 rounded-full" />
       <HeroSlider
         beforeAlt={t.heroBeforeAlt}
-        afterAlt={t.heroAfterAlt}
         beforeLabel={common.youBefore}
-        afterLabel={t.heroCardLabel}
         sampleLabel={common.sampleBadge}
+        looks={t.heroLooks}
+        looksLabel={t.heroLooksLabel}
+        start={t.heroStart}
       />
       <StyleDirectionLabel className="mt-3" />
     </div>
